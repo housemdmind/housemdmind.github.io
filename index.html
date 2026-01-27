@@ -3,121 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Łukasz Kuś | Portfolio Lubieszyn</title>
+    <title>Łukasz Kuś | Kandydat na Zastępcę Kierownika</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #ff1e1e; --accent: #ffcc00; --bg: #05070a; --glass: rgba(255, 255, 255, 0.07); }
+        :root { --primary: #ff1e1e; --accent: #ffcc00; --bg: #05070a; --glass: rgba(255, 255, 255, 0.05); }
         * { scrollbar-width: none; -ms-overflow-style: none; box-sizing: border-box; }
         *::-webkit-scrollbar { display: none; }
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Montserrat', sans-serif; background: var(--bg); color: white; overflow: hidden; }
 
         #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
         .bg-orbs { position: fixed; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
-        .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.15; animation: drift 25s infinite alternate ease-in-out; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15; animation: drift 25s infinite alternate ease-in-out; }
         @keyframes drift { 0% { transform: translate(-5%, -5%) scale(1); } 100% { transform: translate(10%, 10%) scale(1.3); } }
 
         .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 15px; opacity: 0; visibility: hidden; transition: opacity 0.6s ease; z-index: 5; }
         .slide.active { opacity: 1; visibility: visible; }
 
-        .card { background: var(--glass); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.1); padding: clamp(20px, 5vw, 50px); border-radius: 30px; max-width: 1050px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; z-index: 10; box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
+        .card { background: var(--glass); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid rgba(255,255,255,0.1); padding: clamp(25px, 5vw, 55px); border-radius: 40px; max-width: 1050px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; z-index: 10; box-shadow: 0 40px 80px rgba(0,0,0,0.6); }
         
-        h1 { font-size: clamp(2.2rem, 8vw, 4rem); font-weight: 900; margin: 0; line-height: 1.1; text-align: center; }
+        h1 { font-size: clamp(2.2rem, 8vw, 4.5rem); font-weight: 900; margin: 0; line-height: 1.1; text-align: center; }
         .accent { color: var(--accent); }
-        h2 { color: var(--primary); font-size: clamp(1rem, 3vw, 1.4rem); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; text-align: center; font-weight: 700; border-left: 5px solid var(--accent); padding-left: 15px; }
-        p, li { font-size: clamp(0.95rem, 2vw, 1.1rem); line-height: 1.7; color: #e2e8f0; margin-bottom: 15px; text-align: justify; }
+        h2 { color: var(--primary); font-size: clamp(1.2rem, 3vw, 1.8rem); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px; text-align: left; font-weight: 900; border-left: 6px solid var(--accent); padding-left: 20px; }
+        p, li { font-size: clamp(1rem, 2vw, 1.15rem); line-height: 1.8; color: #e2e8f0; margin-bottom: 20px; text-align: justify; }
         
-        .btn { background: var(--primary); color: white; border: none; padding: 18px 45px; border-radius: 100px; font-weight: 900; cursor: pointer; text-transform: uppercase; margin: 25px auto 0; display: block; width: fit-content; transition: 0.3s; letter-spacing: 2px; }
+        .btn { background: var(--primary); color: white; border: none; padding: 18px 45px; border-radius: 100px; font-weight: 900; cursor: pointer; text-transform: uppercase; margin: 30px auto 0; display: block; width: fit-content; transition: 0.3s; letter-spacing: 2px; }
         .btn:hover { background: var(--accent); color: black; transform: scale(1.05); }
-        .btn-static { background: #333; cursor: default; }
+        .btn-static { background: #222; cursor: default; }
 
-        .slide-counter { position: fixed; top: 20px; right: 20px; font-weight: 900; color: var(--accent); z-index: 1000; font-size: 1.2rem; }
-        .dots { position: fixed; bottom: 30px; left: 0; width: 100%; display: flex; justify-content: center; gap: 10px; z-index: 100; }
-        .dot { width: 35px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; transition: 0.4s; cursor: pointer; }
-        .dot.active { background: var(--accent); width: 60px; }
+        .slide-counter { position: fixed; top: 25px; right: 25px; font-weight: 900; color: var(--accent); z-index: 1000; font-size: 1.2rem; }
+        .dots { position: fixed; bottom: 35px; left: 0; width: 100%; display: flex; justify-content: center; gap: 12px; z-index: 100; }
+        .dot { width: 40px; height: 5px; background: rgba(255,255,255,0.15); border-radius: 3px; transition: 0.4s; cursor: pointer; }
+        .dot.active { background: var(--accent); width: 80px; box-shadow: 0 0 15px var(--accent); }
+
+        @media (max-width: 768px) { h2 { font-size: 1.3rem; } p { font-size: 1rem; } .card { padding: 35px 25px; } }
     </style>
 </head>
 <body>
 
     <div id="particles-js"></div>
     <div class="bg-orbs">
-        <div class="orb" style="width: 500px; height: 500px; top: -5%; left: -5%; background: var(--primary);"></div>
-        <div class="orb" style="width: 400px; height: 400px; bottom: 5%; right: 5%; background: var(--accent);"></div>
+        <div class="orb" style="width: 600px; height: 600px; top: -10%; left: -10%; background: var(--primary);"></div>
+        <div class="orb" style="width: 500px; height: 500px; bottom: -5%; right: -5%; background: var(--accent);"></div>
     </div>
     <div class="slide-counter" id="sc">1 / 10</div>
 
     <div class="slide active">
         <div class="card">
             <h1>ŁUKASZ <span class="accent">KUŚ</span></h1>
-            <p style="text-align: center; font-weight: bold; font-size: 1.3rem; margin-top: 15px;">Kandydat na Zastępcę Kierownika – Biedronka Lubieszyn</p>
-            <p>Moja kandydatura to połączenie doświadczenia operacyjnego, opanowania w kontakcie z międzynarodowym klientem oraz pełnej gotowości do pracy w najwyższym tempie. Lubieszyn to specyficzny sklep, a ja jestem na niego gotowy.</p>
-            <button class="btn" onclick="next()">Dalej</button>
+            <h3 style="text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-top: 15px;">Kandydat na Zastępcę Kierownika – Biedronka Lubieszyn</h3>
+            <p>Szanowni Państwo, przedstawiam moją kandydaturę na stanowisko Zastępcy Kierownika Sklepu w placówce na Lubieszynie. Moje podejście do pracy opiera się na pełnej odpowiedzialności za powierzone procesy, wysokiej kulturze osobistej oraz praktycznej znajomości struktur sieci Biedronka. Zapraszam do zapoznania się z moją wizją prowadzenia zmiany i zarządzania zespołem.</p>
+            <button class="btn" onclick="next()">Analiza Kompetencji</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>01. Lubieszyn: Spryt i komunikacja</h2>
-            <p>Praca przy granicy to wyzwanie. Choć mój angielski jest świetny, potrafię też sprytnie dogadać się po niemiecku. Wiem, jak rozładować napięcie i profesjonalnie obsłużyć każdego klienta zza granicy.</p>
-            <button class="btn" onclick="next()">Dalej</button>
+            <h2>01. Specyfika placówki przygranicznej</h2>
+            <p>Doskonale rozumiem dynamikę sklepu na Lubieszynie. Jako punkt przygraniczny, wymaga on nie tylko sprawnej logistyki, ale i elastyczności w komunikacji. Mój wysoki poziom języka angielskiego oraz spryt komunikacyjny w języku niemieckim pozwalają mi na profesjonalną obsługę klienta międzynarodowego.</p>
+            <p>Moim celem jest zapewnienie, aby każdy klient – niezależnie od kraju pochodzenia – otrzymał pomoc na najwyższym poziomie, co bezpośrednio przekłada się na wizerunek sieci Biedronka jako nowoczesnego lidera handlu w regionie szczecińskim.</p>
+            <button class="btn" onclick="next()">Doświadczenie Sieciowe</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>02. Doświadczenie Biedronka (Tikrow)</h2>
-            <p>Zaliczyłem ponad 70 zmian w sieci Biedronka z oceną 5.0. Kasa, wypiek, ekspozycja towaru i nocki – znam standardy firmy i nie muszę się uczyć podstaw od zera.</p>
-            <button class="btn" onclick="next()">Dalej</button>
+            <h2>02. Praktyczna znajomość struktur</h2>
+            <p>Moja kandydatura nie wymaga długotrwałego wdrożenia w podstawowe procesy operacyjne. Dzięki realizacji ponad 70 zmian w placówkach sieci Biedronka (poprzez system Tikrow), posiadam rzetelną wiedzę na temat standardów ekspozycji, wypieku pieczywa oraz obsługi kasowej. Średnia ocen 5.0 to dowód mojego zaangażowania i rzetelności.</p>
+            <p>Rozumiem znaczenie "Sztuki Sprzedaży" i nienagannej ekspozycji towaru. Wchodzę do zespołu jako osoba, która od pierwszej godziny potrafi samodzielnie koordynować pracę na sali sprzedaży, dbając o dostępność towaru i zadowolenie klientów.</p>
+            <button class="btn" onclick="next()">Odpowiedzialność Materialna</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>03. Klucze, Alarmy, Kasa</h2>
-            <p>Otwierałem i zamykałem sklepy (Żabka, Chata Polska), więc odpowiedzialność za mienie, sejf i systemy alarmowe to dla mnie codzienność. Jestem sumienny i rzetelny w rozliczaniu utargów.</p>
-            <button class="btn" onclick="next()">Dalej</button>
+            <h2>03. Odpowiedzialność za mienie i finanse</h2>
+            <p>Jako osoba z doświadczeniem w otwieraniu i zamykaniu placówek handlowych (Żabka, Chata Polska), posiadam pełną świadomość odpowiedzialności za klucze, systemy alarmowe oraz zabezpieczenie sejfu. Praca z gotówką i rzetelne przygotowywanie raportów dobowych to dla mnie procesy rutynowe, wymagające najwyższej precyzji.</p>
+            <p>W roli Zastępcy Kierownika kładę duży nacisk na bezpieczeństwo procesów finansowych i operacyjnych. Moja sumienność gwarantuje, że powierzone mi mienie oraz środki finansowe są zawsze pod należytym nadzorem.</p>
+            <button class="btn" onclick="next()">Relacje z Klientem</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>04. Klient trudny? "Oaza Spokoju"</h2>
-            <p>W relacjach z trudnym klientem jestem oazą spokoju. Brzydzę się brakiem kultury i wulgaryzmami. Zawsze szukam rozwiązania zgodnego z procedurami, dbając o dobry wizerunek sklepu.</p>
-            <button class="btn" onclick="next()">Dalej</button>
+            <h2>04. Zarządzanie sytuacjami spornymi</h2>
+            <p>W handlu sytuacje sporne są nieuniknione, jednak moja postawa jako "oazy spokoju" pozwala na ich szybkie i bezkonfliktowe rozwiązywanie. Brzydzę się brakiem kultury i wulgaryzmami – w relacjach z klientem trudnym stawiam na merytorykę i procedury sieci, nigdy nie ulegając emocjom.</p>
+            <p>Uważam, że lider zmiany musi być przykładem opanowania dla reszty zespołu. Moja kultura osobista pomaga w budowaniu trwałych relacji z kupującymi oraz zapewnia komfort pracy pracownikom kasy i sali sprzedaży.</p>
+            <button class="btn" onclick="next()">Inwentaryzacja i Magazyn</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>05. Inwentaryzacja i Porządek</h2>
-            <p>Rozumiem wagę stanów magazynowych. Porządek "od zaplecza po rampę" to dla mnie standard. Potrafię perfekcyjnie przygotować salę sprzedaży do spisu i nadzorować proces.</p>
-            <button class="btn" onclick="next()">Dalej</button>
+            <h2>05. Kontrola strat i stany magazynowe</h2>
+            <p>Rozumiem, że inwentaryzacja jest kluczowym narzędziem kontroli wyniku finansowego sklepu. Moja rola polega na perfekcyjnym przygotowaniu placówki do spisu oraz bieżącym nadzorze nad czystością danych. Dbam o to, aby "porządek od zaplecza po rampę" był standardem codziennym, a nie tylko przed kontrolą.</p>
+            <p>Dzięki analitycznemu podejściu potrafię sprawnie weryfikować dostawy i pilnować terminów przydatności (FEFO), co w placówce o tak dużym obrocie jak Lubieszyn, ma kluczowe znaczenie dla minimalizacji odpisów i strat.</p>
+            <button class="btn" onclick="next()">Liderowanie Zespołowi</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>06. Koordynacja i Liderstwo</h2>
-            <p>Doświadczenie w dowodzeniu sekcjami ochrony oraz zarządzaniu dużymi grupami online nauczyło mnie sprawiedliwego podziału zadań. Wiem, jak motywować zespół do realizacji celów.</p>
-            <button class="btn" onclick="next()">Dalej</button>
+            <h2>06. Koordynacja i motywowanie zespołu</h2>
+            <p>Moje doświadczenie w koordynowaniu sekcji ochrony oraz zarządzaniu dużymi grupami w środowisku online nauczyło mnie, że sprawiedliwy podział zadań jest kluczem do sukcesu zmiany. Jako Zastępca, skupiam się na jasnym wyznaczaniu priorytetów i realnym wspieraniu zespołu w momentach największego natężenia ruchu.</p>
+            <p>Wierzę w liderstwo oparte na autorytecie kompetencyjnym, a nie tylko formalnym. Jestem gotowy stanąć na kasie lub przy rozładunku ramię w ramię z zespołem, by zapewnić płynność funkcjonowania placówki.</p>
+            <button class="btn" onclick="next()">Dyspozycyjność i Rozwój</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>07. Studia Online = Pełna Dostępność</h2>
-            <p>Studiuję Zarządzanie Online, więc zapomnij o problemach z grafikiem. Nie mam zjazdów, nie mam blokad – jestem do Twojej dyspozycji na nocki, weekendy i poranki 24/7.</p>
-            <button class="btn" onclick="next()">Dalej</button>
+            <h2>07. Edukacja wspierająca biznes</h2>
+            <p>Podjęcie studiów na kierunku Zarządzanie (Online) to dla mnie świadomy krok w stronę profesjonalizacji moich kompetencji menedżerskich. Co istotne dla Państwa, forma online gwarantuje moją pełną dyspozycyjność grafikową. Nie ograniczają mnie zjazdy weekendowe ani sztywne godziny zajęć stacjonarnych.</p>
+            <p>Jestem dostępny na każdą zmianę – poranną, popołudniową oraz nocną, a także we wszystkie niedziele handlowe. Moim celem jest stabilny rozwój w strukturach sieci Biedronka i długofalowa współpraca z placówką na Lubieszynie.</p>
+            <button class="btn" onclick="next()">Podsumowanie Wartości</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card" style="border: 2px solid var(--accent);">
-            <h2>Wartości w pigułce:</h2>
-            <ul>
-                <li>🚀 <strong>Energia:</strong> Nienawidzę bezczynności.</li>
-                <li>🏆 <strong>Pewniak:</strong> 70+ zmian w Biedronce (ocena 5.0).</li>
-                <li>💻 <strong>Mózg:</strong> Informatyk studiujący zarządzanie.</li>
-                <li> lions <strong>Lider:</strong> Doświadczony w sytuacjach kryzysowych.</li>
+            <h2>Wartości, które wnoszę do zespołu:</h2>
+            <p>Jeżeli potrzebują Państwo konkretnego zestawienia moich najmocniejszych stron, oto one:</p>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 10px;">✅ <strong>Brak barier adaptacyjnych:</strong> Praktyczna znajomość systemów i standardów Biedronki (ocena 5.0).</li>
+                <li style="margin-bottom: 10px;">✅ <strong>Samodzielność operacyjna:</strong> Doświadczenie w otwieraniu, zamykaniu i rozliczaniu sklepów.</li>
+                <li style="margin-bottom: 10px;">✅ <strong>Profesjonalizm:</strong> Wysoka kultura osobista i spokój w kontakcie z trudnym klientem.</li>
+                <li style="margin-bottom: 10px;">✅ <strong>Technologia:</strong> Informatyczne tło pozwalające na szybką reakcję przy awariach systemów.</li>
+                <li style="margin-bottom: 10px;">✅ <strong>Lojalność:</strong> Nastawienie na długofalową współpracę i brak nałogów.</li>
             </ul>
             <button class="btn" onclick="next()">Kontakt</button>
         </div>
@@ -125,12 +136,13 @@
 
     <div class="slide">
         <div class="card">
-            <h2>Zapraszam do kontaktu</h2>
-            <p style="text-align: center;">Szczecin | Gotowy do działania od zaraz.</p>
-            <div style="text-align: center; margin-top: 30px;">
-                <h3 style="margin:0; font-size: 2.2rem;">ŁUKASZ KUŚ</h3>
-                <p>📞 667 268 314 | 📧 thkbenice@gmail.com</p>
-                <button class="btn btn-static">ZATRUDNIJ MNIE</button>
+            <h2>Dane Kontaktowe</h2>
+            <p style="text-align: center;">Dziękuję za poświęcony czas. Jestem gotowy zaprezentować moją kandydaturę osobiście podczas rozmowy kwalifikacyjnej na Lubieszynie.</p>
+            <div style="text-align: center; margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
+                <h3 style="font-size: 2.2rem; margin: 0; color: white;">ŁUKASZ <span class="accent">KUŚ</span></h3>
+                <p style="font-size: 1.4rem; color: var(--accent); font-weight: bold; margin-top: 15px;">📞 667 268 314</p>
+                <p style="font-size: 1.2rem; margin-top: 5px;">📧 thkbenice@gmail.com</p>
+                <button class="btn btn-static">DZIĘKUJĘ ZA UWAGĘ</button>
             </div>
         </div>
     </div>
