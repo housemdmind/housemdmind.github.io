@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Łukasz Kuś | Portfolio</title>
+    <title>Łukasz Kuś | Portfolio Zawodowe</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #ff1e1e; --accent: #ffcc00; --bg: #05070a; }
         
-        /* CAŁKOWITE USUNIĘCIE PASKÓW PRZEWIJANIA */
-        * { 
-            box-sizing: border-box; 
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;     /* Firefox */
-        }
-        *::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
+        /* CAŁKOWITE USUNIĘCIE PASKÓW SYSTEMOWYCH */
+        * { scrollbar-width: none; -ms-overflow-style: none; box-sizing: border-box; }
+        *::-webkit-scrollbar { display: none; }
 
         body, html { 
             margin: 0; padding: 0; height: 100%; width: 100%; 
@@ -22,17 +18,16 @@
             color: white; overflow: hidden; 
         }
 
-        /* Tło i Animacje */
-        #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; }
-        
+        /* Tło i Animacje - STAŁY RUCH */
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
         .bg-orbs { position: fixed; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
         .orb { 
-            position: absolute; border-radius: 50%; filter: blur(100px); 
-            opacity: 0.2; animation: drift 20s infinite alternate ease-in-out; 
+            position: absolute; border-radius: 50%; filter: blur(120px); 
+            opacity: 0.2; animation: drift 25s infinite alternate ease-in-out; 
         }
         @keyframes drift {
-            0% { transform: translate(0,0) scale(1); }
-            100% { transform: translate(15vw, 15vh) scale(1.2); }
+            0% { transform: translate(-5%, -5%) scale(1); }
+            100% { transform: translate(10%, 10%) scale(1.3); }
         }
 
         /* Slajdy */
@@ -40,26 +35,26 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             display: flex; justify-content: center; align-items: center; 
             padding: 20px; opacity: 0; visibility: hidden; 
-            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out; 
-            z-index: 5; transform: scale(0.98);
+            transition: opacity 0.7s ease, transform 0.7s ease; 
+            z-index: 5; transform: translateY(30px);
         }
-        .slide.active { opacity: 1; visibility: visible; transform: scale(1); }
+        .slide.active { opacity: 1; visibility: visible; transform: translateY(0); }
 
         /* Karta szklana */
         .card { 
-            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(25px); 
-            -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.1); 
-            padding: clamp(20px, 5vw, 60px); border-radius: 40px; 
-            max-width: 1000px; width: 100%; max-height: 85vh; 
-            overflow-y: scroll; /* Scroll działa, ale pasek jest ukryty przez CSS wyżej */
-            position: relative; z-index: 10; box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+            background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(30px); 
+            -webkit-backdrop-filter: blur(30px); border: 1px solid rgba(255,255,255,0.1); 
+            padding: clamp(25px, 5vw, 60px); border-radius: 40px; 
+            max-width: 1050px; width: 100%; max-height: 85vh; 
+            overflow-y: auto; position: relative; z-index: 10;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
         }
 
-        h1 { font-size: clamp(2rem, 8vw, 4.5rem); font-weight: 900; margin: 0; text-align: center; line-height: 1; }
+        h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; margin: 0; text-align: center; letter-spacing: -2px; }
         .accent { color: var(--accent); }
-        h2 { color: var(--primary); font-size: clamp(1.2rem, 3vw, 2rem); margin-bottom: 25px; text-transform: uppercase; letter-spacing: 4px; }
+        h2 { color: var(--primary); font-size: clamp(1.3rem, 3vw, 2.2rem); margin-bottom: 25px; text-transform: uppercase; border-left: 5px solid var(--accent); padding-left: 15px; }
         
-        p, li { font-size: 1.1rem; line-height: 1.8; color: #cbd5e1; margin-bottom: 20px; text-align: justify; }
+        p, li { font-size: 1.15rem; line-height: 1.8; color: #e2e8f0; margin-bottom: 20px; text-align: justify; }
         
         .btn { 
             background: var(--primary); color: white; border: none; padding: 20px 50px; 
@@ -67,87 +62,138 @@
             text-transform: uppercase; letter-spacing: 2px; display: block; 
             margin: 30px auto 0; transition: 0.4s;
         }
-        .btn:hover { background: var(--accent); color: black; transform: translateY(-5px); }
+        .btn:hover { background: var(--accent); color: black; transform: scale(1.05); }
 
-        .progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: var(--accent); z-index: 1000; transition: width 0.3s; width: 0%; }
+        .progress-bar { position: fixed; top: 0; left: 0; height: 5px; background: linear-gradient(to right, var(--primary), var(--accent)); z-index: 1000; transition: width 0.4s; width: 0%; }
+        
+        .nav-hint { position: fixed; bottom: 20px; width: 100%; text-align: center; font-size: 0.8rem; color: rgba(255,255,255,0.3); z-index: 100; text-transform: uppercase; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
     <div id="particles-js"></div>
     <div class="bg-orbs">
-        <div class="orb" style="width: 500px; height: 500px; top: -10%; left: -10%; background: var(--primary);"></div>
-        <div class="orb" style="width: 400px; height: 400px; bottom: -5%; right: -5%; background: var(--accent);"></div>
+        <div class="orb" style="width: 600px; height: 600px; top: -10%; left: -10%; background: var(--primary);"></div>
+        <div class="orb" style="width: 500px; height: 500px; bottom: -5%; right: -5%; background: var(--accent);"></div>
     </div>
     <div class="progress-bar" id="pb"></div>
 
     <div class="slide active">
         <div class="card">
             <h1>ŁUKASZ <span class="accent">KUŚ</span></h1>
-            <p style="text-align: center; font-weight: bold; font-size: 1.4rem;">Zastępca Kierownika | Informatyk | Lider</p>
-            <p>Moja historia to nie jest zwykłe CV – to zapis ciągłego ruchu. Od zarządzania tysiącami graczy online, po fizyczną pracę operacyjną w Biedronce. Jeśli szukasz kogoś, kto nienawidzi nudy i zawsze szuka sposobu na optymalizację – zapraszam do środka.</p>
-            <button class="btn" onclick="moveSlide(1)">Poznaj mnie</button>
+            <p style="text-align: center; font-weight: bold; font-size: 1.4rem; margin-top: 10px;">Gotowy na wyzwania Zastępca Kierownika | Specjalista IT | Lider</p>
+            <p>Siema! Nie szukam zwykłej pracy – szukam miejsca, gdzie moja energia i "napracowanie" zostaną w pełni wykorzystane. Moja historia to połączenie nowoczesnej technologii, twardego dowodzenia ludźmi i setek godzin spędzonych na operacyjnej pracy w Biedronce. Jeśli szukasz kogoś, kto widzi problem i od razu go rozwiązuje – jesteś w dobrym miejscu.</p>
+            <button class="btn" onclick="next()">Zaczynamy</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>01. Silnik proaktywny</h2>
-            <p>Moje podejście do pracy definiuje brak tolerancji dla bezczynności. W Biedronce czuję się najlepiej, bo tam zawsze jest co robić. Nie czekam na polecenia – widzę pustą półkę, uzupełniam ją. Widzę kolejkę, reaguję. To jest mój standard pracy.</p>
-            <button class="btn" onclick="moveSlide(1)">Dalej</button>
+            <h2>01. Silnik, który nie nienawidzi nudy</h2>
+            <p>Moje podejście do pracy definiuje brak tolerancji dla bezczynności. Chociaż formalnie nie szukałem na to papierów, moja naturalna proaktywność sprawia, że jestem pracownikiem wysokowydajnym. W Biedronce, gdzie dynamika zmian jest ogromna, czuję się najlepiej.</p>
+            <p>Nie czekam na polecenia – widzę brak towaru, uzupełniam go. Widzę kolejkę, otwieram kasę. Widzę bałagan na zapleczu, sprzątam go. Brzydzę się bylejakością i wulgaryzmami, stawiając na najwyższą kulturę osobistą w relacjach z klientem i zespołem.</p>
+            <button class="btn" onclick="next()">Moje doświadczenie</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>06. Kontakt</h2>
-            <p style="text-align: center;">Gotowy do startu w Szczecinie. Czekam na Twój ruch.</p>
-            <div style="text-align: center;">
+            <h2>02. Biedronka: Doświadczenie 5.0</h2>
+            <p>Przez aplikację Tikrow zrealizowałem ponad <span class="accent">70 zmian</span> w różnych placówkach sieci Biedronka. Średnia ocen 5.0 to nie przypadek – to dowód na to, że w każdym sklepie zostawiam po sobie wzorowy porządek.</p>
+            <p>Znam kasy, znam wypiek pieczywa, znam procedury przyjmowania towaru i dbania o ekspozycję. Wchodzę do ekipy jako gotowy lider, który od pierwszego dnia odciąży Kierownika Sklepu w codziennych procesach. Wiem, że liczy się wynik i dostępność towaru dla klienta.</p>
+            <button class="btn" onclick="next()">Lider i Technologia</button>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="card">
+            <h2>03. Dowodzenie w świecie Real & Online</h2>
+            <p>Moje doświadczenie to nie tylko handel. Zarządzałem serwerami gier dla społeczności liczących <span class="accent">tysiące graczy</span>, co nauczyło mnie moderacji konfliktów i planowania zasobów. W firmie FORT jako dowódca sekcji ochrony, odpowiadałem za bezpieczeństwo ludzi w warunkach stresu.</p>
+            <p>Dodatkowo wykształcenie informatyczne (UNICEF, Sąd) sprawia, że kasy i systemy logistyczne ogarniam błyskawicznie. Gdy technologia w sklepie zawodzi, ja jestem osobą, która wie jak przywrócić proces do działania bez zbędnej paniki.</p>
+            <button class="btn" onclick="next()">Czas i Studia</button>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="card">
+            <h2>04. Zarządzanie (Studia Online)</h2>
+            <p>Właśnie zaczynam studia na kierunku <span class="accent">Zarządzanie (Online)</span>. Wybrałem tę formę świadomie – chcę poprzeć moją praktykę solidną teorią, nie tracąc przy tym ani minuty z dostępności dla pracodawcy.</p>
+            <p>Mogę pracować na każdą zmianę: rano, popołudniu, w nocy (rozładunki) oraz we wszystkie weekendy handlowe. Studia nie kolidują z grafikiem, co czyni mnie najbardziej elastycznym kandydatem na stanowisko Zastępcy Kierownika.</p>
+            <button class="btn" onclick="next()">Podsumowanie (TL;DR)</button>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="card" style="border: 2px solid var(--accent);">
+            <h2>05. Konkret w pigułce (TL;DR)</h2>
+            <ul>
+                <li>🚀 <span class="accent">PROAKTYWNOŚĆ:</span> Widzę robotę i ją robię. Zero lania wody.</li>
+                <li>🏆 <span class="accent">DOŚWIADCZENIE:</span> 70+ zmian w Biedronce, ocena 5.0.</li>
+                <li>💻 <span class="accent">KOMPETENCJE:</span> Informatyk studiujący zarządzanie.</li>
+                <li>📅 <span class="accent">DYSPOZYCYJNOŚĆ:</span> 24/7 (studia online).</li>
+                <li>🦁 <span class="accent">LIDER:</span> Doświadczenie w dowodzeniu sekcjami ochrony.</li>
+            </ul>
+            <button class="btn" onclick="next()">Kontakt</button>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="card">
+            <h2>Skontaktujmy się!</h2>
+            <p style="text-align: center;">Gotowy do pracy od zaraz w Szczecinie. Nie zawiodę.</p>
+            <div style="text-align: center; margin-top: 30px;">
                 <h3 style="font-size: 2.5rem; margin: 0;">ŁUKASZ KUŚ</h3>
+                <p>📍 Szczecin | Zachodniopomorskie</p>
                 <p>E-mail: <span class="accent">lukasz.kus.kontakt@poczta.pl</span></p>
-                <button class="btn" onclick="location.href='mailto:lukasz.kus.kontakt@poczta.pl'">Napisz do mnie</button>
+                <button class="btn" onclick="location.href='mailto:lukasz.kus.kontakt@poczta.pl'">Zatrudnij mnie</button>
             </div>
         </div>
     </div>
+
+    <div class="nav-hint">Przewiń kółkiem lub użyj strzałek</div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         let current = 0;
         const slides = document.querySelectorAll('.slide');
         const pb = document.getElementById('pb');
+        let isLocked = false;
 
-        function show(n) {
+        function update(index) {
+            if (index < 0 || index >= slides.length || isLocked) return;
+            
+            isLocked = true;
             slides[current].classList.remove('active');
-            current = (n + slides.length) % slides.length;
+            current = index;
             slides[current].classList.add('active');
+            
             pb.style.width = ((current + 1) / slides.length) * 100 + "%";
+            
+            setTimeout(() => { isLocked = false; }, 800);
         }
 
-        function moveSlide(d) { show(current + d); }
+        function next() { update(current + 1); }
+        function prev() { update(current - 1); }
 
-        // Przewijanie kółkiem myszy
-        let wait = false;
         window.addEventListener('wheel', e => {
-            if (wait) return;
             if (Math.abs(e.deltaY) > 30) {
-                wait = true;
-                show(current + (e.deltaY > 0 ? 1 : -1));
-                setTimeout(() => wait = false, 800);
+                if (e.deltaY > 0) next(); else prev();
             }
         }, { passive: true });
 
-        // Cząsteczki tła - STAŁY RUCH
+        document.addEventListener('keydown', e => {
+            if (e.key === "ArrowRight" || e.key === "ArrowDown") next();
+            if (e.key === "ArrowLeft" || e.key === "ArrowUp") prev();
+        });
+
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "number": { "value": 70, "density": { "enable": true, "value_area": 800 } },
                 "color": { "value": "#ffffff" },
-                "opacity": { "value": 0.2, "random": true },
+                "opacity": { "value": 0.2 },
                 "size": { "value": 2, "random": true },
                 "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
-                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
-            },
-            "interactivity": {
-                "events": { "onhover": { "enable": true, "mode": "grab" } }
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "out_mode": "out" }
             }
         });
     </script>
