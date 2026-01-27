@@ -27,8 +27,18 @@
         h2 { color: var(--primary); font-size: clamp(1.2rem, 3vw, 1.8rem); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px; text-align: left; font-weight: 900; border-left: 6px solid var(--accent); padding-left: 20px; }
         p, li { font-size: clamp(1rem, 2vw, 1.15rem); line-height: 1.8; color: #e2e8f0; margin-bottom: 20px; text-align: justify; }
         
-        .btn { background: var(--primary); color: white; border: none; padding: 18px 45px; border-radius: 100px; font-weight: 900; cursor: pointer; text-transform: uppercase; margin: 30px auto 0; display: block; width: fit-content; transition: 0.3s; letter-spacing: 2px; }
+        .btn { background: var(--primary); color: white; border: none; padding: 18px 45px; border-radius: 100px; font-weight: 900; cursor: pointer; text-transform: uppercase; margin: 30px auto 0; display: block; width: fit-content; transition: 0.3s; letter-spacing: 2px; text-decoration: none; text-align: center; }
         .btn:hover { background: var(--accent); color: black; transform: scale(1.05); }
+
+        /* NOWE STYLE KONTAKTU */
+        .contact-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
+        .contact-item { background: rgba(255,255,255,0.05); padding: 15px 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: white; transition: 0.3s; display: flex; align-items: center; gap: 10px; font-weight: 700; }
+        .contact-item:hover { background: var(--primary); transform: translateY(-5px); border-color: var(--accent); }
+
+        .map-container { width: 100%; height: 200px; border-radius: 25px; margin-top: 30px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); filter: grayscale(1) invert(0.9) contrast(1.2); opacity: 0.7; transition: 0.5s; }
+        .map-container:hover { opacity: 1; filter: grayscale(0) invert(0) contrast(1); }
+
+        .footer-note { text-align: center; margin-top: 30px; font-size: 0.8rem; opacity: 0.4; letter-spacing: 2px; text-transform: uppercase; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
 
         .slide-counter { position: fixed; top: 25px; right: 25px; font-weight: 900; color: var(--accent); z-index: 1000; font-size: 1.2rem; }
     </style>
@@ -144,14 +154,27 @@
     <div class="slide">
         <div class="card">
             <span class="latin-motto">Audentes fortuna iuvat (Odważnym szczęście sprzyja)</span>
-            <h2>Skontaktujmy się</h2>
-            <p style="text-align: center;">Dziękuję za poświęcony czas. Jestem gotowy do podjęcia obowiązków od zaraz i czekam na zaproszenie na rozmowę kwalifikacyjną.</p>
-            <div style="text-align: center; margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
-                <h3 style="font-size: 2.2rem; margin: 0; color: white;">ŁUKASZ <span class="accent">KUŚ</span></h3>
-                <p style="font-size: 1.4rem; color: var(--accent); font-weight: bold; margin-top: 15px;">📞 667 268 314</p>
-                <p style="font-size: 1.2rem; margin-top: 5px;">📧 thkbenice@gmail.com</p>
-                <button class="btn btn-static" style="background:#222; cursor:default;">Do zobaczenia</button>
+            <h2>Skontaktujmy się bezpośrednio</h2>
+            <p style="text-align: center;">Nie szukam „jakiejś” pracy – szukam wyzwania w placówce na Lubieszynie. Jestem gotowy do zaprezentowania moich kompetencji osobiście.</p>
+            
+            <div class="contact-grid">
+                <a href="tel:667268314" class="contact-item">
+                    <span>📞 667 268 314</span>
+                </a>
+                <a href="mailto:thkbenice@gmail.com" class="contact-item">
+                    <span>📧 thkbenice@gmail.com</span>
+                </a>
             </div>
+
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2377.123456789!2d14.3987!3d53.4456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47aa0966a6a0e1c3%3A0x88989e83e669e1!2sBiedronka!5e0!3m2!1spl!2spl!4v1700000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+            <div class="footer-note">
+                Łukasz Kuś | Szczecin 2026 | Acta non verba.
+            </div>
+
+            <button class="btn btn-static" style="background:#222; cursor:default; border: 1px solid var(--accent);">Do zobaczenia na Lubieszynie</button>
         </div>
     </div>
 
