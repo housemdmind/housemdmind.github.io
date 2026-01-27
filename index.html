@@ -3,203 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Łukasz Kuś | Pełne Portfolio Zawodowe</title>
+    <title>Łukasz Kuś | Interaktywne Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #ff1e1e; --accent: #ffcc00; --bg: #05070a; --glass: rgba(255, 255, 255, 0.05); }
+        :root { --primary: #ff1e1e; --accent: #ffcc00; --bg: #05070a; --glass: rgba(255, 255, 255, 0.03); }
         * { box-sizing: border-box; }
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Montserrat', sans-serif; background: var(--bg); color: white; overflow: hidden; }
 
-        /* Tło */
-        .bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: radial-gradient(circle at 50% 50%, #111827 0%, #05070a 100%); }
-        .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15; z-index: 1; }
+        /* Tło z cząsteczkami */
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; }
+        .bg-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; background: radial-gradient(circle at center, transparent 0%, var(--bg) 90%); pointer-events: none; }
+
+        /* Pasek postępu na górze */
+        .top-progress { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(to right, var(--primary), var(--accent)); z-index: 1000; transition: width 0.4s ease; width: 0%; }
 
         /* Slajdy */
-        .slide { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            display: flex; justify-content: center; align-items: center; 
-            padding: 20px; opacity: 0; visibility: hidden; transition: opacity 0.4s ease-in-out;
-            z-index: 5;
-        }
-        .slide.active { opacity: 1; visibility: visible; }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 20px; opacity: 0; visibility: hidden; transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1); z-index: 5; }
+        .slide.active { opacity: 1; visibility: visible; transform: scale(1); }
+        .slide:not(.active) { transform: scale(1.05) translateY(20px); }
 
-        /* Karta */
+        /* Animowana karta */
         .card { 
             background: var(--glass); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             border: 1px solid rgba(255,255,255,0.1); padding: clamp(20px, 5vw, 60px); border-radius: 40px; 
-            max-width: 1100px; width: 100%; max-height: 85vh; overflow-y: auto;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.7); position: relative; z-index: 10;
-            scrollbar-width: thin; scrollbar-color: var(--primary) transparent;
+            max-width: 1000px; width: 100%; max-height: 85vh; overflow-y: auto;
+            position: relative; z-index: 10; box-shadow: 0 0 40px rgba(255, 30, 30, 0.1);
+            scrollbar-width: thin;
         }
-        .card::-webkit-scrollbar { width: 6px; }
-        .card::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+        .card::before { content: ""; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; border-radius: 42px; background: linear-gradient(45deg, var(--primary), transparent, var(--accent)); z-index: -1; opacity: 0.3; }
 
-        h1 { font-size: clamp(2.2rem, 8vw, 4.5rem); font-weight: 900; margin: 0; line-height: 1.1; text-align: center; }
-        .accent-txt { color: var(--accent); }
-        h2 { color: var(--primary); font-size: clamp(1.2rem, 3vw, 2rem); text-transform: uppercase; margin-bottom: 25px; border-left: 5px solid var(--accent); padding-left: 20px; }
-        h3 { color: white; font-size: 1.2rem; margin-top: 30px; }
-        p, li { font-size: clamp(0.95rem, 2vw, 1.15rem); line-height: 1.8; color: #e2e8f0; margin-bottom: 20px; text-align: justify; }
+        h1 { font-size: clamp(2rem, 8vw, 4.5rem); font-weight: 900; margin: 0; text-align: center; text-transform: uppercase; letter-spacing: -2px; }
+        .accent { color: var(--accent); text-shadow: 0 0 20px rgba(255, 204, 0, 0.3); }
+        h2 { color: var(--primary); font-size: clamp(1.2rem, 3vw, 2rem); margin-bottom: 25px; text-transform: uppercase; letter-spacing: 5px; }
         
-        .btn { 
-            background: var(--primary); color: white; border: none; padding: 18px 45px; border-radius: 50px; 
-            font-weight: 900; cursor: pointer; text-transform: uppercase; margin: 30px auto 0; 
-            display: block; transition: 0.3s; letter-spacing: 2px;
-        }
-        .btn:hover { background: var(--accent); color: black; transform: scale(1.05); }
+        p, li { font-size: 1.1rem; line-height: 1.8; color: #cbd5e1; margin-bottom: 20px; text-align: justify; }
+        .btn { background: var(--primary); color: white; border: none; padding: 20px 50px; border-radius: 100px; font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 3px; display: block; margin: 30px auto 0; transition: 0.4s; box-shadow: 0 10px 30px rgba(255, 30, 30, 0.4); }
+        .btn:hover { background: var(--accent); color: black; transform: translateY(-5px); box-shadow: 0 15px 40px rgba(255, 204, 0, 0.5); }
 
-        /* Nawigacja */
-        .nav-container { position: fixed; bottom: 30px; left: 0; width: 100%; display: flex; justify-content: center; gap: 10px; z-index: 100; }
-        .nav-bar { width: 35px; height: 5px; background: rgba(255,255,255,0.1); border-radius: 5px; cursor: pointer; transition: 0.4s; }
-        .nav-bar.active { background: var(--accent); width: 60px; box-shadow: 0 0 15px var(--accent); }
+        /* Nawigacja boczna */
+        .nav-dots { position: fixed; right: 30px; top: 50%; transform: translateY(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 15px; }
+        .dot { width: 12px; height: 12px; background: rgba(255,255,255,0.2); border-radius: 50%; cursor: pointer; transition: 0.4s; }
+        .dot.active { background: var(--accent); box-shadow: 0 0 15px var(--accent); transform: scale(1.5); }
 
-        .counter { position: fixed; top: 20px; right: 20px; font-weight: 900; color: var(--accent); z-index: 100; border: 1px solid var(--accent); padding: 5px 15px; border-radius: 20px; }
+        /* Mobile Fix */
+        @media (max-width: 768px) { .nav-dots { display: none; } .card { padding: 30px 20px; } }
     </style>
 </head>
 <body>
 
-    <div class="bg">
-        <div class="orb" style="width: 500px; height: 500px; top: -100px; left: -100px; background: #ff1e1e;"></div>
-        <div class="orb" style="width: 400px; height: 400px; bottom: -100px; right: -100px; background: #ffcc00;"></div>
-    </div>
-
-    <div class="counter" id="counter">1 / 7</div>
+    <div id="particles-js"></div>
+    <div class="bg-overlay"></div>
+    <div class="top-progress" id="progressBar"></div>
+    <div class="nav-dots" id="dotNav"></div>
 
     <div class="slide active">
         <div class="card">
-            <h1>ŁUKASZ <span class="accent-txt">KUŚ</span></h1>
-            <p style="text-align: center; font-size: 1.3rem; font-weight: bold;">Więcej niż Zastępca Kierownika – Twoje wsparcie w każdym procesie.</p>
-            <p>
-                Siema! Jeśli szukasz kogoś, kto nie tylko odbębni swoje godziny, ale faktycznie zadba o to, żeby sklep hulał jak szwajcarski zegarek – dobrze trafiłeś. Mam 25 lat, głowę pełną pomysłów i energię, której nie da się zatrzymać. Moje podejście do pracy jest proste: widzę problem, rozwiązuję go. Nie znoszę bezczynności, brzydzę się bylejakością i zawsze szukam sposobu, żeby zrobić coś szybciej i lepiej. Przejdź dalej i zobacz, jak moje doświadczenie w IT, ochronie i handlu przekłada się na konkretny zysk dla Twojej Biedronki.
-            </p>
-            <button class="btn" onclick="navSlide(1)">Poznaj moją historię</button>
+            <h1>ŁUKASZ <span class="accent">KUŚ</span></h1>
+            <p style="text-align: center; font-weight: bold; font-size: 1.4rem; color: #fff;">Zastępca Kierownika | Informatyk | Lider</p>
+            <p>Nie szukam zwykłej pracy – szukam wyzwań, które wymagają kogoś o niespożytej energii. Moja historia to połączenie technologii, zarządzania ludźmi i twardej pracy operacyjnej w Biedronce. Zobacz, jak moje "ADHD" i sumienność przekładają się na profesjonalizm, którego potrzebujesz w swoim zespole.</p>
+            <button class="btn" onclick="moveSlide(1)">Poznaj szczegóły</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>01. Silnik, który się nie zaciera</h2>
-            <p>
-                Często słyszę, że mam niespożytą energię. Choć nigdy nie szukałem na to papierów, moje podejście do życia i pracy to definicja proaktywności. Tam, gdzie inni widzą rutynę, ja widzę pole do optymalizacji. W Biedronce, gdzie dynamika zmian jest ogromna, czuję się najlepiej. 
-            </p>
-            <p>
-                Nienawidzę stać w miejscu. Jeśli na sali sprzedaży jest spokojnie, ja już jestem na zapleczu sprawdzać dostawę, albo koryguję oznaczenia cenowe, żeby klient nie miał wątpliwości przy kasie. Moja sumienność i kultura osobista to fundamenty – brzydzę się wulgaryzmami i konfliktami. Stawiam na jasną komunikację i atmosferę, w której każdemu chce się pracować.
-            </p>
+            <h2>01. Silnik, który nie stygnie</h2>
+            <p>Mój etos pracy opiera się na prostym fakcie: <span class="accent">nienawidzę bezczynności</span>. Tam, gdzie inni widzą rutynę, ja widzę proces do poprawy. Moja naturalna dynamika sprawia, że w sklepie zawsze jestem o krok przed problemami. Nie czekam na polecenia – widzę pustą półkę, uzupełniam ją. Widzę kolejkę, reaguję. To jest moja definicja proaktywności.</p>
+            <p>Brzydzę się bylejakością i wulgaryzmami. Stawiam na kulturę osobistą, która w relacjach z trudnym klientem jest moją najpotężniejszą bronią. Jestem spokojny, opanowany i zawsze nastawiony na rozwiązanie sytuacji tak, by klient wyszedł zadowolony.</p>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>02. Doświadczenie w boju (Tikrow)</h2>
-            <p>
-                Nie musisz mnie uczyć, jak wygląda praca w Biedronce. Przez aplikację Tikrow zrealizowałem ponad <span class="accent-txt">70 zmian</span> w różnych placówkach sieci. Moja średnia ocen <span class="accent-txt">5.0</span> to nie jest przypadek – to dowód na to, że w każdym sklepie, do którego wszedłem, zostawiłem po sobie porządek i dobrze wykonaną robotę.
-            </p>
-            <p>
-                Znam systemy kasowe, procedury wypieku pieczywa i zasady przyjmowania towaru. Ekspozycja towaru zgodna z planogramem, dbanie o świeżość na dziale "Warzywniak" czy szybka reakcja na kolejki – mam to opanowane w praktyce, nie w teorii. Wchodzę do ekipy jako gotowy lider, który od pierwszego dnia odciąży Kierownika Sklepu w codziennych obowiązkach.
-            </p>
-        </div>
-    </div>
-
-    <div class="slide">
-        <div class="card">
-            <h2>03. Lider z zapleczem technologicznym</h2>
-            <p>
-                Moje doświadczenie wykracza poza handel. Przez lata zarządzałem serwerami gier, gdzie społeczności liczyły <span class="accent-txt">tysiące graczy</span>. To nauczyło mnie moderacji konfliktów, planowania zasobów i odpowiedzialności za projekt. W firmie FORT jako dowódca sekcji ochrony na eventach, odpowiadałem za bezpieczeństwo i koordynację ludzi w warunkach stresu.
-            </p>
-            <p>
-                Do tego dochodzi moje wykształcenie informatyczne. Praktyki w Sądzie Okręgowym i praca w UNICEF-ie wyrobiły we mnie precyzję. W nowoczesnej Biedronce, gdzie technologia (kasy samoobsługowe, terminale, systemy zamówień) jest kluczowa, moja biegłość IT eliminuje przestoje. Gdy sprzęt odmawia posłuszeństwa, ja jestem pierwszy, który wie, jak go zdiagnozować.
-            </p>
-        </div>
-    </div>
-
-    <div class="slide">
-        <div class="card">
-            <h2>04. Zarządzanie i Dyspozycyjność</h2>
-            <p>
-                Właśnie rozpoczynam studia na kierunku <span class="accent-txt">Zarządzanie</span>. Wybrałem formę online, co jest kluczowe dla mojej pracy. Dlaczego? Bo nie mam zjazdów, które rozbijają grafik. Mogę pracować na poranną zmianę, popołudniową lub nockę – studia dopasowuję do pracy, a nie na odwrót.
-            </p>
-            <p>
-                Wiedzę teoretyczną o zarządzaniu zespołem i logistyce chcę przekuwać w praktykę właśnie u Państwa. Moja dyspozycyjność obejmuje również wszystkie weekendy handlowe. Jestem pracownikiem lojalnym, który szuka miejsca na dłużej, by wspólnie budować wyniki sklepu i dbać o to, by klienci ze Szczecina zawsze wybierali naszą placówkę.
-            </p>
-        </div>
-    </div>
-
-    <div class="slide">
-        <div class="card" style="border: 2px solid var(--accent);">
-            <h2>05. Sekcja dla leniwych (TL;DR)</h2>
-            <p>Nie masz czasu czytać wszystkiego? Oto konkret w pigułce:</p>
+            <h2>02. Praktyka w Biedronce (5.0)</h2>
+            <p>Przez Tikrowa zrealizowałem ponad <span class="accent">70 zmian</span> w różnych placówkach sieci Biedronka. Średnia ocen 5.0 to dowód, że w każdym sklepie, do którego wchodzę, zostawiam po sobie wzorcowy porządek i zadowolony zespół.</p>
             <ul>
-                <li>🚀 <span class="accent-txt">Energia:</span> Nienawidzę nic nie robić. W sklepie zawsze znajdę sobie zajęcie.</li>
-                <li>🏆 <span class="accent-txt">Pewniak:</span> 70+ zmian w Biedronce, ocena 5.0. Wchodzę i robię.</li>
-                <li>💻 <span class="accent-txt">Mózg:</span> Informatyk studiujący zarządzanie. Ogarniam kasy i ludzi.</li>
-                <li>📅 <span class="accent-txt">Czas:</span> Studia online = pełna dyspozycyjność (nocki, weekendy).</li>
-                <li>🤝 <span class="accent-txt">Kultura:</span> Zero wulgaryzmów, pełen profesjonalizm i pomocność dla klienta.</li>
-                <li>🦁 <span class="accent-txt">Lider:</span> Dowodziłem ochroną i wielkimi społecznościami online.</li>
+                <li><strong>Ekspozycja:</strong> Dbam o oznaczenia cenowe i planogramy. Klient kupuje oczami.</li>
+                <li><strong>Kasa:</strong> Szybkość i kultura to moje priorytety przy fiskalizacji.</li>
+                <li><strong>Logistyka:</strong> Nocne rozładunki i realizacja zamówień nie mają przede mną tajemnic.</li>
             </ul>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>06. Zróbmy coś razem</h2>
-            <p style="text-align: center;">Czekam na zaproszenie na rozmowę. Wpadnę w każdej chwili.</p>
+            <h2>03. Lider z zapleczem IT</h2>
+            <p>Zarządzanie tysiącami graczy na serwerach online nauczyło mnie moderacji, cierpliwości i planowania strategicznego. W firmie FORT jako dowódca sekcji na eventach, odpowiadałem za życie i zdrowie ludzi, koordynując pracę zespołów w ekstremalnym stresie.</p>
+            <p>Dodatkowo, moje wykształcenie informatyczne (UNICEF, Sąd) sprawia, że kasy i systemy logistyczne ogarniam szybciej niż standardowy pracownik. Nie straszne mi awarie sprzętu – ja je naprawiam.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="card">
+            <h2>04. Zarządzanie i Dyspozycyjność</h2>
+            <p>Właśnie zaczynam studia na kierunku <span class="accent">Zarządzanie (Online)</span>. Dzięki tej formie edukacji, jestem dostępny dla Ciebie 24/7. Nie mam zjazdów, nie mam blokad w grafiku. Mogę brać nocki, weekendy i święta, bo uczę się wtedy, kiedy sklep śpi.</p>
+            <p>Moja dyspozycyjność 3-zmianowa to gwarancja, że zawsze masz kogoś pod ręką, kto nie tylko przyjdzie do pracy, ale wniesie do niej nową energię i wiedzę akademicką z zakresu kierowania ludźmi.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="card" style="border: 2px solid var(--accent);">
+            <h2>05. Podsumowanie (TL;DR)</h2>
+            <ul style="list-style: none; padding: 0;">
+                <li>🚀 <span class="accent">ENERGIA:</span> Pracuję za dwóch, bo kocham ruch.</li>
+                <li>🏆 <span class="accent">PEWNIAK:</span> 70+ zmian w Biedronce z oceną 5.0.</li>
+                <li>💻 <span class="accent">MÓZG:</span> Informatyk studiujący zarządzanie.</li>
+                <li>📅 <span class="accent">CZAS:</span> Studia online = pełna gotowość 24/7.</li>
+                <li>🤝 <span class="accent">KLASA:</span> Spokój, brak przekleństw, wysoka kultura.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="card">
+            <h2>Zbudujmy sukces razem</h2>
+            <p style="text-align: center;">Gotowy do startu w Szczecinie. Czekam na Twój ruch.</p>
             <div style="text-align: center; margin-top: 30px;">
                 <h3 style="font-size: 2.5rem; margin: 0;">ŁUKASZ KUŚ</h3>
-                <p>📍 Szczecin | Zachodniopomorskie</p>
-                <p>📧 <strong>lukasz.kus.kontakt@poczta.pl</strong></p>
+                <p>E-mail: <span class="accent">lukasz.kus.kontakt@poczta.pl</span></p>
                 <button class="btn" onclick="location.href='mailto:lukasz.kus.kontakt@poczta.pl'">Zatrudnij mnie</button>
             </div>
         </div>
     </div>
 
-    <div class="nav-container" id="nav"></div>
-
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         let current = 0;
         const slides = document.querySelectorAll('.slide');
-        const nav = document.getElementById('nav');
-        const count = document.getElementById('counter');
+        const progress = document.getElementById('progressBar');
+        const dotNav = document.getElementById('dotNav');
 
+        // Nawigacja kropkowa
         slides.forEach((_, i) => {
-            const bar = document.createElement('div');
-            bar.className = `nav-bar ${i === 0 ? 'active' : ''}`;
-            bar.onclick = () => show(i);
-            nav.appendChild(bar);
+            const dot = document.createElement('div');
+            dot.className = `dot ${i === 0 ? 'active' : ''}`;
+            dot.onclick = () => show(i);
+            dotNav.appendChild(dot);
         });
 
         function show(n) {
             slides[current].classList.remove('active');
             current = (n + slides.length) % slides.length;
             slides[current].classList.add('active');
-            count.innerText = `${current + 1} / ${slides.length}`;
-            document.querySelectorAll('.nav-bar').forEach((b, i) => {
-                b.className = `nav-bar ${i === current ? 'active' : ''}`;
+            
+            // Postęp
+            progress.style.width = ((current + 1) / slides.length) * 100 + "%";
+            
+            // Kropki
+            document.querySelectorAll('.dot').forEach((d, i) => {
+                d.className = `dot ${i === current ? 'active' : ''}`;
             });
         }
 
-        function navSlide(d) { show(current + d); }
+        function moveSlide(d) { show(current + d); }
 
-        // Pancerne przewijanie
+        // Myszka i klawiatura
         let wait = false;
         window.addEventListener('wheel', e => {
             if (wait) return;
             if (Math.abs(e.deltaY) > 30) {
                 wait = true;
                 show(current + (e.deltaY > 0 ? 1 : -1));
-                setTimeout(() => { wait = false; }, 600);
+                setTimeout(() => wait = false, 700);
             }
-        }, { passive: true });
+        });
 
         document.addEventListener('keydown', e => {
             if (e.key === "ArrowRight" || e.key === "ArrowDown") show(current + 1);
             if (e.key === "ArrowLeft" || e.key === "ArrowUp") show(current - 1);
         });
 
-        let sy = 0;
-        document.addEventListener('touchstart', e => sy = e.touches[0].clientY, { passive: true });
-        document.addEventListener('touchend', e => {
-            let ey = e.changedTouches[0].clientY;
-            if (Math.abs(sy - ey) > 60) show(current + (sy > ey ? 1 : -1));
-        }, { passive: true });
+        // Cząsteczki tła
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80 },
+                "color": { "value": "#ffffff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.2 },
+                "size": { "value": 3 },
+                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
+                "move": { "enable": true, "speed": 2 }
+            },
+            "interactivity": {
+                "events": { "onhover": { "enable": true, "mode": "grab" } },
+                "modes": { "grab": { "distance": 200 } }
+            }
+        });
     </script>
 </body>
 </html>
