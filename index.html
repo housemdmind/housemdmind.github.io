@@ -3,144 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV | Zastępca Kierownika Sklepu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Łukasz Kuś | CV & List Motywacyjny</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
     <style>
-        :root {
-            --primary: #e30613; /* Kolor zbliżony do brandu Biedronki */
-            --dark: #2d2d2d;
-            --light: #f4f4f4;
-            --accent: #ffcc00;
+        :root { --primary: #e30613; --dark: #1e293b; --light: #f8fafc; --accent: #ffcc00; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; margin: 0; background: var(--light); color: var(--dark); overflow-x: hidden; }
+        
+        header { 
+            background: linear-gradient(135deg, var(--primary), #a3040e); 
+            color: white; padding: 6rem 1rem; text-align: center; 
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); 
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            background: var(--light);
-            color: var(--dark);
-            overflow-x: hidden;
+        .container { max-width: 850px; margin: -60px auto 2rem; padding: 0 1rem; position: relative; z-index: 10; }
+        
+        section { 
+            background: white; padding: 3rem; border-radius: 20px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.07); margin-bottom: 2.5rem; 
         }
 
-        header {
-            background: linear-gradient(135deg, var(--primary), #a3040e);
-            color: white;
-            padding: 5rem 1rem;
-            text-align: center;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        h2 { color: var(--primary); font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-top: 0; display: flex; align-items: center; gap: 10px; }
+        
+        .letter-content { font-style: italic; color: #475569; border-left: 3px solid var(--accent); padding-left: 20px; }
+        
+        .tag { display: inline-block; background: var(--dark); color: white; padding: 0.5rem 1rem; border-radius: 10px; margin: 0.3rem; font-size: 0.85rem; }
+        
+        .lazy-section { 
+            background: var(--dark); color: white; border: 4px dashed var(--accent);
+        }
+        .lazy-section h2 { color: var(--accent); border: none; }
+        .lazy-item { margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
+        .lazy-item span { color: var(--accent); font-weight: bold; }
+
+        .rating-badge { 
+            background: var(--accent); color: var(--dark); padding: 8px 20px; 
+            border-radius: 50px; font-weight: 900; display: inline-block; margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
         }
 
-        .container { max-width: 900px; margin: -50px auto 2rem; padding: 0 1rem; position: relative; z-index: 10; }
-
-        section {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            margin-bottom: 2rem;
-            transition: transform 0.3s ease;
+        .contact-btn { 
+            display: inline-block; background: var(--primary); color: white; 
+            padding: 1.2rem 2.5rem; text-decoration: none; border-radius: 12px; 
+            font-weight: bold; transition: 0.4s; border: none; cursor: pointer;
         }
+        .contact-btn:hover { background: #b90510; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(227, 6, 19, 0.2); }
 
-        section:hover { transform: translateY(-5px); }
-
-        h2 { color: var(--primary); border-left: 5px solid var(--accent); padding-left: 15px; margin-top: 0; }
-
-        .skill-tag {
-            display: inline-block;
-            background: var(--dark);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            margin: 0.3rem;
-            font-size: 0.85rem;
-            transition: all 0.3s;
-        }
-
-        .skill-tag:hover { background: var(--accent); color: var(--dark); transform: scale(1.1); }
-
-        .job { margin-bottom: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 1rem; }
-        .job:last-child { border-bottom: none; }
-
-        .contact-btn {
-            display: inline-block;
-            background: var(--accent);
-            color: var(--dark);
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            margin-top: 1rem;
-            transition: box-shadow 0.3s;
-        }
-
-        .contact-btn:hover { box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4); }
-
-        footer { text-align: center; padding: 3rem; color: #888; font-size: 0.8rem; }
+        footer { text-align: center; padding: 4rem; color: #94a3b8; }
     </style>
 </head>
 <body>
 
-<header data-aos="fade-down">
-    <h1 style="font-size: 3rem; margin: 0;">Twoje Imię i Nazwisko</h1>
-    <p style="font-size: 1.2rem; opacity: 0.9;">Kandydat na Zastępcę Kierownika Sklepu</p>
+<header data-aos="zoom-in">
+    <div class="rating-badge">OCENA TIKROW: 5.0 / 5.0 (70+ zleceń) ★</div>
+    <h1 style="margin:0; font-size: 3.5rem;">Łukasz Kuś</h1>
+    <p style="font-size: 1.4rem; font-weight: 300;">Więcej niż Zastępca Kierownika – Człowiek od zadań specjalnych</p>
 </header>
 
 <div class="container">
+    
     <section data-aos="fade-up">
-        <h2>Profil Zawodowy</h2>
-        <p>Zorientowany na wyniki lider z doświadczeniem w handlu. Skutecznie zarządzam procesami operacyjnymi, dbając o najwyższe standardy obsługi klienta i efektywność zespołu. Szukam wyzwań w dynamicznym środowisku sieci Biedronka.</p>
-    </section>
-
-    <section data-aos="fade-up" data-aos-delay="100">
-        <h2>Kluczowe Kompetencje</h2>
-        <div class="skill-tag">Zarządzanie Zespołem</div>
-        <div class="skill-tag">Standardy HACCP / BHP</div>
-        <div class="skill-tag">Rozliczanie Utargów</div>
-        <div class="skill-tag">Planowanie Grafików</div>
-        <div class="skill-tag">Obsługa Klienta</div>
-        <div class="skill-tag">Zarządzanie Towarem</div>
-    </section>
-
-    <section data-aos="fade-up" data-aos-delay="200">
-        <h2>Doświadczenie</h2>
-        <div class="job">
-            <strong>Nazwa Firmy / Sklepu</strong> | Stanowisko | 2021 – Obecnie
-            <ul>
-                <li>Nadzór nad pracą zespołu (10+ osób) i motywowanie do realizacji planów.</li>
-                <li>Zapewnienie ciągłości sprzedaży poprzez optymalne zatowarowanie.</li>
-                <li>Rozwiązywanie trudnych sytuacji z klientami zgodnie z polityką firmy.</li>
-            </ul>
-        </div>
-        <div class="job">
-            <strong>Poprzednia Firma</strong> | Sprzedawca-Kasjer | 2018 – 2021
-            <ul>
-                <li>Szybka i profesjonalna obsługa klienta.</li>
-                <li>Dbanie o ekspozycję towaru zgodnie ze standardami.</li>
-            </ul>
+        <h2>✉️ Dlaczego właśnie ja?</h2>
+        <div class="letter-content">
+            <p>Szanowni Państwo,</p>
+            <p>Nie lubię nudy. Jeśli nic się nie dzieje, sam szukam sobie pracy – dlatego moje doświadczenie rozciąga się od informatyki w UNICEF-ie, przez zarządzanie tysiącami graczy online, aż po 70+ pozytywnie ocenionych zleceń w Biedronkach przez aplikację Tikrow.</p>
+            <p>Szukam pracy jako Zastępca Kierownika, bo <strong>zarządzanie mam we krwi</strong> (od samorządów szkolnych po dowodzenie ochroną na eventach), a Biedronkę znam od strony operacyjnej lepiej niż niejeden stały pracownik. Moje studia z Zarządzania (online) pozwalają mi być u Państwa o każdej porze, a moja natura "pracoholika" sprawia, że każda powierzona mi paleta, grafik czy problem klienta zostaną rozwiązane na 100%.</p>
         </div>
     </section>
 
-    <section data-aos="fade-up" data-aos-delay="300" style="text-align: center;">
-        <h2>Zapraszam do kontaktu</h2>
-        <p>Jestem gotowy na nowe wyzwania!</p>
-        <p>Telefon: <strong>+48 123 456 789</strong></p>
-        <a href="mailto:twoj-email@poczta.pl" class="contact-btn">Wyślij e-mail</a>
+    <section data-aos="fade-up">
+        <h2>🛠️ Co wnoszę do zespołu?</h2>
+        <div class="tag">Zarządzanie ludźmi (online & offline)</div>
+        <div class="tag">Biegła obsługa systemów sprzedaży</div>
+        <div class="tag">Komunikacja (Angielski + spryt językowy)</div>
+        <div class="tag">Odporność na stres</div>
+        <div class="tag">Szybkie rozwiązywanie konfliktów</div>
+        <div class="tag">Standardy Biedronki (znajomość z praktyki)</div>
     </section>
+
+    <section data-aos="fade-up">
+        <h2>🎓 Wykształcenie i Kursy</h2>
+        <p><strong>Obecnie:</strong> Zarządzanie (Studia online – pełna dyspozycyjność)</p>
+        <p><strong>Wcześniej:</strong> Informatyka, Technikum Hodowli Koni</p>
+        <p><strong>Kursy:</strong> Pierwsza pomoc, Pilarz, Cyberbezpieczeństwo, Inseminator.</p>
+    </section>
+
+    <section class="lazy-section" data-aos="flip-up">
+        <h2>😴 Sekcja dla leniwych (TL;DR)</h2>
+        <p>Nie masz czasu czytać całości? Oto konkret w 15 sekund:</p>
+        <div class="lazy-item"><span>🚀</span> Pracuję za dwóch, bo nie znoszę bezczynności.</div>
+        <div class="lazy-item"><span>🏆</span> Na Tikrow mam czyste 5.0 po 70 zleceniach w handlu.</div>
+        <div class="lazy-item"><span>🤝</span> Dogadam się z każdym – od zdenerwowanego klienta po niemieckiego turystę.</div>
+        <div class="lazy-item"><span>📅</span> Jestem dostępny 24/7 (studia mam w internecie).</div>
+        <div class="lazy-item"><span>💻</span> Ogarniam komputery lepiej niż przeciętny kierownik (ex-informatyk).</div>
+        <div class="lazy-item"><span>🦁</span> Prowadziłem projekty dla tysięcy ludzi – 10-osobowy zespół to dla mnie czysta przyjemność.</div>
+    </section>
+
+    <section data-aos="fade-up" style="text-align: center;">
+        <h2>📱 Porozmawiajmy!</h2>
+        <p>Łukasz Kuś | Ur. 31.01.2001</p>
+        <p>Gotowy do startu od zaraz.</p>
+        <a href="mailto:TWOJ@EMAIL.PL" class="contact-btn">Zatrudnij mnie (wyślij e-mail)</a>
+    </section>
+
 </div>
 
 <footer>
-    &copy; 2026 housemdmind CV. Wszystkie prawa zastrzeżone.
+    Wygenerowano z energią przez housemdmind & Gemini.
 </footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init({
-        duration: 1000, // Czas trwania animacji
-        once: true // Animacja tylko raz przy przewijaniu
-    });
-</script>
+<script>AOS.init({ duration: 800, once: true });</script>
 
 </body>
 </html>
