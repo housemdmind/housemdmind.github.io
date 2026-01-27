@@ -3,125 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Łukasz Kuś | Interaktywne Portfolio</title>
+    <title>Łukasz Kuś | Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #ff1e1e; --accent: #ffcc00; --bg: #05070a; --glass: rgba(255, 255, 255, 0.03); }
-        * { box-sizing: border-box; }
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Montserrat', sans-serif; background: var(--bg); color: white; overflow: hidden; }
+        :root { --primary: #ff1e1e; --accent: #ffcc00; --bg: #05070a; }
+        
+        /* CAŁKOWITE USUNIĘCIE PASKÓW PRZEWIJANIA */
+        * { 
+            box-sizing: border-box; 
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;     /* Firefox */
+        }
+        *::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
 
-        /* Tło z cząsteczkami */
+        body, html { 
+            margin: 0; padding: 0; height: 100%; width: 100%; 
+            font-family: 'Montserrat', sans-serif; background: var(--bg); 
+            color: white; overflow: hidden; 
+        }
+
+        /* Tło i Animacje */
         #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; }
-        .bg-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; background: radial-gradient(circle at center, transparent 0%, var(--bg) 90%); pointer-events: none; }
-
-        /* Pasek postępu na górze */
-        .top-progress { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(to right, var(--primary), var(--accent)); z-index: 1000; transition: width 0.4s ease; width: 0%; }
+        
+        .bg-orbs { position: fixed; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+        .orb { 
+            position: absolute; border-radius: 50%; filter: blur(100px); 
+            opacity: 0.2; animation: drift 20s infinite alternate ease-in-out; 
+        }
+        @keyframes drift {
+            0% { transform: translate(0,0) scale(1); }
+            100% { transform: translate(15vw, 15vh) scale(1.2); }
+        }
 
         /* Slajdy */
-        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 20px; opacity: 0; visibility: hidden; transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1); z-index: 5; }
-        .slide.active { opacity: 1; visibility: visible; transform: scale(1); }
-        .slide:not(.active) { transform: scale(1.05) translateY(20px); }
-
-        /* Animowana karta */
-        .card { 
-            background: var(--glass); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255,255,255,0.1); padding: clamp(20px, 5vw, 60px); border-radius: 40px; 
-            max-width: 1000px; width: 100%; max-height: 85vh; overflow-y: auto;
-            position: relative; z-index: 10; box-shadow: 0 0 40px rgba(255, 30, 30, 0.1);
-            scrollbar-width: thin;
+        .slide { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            display: flex; justify-content: center; align-items: center; 
+            padding: 20px; opacity: 0; visibility: hidden; 
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out; 
+            z-index: 5; transform: scale(0.98);
         }
-        .card::before { content: ""; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; border-radius: 42px; background: linear-gradient(45deg, var(--primary), transparent, var(--accent)); z-index: -1; opacity: 0.3; }
+        .slide.active { opacity: 1; visibility: visible; transform: scale(1); }
 
-        h1 { font-size: clamp(2rem, 8vw, 4.5rem); font-weight: 900; margin: 0; text-align: center; text-transform: uppercase; letter-spacing: -2px; }
-        .accent { color: var(--accent); text-shadow: 0 0 20px rgba(255, 204, 0, 0.3); }
-        h2 { color: var(--primary); font-size: clamp(1.2rem, 3vw, 2rem); margin-bottom: 25px; text-transform: uppercase; letter-spacing: 5px; }
+        /* Karta szklana */
+        .card { 
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(25px); 
+            -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.1); 
+            padding: clamp(20px, 5vw, 60px); border-radius: 40px; 
+            max-width: 1000px; width: 100%; max-height: 85vh; 
+            overflow-y: scroll; /* Scroll działa, ale pasek jest ukryty przez CSS wyżej */
+            position: relative; z-index: 10; box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+        }
+
+        h1 { font-size: clamp(2rem, 8vw, 4.5rem); font-weight: 900; margin: 0; text-align: center; line-height: 1; }
+        .accent { color: var(--accent); }
+        h2 { color: var(--primary); font-size: clamp(1.2rem, 3vw, 2rem); margin-bottom: 25px; text-transform: uppercase; letter-spacing: 4px; }
         
         p, li { font-size: 1.1rem; line-height: 1.8; color: #cbd5e1; margin-bottom: 20px; text-align: justify; }
-        .btn { background: var(--primary); color: white; border: none; padding: 20px 50px; border-radius: 100px; font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 3px; display: block; margin: 30px auto 0; transition: 0.4s; box-shadow: 0 10px 30px rgba(255, 30, 30, 0.4); }
-        .btn:hover { background: var(--accent); color: black; transform: translateY(-5px); box-shadow: 0 15px 40px rgba(255, 204, 0, 0.5); }
+        
+        .btn { 
+            background: var(--primary); color: white; border: none; padding: 20px 50px; 
+            border-radius: 100px; font-weight: 900; cursor: pointer; 
+            text-transform: uppercase; letter-spacing: 2px; display: block; 
+            margin: 30px auto 0; transition: 0.4s;
+        }
+        .btn:hover { background: var(--accent); color: black; transform: translateY(-5px); }
 
-        /* Nawigacja boczna */
-        .nav-dots { position: fixed; right: 30px; top: 50%; transform: translateY(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 15px; }
-        .dot { width: 12px; height: 12px; background: rgba(255,255,255,0.2); border-radius: 50%; cursor: pointer; transition: 0.4s; }
-        .dot.active { background: var(--accent); box-shadow: 0 0 15px var(--accent); transform: scale(1.5); }
-
-        /* Mobile Fix */
-        @media (max-width: 768px) { .nav-dots { display: none; } .card { padding: 30px 20px; } }
+        .progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: var(--accent); z-index: 1000; transition: width 0.3s; width: 0%; }
     </style>
 </head>
 <body>
 
     <div id="particles-js"></div>
-    <div class="bg-overlay"></div>
-    <div class="top-progress" id="progressBar"></div>
-    <div class="nav-dots" id="dotNav"></div>
+    <div class="bg-orbs">
+        <div class="orb" style="width: 500px; height: 500px; top: -10%; left: -10%; background: var(--primary);"></div>
+        <div class="orb" style="width: 400px; height: 400px; bottom: -5%; right: -5%; background: var(--accent);"></div>
+    </div>
+    <div class="progress-bar" id="pb"></div>
 
     <div class="slide active">
         <div class="card">
             <h1>ŁUKASZ <span class="accent">KUŚ</span></h1>
-            <p style="text-align: center; font-weight: bold; font-size: 1.4rem; color: #fff;">Zastępca Kierownika | Informatyk | Lider</p>
-            <p>Nie szukam zwykłej pracy – szukam wyzwań, które wymagają kogoś o niespożytej energii. Moja historia to połączenie technologii, zarządzania ludźmi i twardej pracy operacyjnej w Biedronce. Zobacz, jak moje "ADHD" i sumienność przekładają się na profesjonalizm, którego potrzebujesz w swoim zespole.</p>
-            <button class="btn" onclick="moveSlide(1)">Poznaj szczegóły</button>
+            <p style="text-align: center; font-weight: bold; font-size: 1.4rem;">Zastępca Kierownika | Informatyk | Lider</p>
+            <p>Moja historia to nie jest zwykłe CV – to zapis ciągłego ruchu. Od zarządzania tysiącami graczy online, po fizyczną pracę operacyjną w Biedronce. Jeśli szukasz kogoś, kto nienawidzi nudy i zawsze szuka sposobu na optymalizację – zapraszam do środka.</p>
+            <button class="btn" onclick="moveSlide(1)">Poznaj mnie</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>01. Silnik, który nie stygnie</h2>
-            <p>Mój etos pracy opiera się na prostym fakcie: <span class="accent">nienawidzę bezczynności</span>. Tam, gdzie inni widzą rutynę, ja widzę proces do poprawy. Moja naturalna dynamika sprawia, że w sklepie zawsze jestem o krok przed problemami. Nie czekam na polecenia – widzę pustą półkę, uzupełniam ją. Widzę kolejkę, reaguję. To jest moja definicja proaktywności.</p>
-            <p>Brzydzę się bylejakością i wulgaryzmami. Stawiam na kulturę osobistą, która w relacjach z trudnym klientem jest moją najpotężniejszą bronią. Jestem spokojny, opanowany i zawsze nastawiony na rozwiązanie sytuacji tak, by klient wyszedł zadowolony.</p>
+            <h2>01. Silnik proaktywny</h2>
+            <p>Moje podejście do pracy definiuje brak tolerancji dla bezczynności. W Biedronce czuję się najlepiej, bo tam zawsze jest co robić. Nie czekam na polecenia – widzę pustą półkę, uzupełniam ją. Widzę kolejkę, reaguję. To jest mój standard pracy.</p>
+            <button class="btn" onclick="moveSlide(1)">Dalej</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>02. Praktyka w Biedronce (5.0)</h2>
-            <p>Przez Tikrowa zrealizowałem ponad <span class="accent">70 zmian</span> w różnych placówkach sieci Biedronka. Średnia ocen 5.0 to dowód, że w każdym sklepie, do którego wchodzę, zostawiam po sobie wzorcowy porządek i zadowolony zespół.</p>
-            <ul>
-                <li><strong>Ekspozycja:</strong> Dbam o oznaczenia cenowe i planogramy. Klient kupuje oczami.</li>
-                <li><strong>Kasa:</strong> Szybkość i kultura to moje priorytety przy fiskalizacji.</li>
-                <li><strong>Logistyka:</strong> Nocne rozładunki i realizacja zamówień nie mają przede mną tajemnic.</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="slide">
-        <div class="card">
-            <h2>03. Lider z zapleczem IT</h2>
-            <p>Zarządzanie tysiącami graczy na serwerach online nauczyło mnie moderacji, cierpliwości i planowania strategicznego. W firmie FORT jako dowódca sekcji na eventach, odpowiadałem za życie i zdrowie ludzi, koordynując pracę zespołów w ekstremalnym stresie.</p>
-            <p>Dodatkowo, moje wykształcenie informatyczne (UNICEF, Sąd) sprawia, że kasy i systemy logistyczne ogarniam szybciej niż standardowy pracownik. Nie straszne mi awarie sprzętu – ja je naprawiam.</p>
-        </div>
-    </div>
-
-    <div class="slide">
-        <div class="card">
-            <h2>04. Zarządzanie i Dyspozycyjność</h2>
-            <p>Właśnie zaczynam studia na kierunku <span class="accent">Zarządzanie (Online)</span>. Dzięki tej formie edukacji, jestem dostępny dla Ciebie 24/7. Nie mam zjazdów, nie mam blokad w grafiku. Mogę brać nocki, weekendy i święta, bo uczę się wtedy, kiedy sklep śpi.</p>
-            <p>Moja dyspozycyjność 3-zmianowa to gwarancja, że zawsze masz kogoś pod ręką, kto nie tylko przyjdzie do pracy, ale wniesie do niej nową energię i wiedzę akademicką z zakresu kierowania ludźmi.</p>
-        </div>
-    </div>
-
-    <div class="slide">
-        <div class="card" style="border: 2px solid var(--accent);">
-            <h2>05. Podsumowanie (TL;DR)</h2>
-            <ul style="list-style: none; padding: 0;">
-                <li>🚀 <span class="accent">ENERGIA:</span> Pracuję za dwóch, bo kocham ruch.</li>
-                <li>🏆 <span class="accent">PEWNIAK:</span> 70+ zmian w Biedronce z oceną 5.0.</li>
-                <li>💻 <span class="accent">MÓZG:</span> Informatyk studiujący zarządzanie.</li>
-                <li>📅 <span class="accent">CZAS:</span> Studia online = pełna gotowość 24/7.</li>
-                <li>🤝 <span class="accent">KLASA:</span> Spokój, brak przekleństw, wysoka kultura.</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="slide">
-        <div class="card">
-            <h2>Zbudujmy sukces razem</h2>
+            <h2>06. Kontakt</h2>
             <p style="text-align: center;">Gotowy do startu w Szczecinie. Czekam na Twój ruch.</p>
-            <div style="text-align: center; margin-top: 30px;">
+            <div style="text-align: center;">
                 <h3 style="font-size: 2.5rem; margin: 0;">ŁUKASZ KUŚ</h3>
                 <p>E-mail: <span class="accent">lukasz.kus.kontakt@poczta.pl</span></p>
-                <button class="btn" onclick="location.href='mailto:lukasz.kus.kontakt@poczta.pl'">Zatrudnij mnie</button>
+                <button class="btn" onclick="location.href='mailto:lukasz.kus.kontakt@poczta.pl'">Napisz do mnie</button>
             </div>
         </div>
     </div>
@@ -130,63 +114,40 @@
     <script>
         let current = 0;
         const slides = document.querySelectorAll('.slide');
-        const progress = document.getElementById('progressBar');
-        const dotNav = document.getElementById('dotNav');
-
-        // Nawigacja kropkowa
-        slides.forEach((_, i) => {
-            const dot = document.createElement('div');
-            dot.className = `dot ${i === 0 ? 'active' : ''}`;
-            dot.onclick = () => show(i);
-            dotNav.appendChild(dot);
-        });
+        const pb = document.getElementById('pb');
 
         function show(n) {
             slides[current].classList.remove('active');
             current = (n + slides.length) % slides.length;
             slides[current].classList.add('active');
-            
-            // Postęp
-            progress.style.width = ((current + 1) / slides.length) * 100 + "%";
-            
-            // Kropki
-            document.querySelectorAll('.dot').forEach((d, i) => {
-                d.className = `dot ${i === current ? 'active' : ''}`;
-            });
+            pb.style.width = ((current + 1) / slides.length) * 100 + "%";
         }
 
         function moveSlide(d) { show(current + d); }
 
-        // Myszka i klawiatura
+        // Przewijanie kółkiem myszy
         let wait = false;
         window.addEventListener('wheel', e => {
             if (wait) return;
             if (Math.abs(e.deltaY) > 30) {
                 wait = true;
                 show(current + (e.deltaY > 0 ? 1 : -1));
-                setTimeout(() => wait = false, 700);
+                setTimeout(() => wait = false, 800);
             }
-        });
+        }, { passive: true });
 
-        document.addEventListener('keydown', e => {
-            if (e.key === "ArrowRight" || e.key === "ArrowDown") show(current + 1);
-            if (e.key === "ArrowLeft" || e.key === "ArrowUp") show(current - 1);
-        });
-
-        // Cząsteczki tła
+        // Cząsteczki tła - STAŁY RUCH
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 80 },
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
                 "color": { "value": "#ffffff" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.2 },
-                "size": { "value": 3 },
+                "opacity": { "value": 0.2, "random": true },
+                "size": { "value": 2, "random": true },
                 "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
-                "move": { "enable": true, "speed": 2 }
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
             },
             "interactivity": {
-                "events": { "onhover": { "enable": true, "mode": "grab" } },
-                "modes": { "grab": { "distance": 200 } }
+                "events": { "onhover": { "enable": true, "mode": "grab" } }
             }
         });
     </script>
