@@ -23,7 +23,7 @@
         
         h1 { font-size: clamp(2.2rem, 8vw, 4.5rem); font-weight: 900; margin: 0; line-height: 1.1; text-align: center; }
         .accent { color: var(--accent); }
-        .latin-motto { display: block; font-style: italic; color: var(--accent); font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-top: -10px; margin-bottom: 20px; text-align: left; opacity: 0.7; }
+        .latin-motto { display: block; font-style: italic; color: var(--accent); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-top: -10px; margin-bottom: 20px; text-align: left; opacity: 0.9; border-bottom: 1px solid rgba(255,204,0,0.3); padding-bottom: 5px; }
         h2 { color: var(--primary); font-size: clamp(1.2rem, 3vw, 1.8rem); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px; text-align: left; font-weight: 900; border-left: 6px solid var(--accent); padding-left: 20px; }
         p, li { font-size: clamp(1rem, 2vw, 1.15rem); line-height: 1.8; color: #e2e8f0; margin-bottom: 20px; text-align: justify; }
         
@@ -31,17 +31,12 @@
         .btn:hover { background: var(--accent); color: black; transform: scale(1.05); }
 
         .slide-counter { position: fixed; top: 25px; right: 25px; font-weight: 900; color: var(--accent); z-index: 1000; font-size: 1.2rem; }
-        .dots { position: fixed; bottom: 35px; left: 0; width: 100%; display: flex; justify-content: center; gap: 12px; z-index: 100; }
-        .dot { width: 40px; height: 5px; background: rgba(255,255,255,0.15); border-radius: 3px; transition: 0.4s; cursor: pointer; }
-        .dot.active { background: var(--accent); width: 80px; box-shadow: 0 0 15px var(--accent); }
-
-        @media (max-width: 768px) { h2 { font-size: 1.3rem; } p { font-size: 1.05rem; } .card { padding: 35px 25px; } }
     </style>
 </head>
 <body>
 
     <audio id="bgAudio" loop preload="auto">
-        <source src="http://googleusercontent.com/file_content/2" type="audio/mpeg">
+        <source src="Antonio Vivaldi - Zima.mp3" type="audio/mpeg">
     </audio>
 
     <div id="particles-js"></div>
@@ -53,94 +48,94 @@
 
     <div class="slide active">
         <div class="card">
-            <span class="latin-motto">Ad astra per aspera</span>
+            <span class="latin-motto">Ad astra per aspera (Przez trudy do gwiazd)</span>
             <h1>ŁUKASZ <span class="accent">KUŚ</span></h1>
-            <h3 style="text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-top: 15px;">Kandydat na Zastępcę Kierownika – Biedronka Lubieszyn</h3>
+            <h3 style="text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-top: 15px;">Kandydat na Zastępcę Kierownika Sklepu – Biedronka Lubieszyn</h3>
             <p>Moja aplikacja na Lubieszyn to konkretna deklaracja: biorę pełną odpowiedzialność za powierzoną zmianę, ludzi i wyniki sklepu. Mam 25 lat, ogromną energię i praktyczne doświadczenie w strukturach Biedronki. Nie potrzebuję wdrożenia w podstawy – potrzebuję pola do działania, na którym pokażę, jak sprawnie koordynować procesy w tak wymagającej lokalizacji.</p>
-            <button class="btn" onclick="startExperience()">Rozpocznij</button>
+            <button class="btn" onclick="startExperience()">Rozpocznij prezentację</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <span class="latin-motto">Finis coronat opus</span>
+            <span class="latin-motto">Finis coronat opus (Koniec wieńczy dzieło)</span>
             <h2>01. Lubieszyn to specyficzny front</h2>
             <p>Sklep przygraniczny to nie jest miejsce dla przypadkowych osób. To ogromne obroty, masa klientów z Niemiec i tempo, którego wielu nie wytrzymuje. Ja to tempo lubię. Moim atutem jest spryt komunikacyjny – nawet jeśli niemiecki nie jest perfekcyjny, potrafię kulturalnie i profesjonalnie obsłużyć klienta zza granicy, dbając o to, by każda transakcja przebiegła bez zgrzytów.</p>
-            <p>Wiem, że na Lubieszynie liczy się czas i sprawność na kasie. Moja dyspozycyjność i brak nałogów to gwarancja, że zawsze jestem w 100% gotowy na najcięższe godziny szczytu.</p>
+            <p>Wiem, że na Lubieszynie liczy się czas i sprawność na kasie. Moja dyspozycyjność i brak nałogów to gwarancja, że zawsze jestem w 100% gotowy na najcięższe godziny szczytu, niezależnie od dnia tygodnia.</p>
             <button class="btn" onclick="next()">Dalej</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <span class="latin-motto">Per scientiam ad libertatem</span>
-            <h2>02. 70+ zmian w Biedronce</h2>
-            <p>Moja wiedza o systemach Biedronki nie pochodzi z podręczników, tylko z praktyki. Ponad 70 zrealizowanych zmian w sieci z oceną 5.0 to dowód, że znam każdy proces: od sprawnej fiskalizacji, przez wypiek pieczywa, po dbanie o „Warzywniak” i estetykę sali sprzedaży. Rozumiem, co to jest Sztuka Sprzedaży i dlaczego poprawna cena na półce jest świętością.</p>
-            <p>Jako Zastępca Kierownika od pierwszej godziny biorę na siebie nadzór nad personelem i kontrolę standardów. Nie muszę pytać, gdzie co leży – ja to po prostu wiem.</p>
+            <span class="latin-motto">Per scientiam ad libertatem (Przez wiedzę do wolności)</span>
+            <h2>02. Ponad 70 zmian w Biedronce</h2>
+            <p>Moja wiedza o systemach Biedronki nie pochodzi z podręczników, tylko z intensywnej praktyki. Ponad 70 zrealizowanych zmian w sieci z oceną 5.0 to dowód, że znam każdy proces: od sprawnej fiskalizacji, przez wypiek pieczywa, po dbanie o „Warzywniak” i estetykę sali sprzedaży. Rozumiem, co to jest Sztuka Sprzedaży i dlaczego poprawna cena na półce jest świętością.</p>
+            <p>Jako Zastępca Kierownika od pierwszej godziny biorę na siebie nadzór nad personelem i kontrolę standardów. Wchodzę do zespołu jako gotowy element układanki, a nie osoba do nauki podstaw.</p>
             <button class="btn" onclick="next()">Dalej</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <span class="latin-motto">Faber est quisque fortunae suae</span>
+            <span class="latin-motto">Faber est quisque fortunae suae (Każdy jest kowalem swego losu)</span>
             <h2>03. Klucze, Alarmy i Sejf</h2>
             <p>Rola Zastępcy to przede wszystkim odpowiedzialność materialna. Mam doświadczenie w otwieraniu i zamykaniu placówek (Żabka, Chata Polska). Wiem, co oznacza odpowiedzialność za klucze, kody alarmowe i zabezpieczenie utargu. Nigdy nie zawiodłem zaufania pracodawcy w kwestii finansów czy bezpieczeństwa obiektu.</p>
-            <p>Potrafię rzetelnie przygotować raporty i nadzorować obieg gotówki. Moja informatyczna przeszłość sprawia, że systemy logistyczne i biurowe obsługuję bezbłędnie i szybciej niż inni.</p>
+            <p>Potrafię rzetelnie przygotować raporty i nadzorować obieg gotówki. Moja informatyczna przeszłość sprawia, że systemy logistyczne i biurowe obsługuję bezbłędnie i znacznie szybciej niż przeciętny pracownik.</p>
             <button class="btn" onclick="next()">Dalej</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <span class="latin-motto">Fortes fortuna adiuvat</span>
-            <h2>04. Oaza spokoju w sytuacjach kryzysowych</h2>
-            <p>W handlu bywa różnie – klienci bywają złośliwi, a sprzęt potrafi zawieść. Moja zasada: spokój przede wszystkim. Brzydzę się wulgaryzmami i brakiem szacunku. Nawet przy najbardziej agresywnym kliencie zachowuję kulturalną postawę i trzymam się procedur. Rozładowuję napięcie zamiast je potęgować.</p>
-            <p>Uważam, że lider musi dawać przykład zespołowi. Jeśli ja panuję nad emocjami, to reszta ekipy czuje się pewniej, a sklep funkcjonuje normalnie nawet podczas największego zamieszania.</p>
+            <span class="latin-motto">Fortes fortuna adiuvat (Śmiałym los sprzyja)</span>
+            <h2>04. Oaza spokoju w stresie</h2>
+            <p>W handlu sytuacje sporne są nieuniknione – klienci bywają zmęczeni, a sprzęt potrafi zawieść. Moja zasada: spokój przede wszystkim. Brzydzę się wulgaryzmami i brakiem szacunku. Nawet przy najbardziej roszczeniowym kliencie zachowuję kulturalną postawę i twardo trzymam się procedur sieci. Rozładowuję napięcie zamiast je potęgować.</p>
+            <p>Uważam, że lider musi dawać przykład zespołowi. Jeśli ja panuję nad emocjami, to reszta ekipy czuje się pewniej, a sklep funkcjonuje normalnie nawet podczas największego, przedświątecznego zamieszania.</p>
             <button class="btn" onclick="next()">Dalej</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <span class="latin-motto">Non scholae, sed vitae discimus</span>
+            <span class="latin-motto">Non scholae, sed vitae discimus (Uczymy się dla życia, nie dla szkoły)</span>
             <h2>05. Inwentaryzacja i Magazyn</h2>
-            <p>Inwentaryzacja to dla mnie nie tylko liczby, to weryfikacja sumienności całego zespołu. Choć w Biedronce spisy robią firmy zewnętrzne, moją rolą jest takie przygotowanie sali i magazynu, aby proces przeszedł bezbłędnie. Porządek "od rampy po półkę" to mój standard codzienny, a nie tylko na pokaz.</p>
-            <p>Wiem, jak pilnować terminów (FEFO) i zarządzać stratami. Na Lubieszynie, przy tak dużych obrotach, dbanie o każdy produkt to realne oszczędności dla firmy.</p>
+            <p>Inwentaryzacja to dla mnie weryfikacja sumienności całego zespołu. Choć w Biedronce spisy robią firmy zewnętrzne, moją rolą jako Zastępcy jest takie przygotowanie sali i magazynu, aby proces przeszedł bezbłędnie. Porządek "od rampy po półkę" to mój standard codzienny, a nie tylko działanie pod audyt.</p>
+            <p>Wiem, jak pilnować terminów (system FEFO) i zarządzać stratami. Na Lubieszynie, przy tak ogromnym obrocie, dbanie o każdy produkt to realne oszczędności dla firmy, za które czuję się odpowiedzialny.</p>
             <button class="btn" onclick="next()">Dalej</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <span class="latin-motto">Veni, vidi, vici</span>
+            <span class="latin-motto">Veni, vidi, vici (Przybyłem, zobaczyłem, zwyciężyłem)</span>
             <h2>06. Prowadzenie Zespołu</h2>
-            <p>Dowodziłem sekcjami ochrony i tysiącami graczy w sieci – to nauczyło mnie, jak sprawiedliwie dzielić robotę. Jako Zastępca nie jestem gościem z biura. Jeśli trzeba, staję na kasie ramię w ramię z ludźmi albo pomagam przy rozładunku. Lider musi być wsparciem, a nie tylko osobą wydającą polecenia.</p>
-            <p>Stawiam na jasne zadania: każdy na zmianie musi wiedzieć, za co odpowiada. Dzięki temu unika się chaosu, a praca idzie sprawnie nawet przy brakach kadrowych.</p>
+            <p>Dowodziłem sekcjami ochrony i dużymi grupami w sieci – to nauczyło mnie, jak sprawiedliwie dzielić zadania. Jako Zastępca nie zamierzam być "duchem w biurze". Jeśli trzeba, staję na kasie ramię w ramię z ludźmi albo pomagam przy rozładunku dostawy. Prawdziwy lider musi być realnym wsparciem.</p>
+            <p>Stawiam na jasne priorytety: każdy na zmianie musi wiedzieć, za co odpowiada. Dzięki temu unika się chaosu na sali sprzedaży, a praca idzie płynnie nawet przy brakach kadrowych czy awariach.</p>
             <button class="btn" onclick="next()">Dalej</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <span class="latin-motto">Docendo discimus</span>
+            <span class="latin-motto">Docendo discimus (Uczymy się nauczając innych)</span>
             <h2>07. Studia Zarządzania Online</h2>
-            <p>To, że studiuję Zarządzanie Online, jest atutem dla sklepu. Nie mam zjazdów, nie mam przymusowych nieobecności. Uczę się wtedy, kiedy nie jestem w pracy. Moja dyspozycyjność jest totalna: poranki, popołudnia, nocki i wszystkie weekendy handlowe.</p>
-            <p>Szukam stabilizacji na Lubieszynie. Chcę rosnąć razem z tą placówką, wykorzystując wiedzę ze studiów do jeszcze lepszej organizacji pracy i budowania wyników sprzedażowych.</p>
+            <p>Fakt, że studiuję Zarządzanie Online, jest moim dużym atutem. Nie mam zjazdów, nie mam przymusowych nieobecności w tygodniu. Uczę się wtedy, kiedy nie jestem w pracy. Moja dyspozycyjność jest totalna: poranki, popołudnia, nocki i wszystkie weekendy handlowe są do Państwa dyspozycji.</p>
+            <p>Szukam stabilizacji i miejsca, gdzie moje ambicje zostaną wykorzystane. Chcę rosnąć razem z placówką na Lubieszynie, wykorzystując wiedzę akademicką do jeszcze lepszej organizacji pracy.</p>
             <button class="btn" onclick="next()">Dalej</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card" style="border: 2px solid var(--accent);">
-            <span class="latin-motto">Acta non verba</span>
-            <h2>Konkrety w pigułce:</h2>
+            <span class="latin-motto">Acta non verba (Czyny, nie słowa)</span>
+            <h2>Konkretne argumenty:</h2>
             <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 12px;">✅ <strong>Biedronka na 100%:</strong> Znam systemy, kasę i standardy (Tikrow 5.0).</li>
-                <li style="margin-bottom: 12px;">✅ <strong>Samodzielność:</strong> Otwierałem i zamykałem obiekty, zarządzałem sejfem.</li>
-                <li style="margin-bottom: 12px;">✅ <strong>Opanowanie:</strong> Zero wulgaryzmów, pełna kultura w stresie.</li>
-                <li style="margin-bottom: 12px;">✅ <strong>Dyspozycyjność:</strong> Studia online = praca 24/7 bez blokad w grafiku.</li>
-                <li style="margin-bottom: 12px;">✅ <strong>Technologia:</strong> Informatyczne tło pozwalające szybko usuwać awarie.</li>
+                <li style="margin-bottom: 12px;">✅ <strong>Doświadczenie:</strong> Znam systemy, kasę i standardy Biedronki od podszewki.</li>
+                <li style="margin-bottom: 12px;">✅ <strong>Rzetelność:</strong> Otwierałem i zamykałem obiekty, zarządzałem sejfem i alarmami.</li>
+                <li style="margin-bottom: 12px;">✅ <strong>Kultura:</strong> Zero wulgaryzmów, pełne opanowanie w kontakcie z klientem.</li>
+                <li style="margin-bottom: 12px;">✅ <strong>Gotowość:</strong> Studia online oznaczają dyspozycyjność 24/7 bez wyjątków.</li>
+                <li style="margin-bottom: 12px;">✅ <strong>Energia:</strong> Mam 25 lat i ADHD, które przekuwam w niespożytą siłę do pracy.</li>
             </ul>
             <button class="btn" onclick="next()">Kontakt</button>
         </div>
@@ -148,14 +143,14 @@
 
     <div class="slide">
         <div class="card">
-            <span class="latin-motto">Audentes fortuna iuvat</span>
-            <h2>Dane Kontaktowe</h2>
-            <p style="text-align: center;">Dziękuję za czas poświęcony na moją prezentację. Jestem gotowy do podjęcia obowiązków i czekam na zaproszenie na rozmowę.</p>
+            <span class="latin-motto">Audentes fortuna iuvat (Odważnym szczęście sprzyja)</span>
+            <h2>Skontaktujmy się</h2>
+            <p style="text-align: center;">Dziękuję za poświęcony czas. Jestem gotowy do podjęcia obowiązków od zaraz i czekam na zaproszenie na rozmowę kwalifikacyjną.</p>
             <div style="text-align: center; margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
                 <h3 style="font-size: 2.2rem; margin: 0; color: white;">ŁUKASZ <span class="accent">KUŚ</span></h3>
                 <p style="font-size: 1.4rem; color: var(--accent); font-weight: bold; margin-top: 15px;">📞 667 268 314</p>
                 <p style="font-size: 1.2rem; margin-top: 5px;">📧 thkbenice@gmail.com</p>
-                <button class="btn btn-static" style="background:#222; cursor:default;">POWODZENIA</button>
+                <button class="btn btn-static" style="background:#222; cursor:default;">ZATRUDNIJ MNIE</button>
             </div>
         </div>
     </div>
@@ -169,7 +164,11 @@
         let isLocked = false;
 
         function startExperience() {
-            audio.play().catch(e => console.log("Audio trigger"));
+            audio.play().then(() => {
+                console.log("Muzyka gra!");
+            }).catch(e => {
+                console.log("Błąd audio: Plik musi być w tym samym folderze lub link jest zły.");
+            });
             next();
         }
 
