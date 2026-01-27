@@ -25,6 +25,7 @@
         .accent { color: var(--accent); }
         .latin-motto { display: block; font-style: italic; color: var(--accent); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-top: -10px; margin-bottom: 20px; text-align: left; opacity: 0.9; border-bottom: 1px solid rgba(255,204,0,0.3); padding-bottom: 5px; }
         h2 { color: var(--primary); font-size: clamp(1.2rem, 3vw, 1.8rem); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px; text-align: left; font-weight: 900; border-left: 6px solid var(--accent); padding-left: 20px; }
+        
         p, li { font-size: clamp(1rem, 2vw, 1.15rem); line-height: 1.8; color: #e2e8f0; margin-bottom: 20px; text-align: justify; }
         
         .btn { background: var(--primary); color: white; border: none; padding: 18px 45px; border-radius: 100px; font-weight: 900; cursor: pointer; text-transform: uppercase; margin: 30px auto 10px; display: block; width: fit-content; transition: 0.3s; letter-spacing: 2px; text-decoration: none; text-align: center; position: relative; z-index: 20; }
@@ -44,7 +45,14 @@
         .footer-note { text-align: center; margin-top: 30px; font-size: 0.7rem; opacity: 0.3; letter-spacing: 3px; text-transform: uppercase; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
         .slide-counter { position: fixed; top: 25px; right: 25px; font-weight: 900; color: var(--accent); z-index: 1000; font-size: 1.2rem; }
         
-        .nav-hints { position: fixed; bottom: 10px; width: 100%; text-align: center; font-size: 0.65rem; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; opacity: 0.5; z-index: 5; pointer-events: none; }
+        .nav-hints { position: fixed; bottom: 15px; width: 100%; text-align: center; font-size: 0.65rem; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; z-index: 5; pointer-events: none; padding: 5px; background: rgba(0,0,0,0.4); }
+
+        @media (max-width: 768px) {
+            p, li { text-align: left; }
+            .card { padding: 35px 20px; }
+            h2 { font-size: 1.2rem; }
+            .nav-hints { bottom: 0; font-size: 0.6rem; }
+        }
     </style>
 </head>
 <body>
