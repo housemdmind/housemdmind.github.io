@@ -3,97 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Łukasz Kuś | Kandydat Nowej Generacji</title>
+    <title>Łukasz Kuś | Interaktywne CV</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
-        :root { --primary: #e30613; --accent: #ffcc00; --bg: #0f172a; --glass: rgba(255, 255, 255, 0.05); }
+        :root { --primary: #e30613; --accent: #ffcc00; --bg: #0f172a; --glass: rgba(255, 255, 255, 0.07); }
         
-        * { box-sizing: border-box; transition: all 0.4s ease; }
-        body, html { margin: 0; padding: 0; height: 100%; font-family: 'Montserrat', sans-serif; background: var(--bg); color: white; overflow: hidden; }
+        * { box-sizing: border-box; transition: all 0.3s ease; }
+        body, html { 
+            margin: 0; padding: 0; height: 100%; width: 100%;
+            font-family: 'Montserrat', sans-serif; background: var(--bg); color: white; 
+            overflow: hidden; touch-action: none; /* Blokuje domyślne gesty dla płynności slajdów */
+        }
 
-        /* Animowane tło */
-        .bg-animate { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%); }
-        .circle { position: absolute; background: var(--primary); filter: blur(100px); border-radius: 50%; opacity: 0.15; animation: float 20s infinite alternate; }
+        .bg-animate { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .circle { position: absolute; background: var(--primary); filter: blur(80px); border-radius: 50%; opacity: 0.1; animation: float 15s infinite alternate; }
 
-        @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(100px, 100px); } }
+        @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(50px, 50px); } }
 
         .slide { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            padding: 4rem; text-align: center; opacity: 0; visibility: hidden; transform: scale(1.1);
+            padding: 1.5rem; text-align: center; opacity: 0; visibility: hidden; transform: scale(0.95);
         }
         .slide.active { opacity: 1; visibility: visible; transform: scale(1); }
 
-        /* Szklane karty */
         .glass-card { 
-            background: var(--glass); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1);
-            padding: 3rem; border-radius: 30px; max-width: 1000px; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            background: var(--glass); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1); padding: 2rem; border-radius: 25px; 
+            max-width: 900px; width: 100%; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            max-height: 90vh; overflow-y: auto; /* Zapewnia przewijanie treści wewnątrz karty na małych ekranach */
         }
 
-        h1 { font-size: 4.5rem; font-weight: 900; margin: 0; background: linear-gradient(to right, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        h2 { color: var(--accent); font-size: 2.2rem; margin-top: 0; text-transform: uppercase; letter-spacing: 4px; }
-        p { font-size: 1.15rem; line-height: 1.8; color: #cbd5e1; text-align: justify; }
+        h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900; margin: 0; color: #fff; line-height: 1.1; }
+        h2 { color: var(--accent); font-size: clamp(1.2rem, 5vw, 2rem); margin-top: 0; text-transform: uppercase; letter-spacing: 2px; }
+        p { font-size: clamp(0.9rem, 3vw, 1.1rem); line-height: 1.6; color: #cbd5e1; text-align: center; }
 
-        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
-        .stat-item { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; }
-        .stat-num { display: block; font-size: 2rem; font-weight: 900; color: var(--accent); }
-
-        .nav-dots { position: fixed; right: 30px; top: 50%; transform: translateY(-50%); z-index: 100; }
-        .dot { width: 12px; height: 12px; background: rgba(255,255,255,0.3); border-radius: 50%; margin: 15px 0; cursor: pointer; }
-        .dot.active { background: var(--accent); box-shadow: 0 0 15px var(--accent); scale: 1.5; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 15px; margin-top: 20px; }
+        .stat-item { background: rgba(255,255,255,0.1); padding: 10px; border-radius: 15px; }
+        .stat-num { display: block; font-size: 1.5rem; font-weight: 900; color: var(--accent); }
 
         .btn-main { 
-            margin-top: 30px; padding: 15px 40px; border-radius: 50px; border: none; 
+            margin-top: 25px; padding: 15px 35px; border-radius: 50px; border: none; 
             background: var(--primary); color: white; font-weight: bold; cursor: pointer; 
-            text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 10px 20px rgba(227, 6, 19, 0.4);
+            text-transform: uppercase; letter-spacing: 1px; width: 100%; max-width: 300px;
         }
-        .btn-main:hover { background: var(--accent); color: var(--dark); transform: translateY(-5px); }
+
+        .nav-hint { position: fixed; bottom: 20px; width: 100%; text-align: center; font-size: 0.8rem; color: rgba(255,255,255,0.4); pointer-events: none; }
+
+        /* Styl dla listy w kartach */
+        ul { text-align: left; padding-left: 0; list-style: none; font-size: 0.9rem; }
+        li { margin-bottom: 8px; display: flex; align-items: flex-start; gap: 8px; }
+        li::before { content: "✓"; color: var(--accent); font-weight: bold; }
+
+        @media (min-width: 768px) {
+            .glass-card { padding: 3.5rem; }
+            .btn-main { width: auto; }
+            p { text-align: justify; }
+        }
     </style>
 </head>
 <body>
 
     <div class="bg-animate">
-        <div class="circle" style="width: 400px; height: 400px; top: -10%; left: -10%;"></div>
-        <div class="circle" style="width: 300px; height: 300px; bottom: -5%; right: -5%; background: var(--accent);"></div>
+        <div class="circle" style="width: 300px; height: 300px; top: 5%; left: 5%;"></div>
+        <div class="circle" style="width: 250px; height: 250px; bottom: 10%; right: 10%; background: var(--accent);"></div>
     </div>
-
-    <div class="nav-dots" id="dots"></div>
 
     <div class="slide active">
         <div class="glass-card">
-            <span style="letter-spacing: 5px; color: var(--accent);">PREZENTACJA KANDYDATURY</span>
+            <span style="letter-spacing: 3px; color: var(--accent); font-size: 0.8rem;">KANDYDAT NA ZASTĘPCĘ KIEROWNIKA</span>
             <h1>ŁUKASZ KUŚ</h1>
-            <p style="text-align: center;">Ekspert operacyjny, lider społeczności, wizjoner zarządzania. Łączę technologiczną precyzję informatyka z dynamiką nowoczesnego handlu detalicznego.</p>
+            <p>Ekspert operacyjny z certyfikatem 5.0 w Tikrow. Łączę technologiczną precyzję z energią, która nie znosi bezczynności.</p>
             <div class="stats-grid">
-                <div class="stat-item"><span class="stat-num">70+</span>Zleceń Tikrow</div>
-                <div class="stat-item"><span class="stat-num">5.0</span>Średnia Ocen</div>
-                <div class="stat-item"><span class="stat-num">100%</span>Dyspozycyjność</div>
+                <div class="stat-item"><span class="stat-num">70+</span>Zleceń</div>
+                <div class="stat-item"><span class="stat-num">5.0</span>Ocena</div>
+                <div class="stat-item"><span class="stat-num">24/7</span>Gotowość</div>
             </div>
-            <button class="btn-main" onclick="changeSlide(1)">Rozpocznij przegląd</button>
+            <button class="btn-main" onclick="changeSlide(1)">Poznaj mnie</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="glass-card">
-            <h2>Wizja i Etos Pracy</h2>
-            <p>
-                Wierzę, że rola Zastępcy Kierownika to nie tylko nadzór, ale przede wszystkim inspirowanie zespołu do osiągania ponadprzeciętnych wyników. Moje podejście opiera się na <strong>hiper-efektywności</strong> – tam, gdzie inni widzą przestój, ja dostrzegam szansę na optymalizację ekspozycji czy poprawę standardów obsługi. Dzięki doświadczeniu w strukturach informatycznych (UNICEF, Sąd), do każdego problemu podchodzę analitycznie, eliminując błędy u źródła. Moja nienawiść do bezczynności gwarantuje, że pod moją opieką sklep zawsze będzie funkcjonował na najwyższych obrotach.
-            </p>
+            <h2>Etos i Energia</h2>
+            <p>Wierzę, że sukces sklepu zależy od lidera, który nie boi się pracy rękami. Moje ADHD przekuwam w <strong>hiper-produktywność</strong>: tam, gdzie inni widzą problem, ja widzę szansę na szybsze zatowarowanie lub poprawę standardów. Dzięki studiom Zarządzania (online), jestem dostępny zawsze wtedy, gdy sklep mnie potrzebuje.</p>
         </div>
     </div>
 
     <div class="slide">
         <div class="glass-card">
-            <h2>Kapitał Doświadczenia</h2>
-            <div class="grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; text-align: left;">
+            <h2>Doświadczenie</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
                 <div>
-                    <h3 style="color: var(--accent);">Zarządzanie Kryzysowe</h3>
-                    <p style="font-size: 0.9rem;">Od prowadzenia wielotysięcznych społeczności w świecie gier, po funkcje dowódcze w sektorze ochrony (FORT). Potrafię zachować zimną krew, gdy presja czasu i trudne sytuacje z klientami wymagają natychmiastowej, trafnej decyzji.</p>
+                    <h3 style="color: var(--accent); font-size: 1rem;">LIDER & ORGANIZATOR</h3>
+                    <ul>
+                        <li>Zarządzanie serwerami (tysiące graczy)</li>
+                        <li>Dowodzenie sekcjami ochrony (FORT)</li>
+                        <li>Samorządy i inicjatywy społeczne</li>
+                    </ul>
                 </div>
                 <div>
-                    <h3 style="color: var(--accent);">Fundament Techniczny</h3>
-                    <p style="font-size: 0.9rem;">Studia informatyczne i praca w administracji państwowej nauczyły mnie biegłości w obsłudze systemów, której brakuje standardowym pracownikom. Nowoczesna Biedronka to systemy naczyń połączonych – ja rozumiem ich mechanikę.</p>
+                    <h3 style="color: var(--accent); font-size: 1rem;">OPERACJE & IT</h3>
+                    <ul>
+                        <li>Dogłębna znajomość Biedronki (Tikrow)</li>
+                        <li>Informatyk (UNICEF, Sąd Okręgowy)</li>
+                        <li>Handel (Żabka, Jubiler, Chata Polska)</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -101,65 +116,52 @@
 
     <div class="slide">
         <div class="glass-card" style="border: 2px solid var(--accent);">
-            <h2 style="color: var(--accent);">Executive Summary</h2>
-            <p style="text-align: center; font-weight: bold;">(Dla tych, którzy cenią każdą sekundę)</p>
-            <ul style="text-align: left; font-size: 1.2rem; list-style: none; padding: 0;">
-                <li style="margin: 10px 0;">✅ <strong>DOŚWIADCZENIE:</strong> Przeszedłem przez każdy szczebel handlu – od kasy po zarządzanie.</li>
-                <li style="margin: 10px 0;">✅ <strong>KOMUNIKACJA:</strong> Angielski płynny, spryt językowy w relacjach z turystami (DE).</li>
-                <li style="margin: 10px 0;">✅ <strong>ELASTYCZNOŚĆ:</strong> Studia online = brak konfliktów w grafiku.</li>
-                <li style="margin: 10px 0;">✅ <strong>KULTURA:</strong> Absolutny brak wulgaryzmów, spokój i profesjonalna etykieta.</li>
+            <h2 style="color: var(--accent);">W SKRÓCIE (TL;DR)</h2>
+            <ul style="font-size: 1.1rem;">
+                <li>🚀 <strong>Pracuję za dwóch:</strong> Nienawidzę stać w miejscu.</li>
+                <li>🏆 <strong>Sprawdzona jakość:</strong> Średnia 5.0 w handlu.</li>
+                <li>🌍 <strong>Brak barier:</strong> Angielski + spryt komunikacyjny.</li>
+                <li>💻 <strong>Technologia:</strong> Systemy IT ogarniam w mgnieniu oka.</li>
             </ul>
         </div>
     </div>
 
     <div class="slide">
         <div class="glass-card">
-            <h2>Zbudujmy Sukces Razem</h2>
-            <p style="text-align: center;">Jestem gotowy wnieść nową jakość do Państwa zespołu w Szczecinie. <br> Czekam na wyzwanie, którego inni się obawiają.</p>
-            <h3 style="font-size: 2.5rem; margin: 20px 0;">ŁUKASZ KUŚ</h3>
-            <p style="text-align: center;">📧 <strong>lukasz.kus.kontakt@poczta.pl</strong> (Zmień na swój!)</p>
-            <button class="btn-main" onclick="location.href='mailto:TWÓJ@EMAIL.PL'">Otwórz kanał komunikacji</button>
+            <h2>Czekam na wyzwanie</h2>
+            <p>Jestem gotowy wnieść nową jakość do Państwa zespołu w Szczecinie od zaraz.</p>
+            <h3 style="margin: 10px 0;">ŁUKASZ KUŚ</h3>
+            <p style="font-size: 0.8rem; margin-bottom: 20px;">Ur. 31.01.2001 | Szczecin / Online</p>
+            <button class="btn-main" onclick="location.href='mailto:TWÓJ@EMAIL.PL'">Wyślij e-mail</button>
         </div>
     </div>
+
+    <div class="nav-hint">Przesuń palcem lub użyj strzałek</div>
 
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
-        const dotsContainer = document.getElementById('dots');
-
-        slides.forEach((_, i) => {
-            const dot = document.createElement('div');
-            dot.className = `dot ${i === 0 ? 'active' : ''}`;
-            dot.onclick = () => goToSlide(i);
-            dotsContainer.appendChild(dot);
-        });
-
-        function updateDots() {
-            document.querySelectorAll('.dot').forEach((dot, i) => {
-                dot.className = `dot ${i === currentSlide ? 'active' : ''}`;
-            });
-        }
+        let startY = 0;
 
         function goToSlide(n) {
             slides[currentSlide].classList.remove('active');
-            currentSlide = n;
+            currentSlide = (n + slides.length) % slides.length;
             slides[currentSlide].classList.add('active');
-            updateDots();
         }
 
-        function changeSlide(d) {
-            let next = currentSlide + d;
-            if (next >= slides.length) next = 0;
-            if (next < 0) next = slides.length - 1;
-            goToSlide(next);
-        }
+        function changeSlide(d) { goToSlide(currentSlide + d); }
 
-        window.addEventListener('wheel', (e) => {
-            if (e.deltaY > 0) changeSlide(1);
-            else changeSlide(-1);
+        // Obsługa dotyku (Swipe)
+        document.addEventListener('touchstart', e => { startY = e.touches[0].clientY; });
+        document.addEventListener('touchend', e => {
+            let endY = e.changedTouches[0].clientY;
+            if (startY - endY > 50) changeSlide(1); // Swipe up
+            if (startY - endY < -50) changeSlide(-1); // Swipe down
         });
 
-        document.addEventListener('keydown', (e) => {
+        // Obsługa kółka i klawiatury
+        window.addEventListener('wheel', e => { if(Math.abs(e.deltaY) > 20) changeSlide(e.deltaY > 0 ? 1 : -1); });
+        document.addEventListener('keydown', e => {
             if (e.key === "ArrowRight" || e.key === "ArrowDown") changeSlide(1);
             if (e.key === "ArrowLeft" || e.key === "ArrowUp") changeSlide(-1);
         });
