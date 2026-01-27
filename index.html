@@ -2,164 +2,163 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Łukasz Kuś | Portfolio Rekrutacyjne</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Łukasz Kuś | CV Interaktywne</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #ff1e1e; --accent: #ffcc00; --bg: #05070a; --glass: rgba(255, 255, 255, 0.07); }
+        :root { --primary: #ff1e1e; --accent: #ffcc00; --bg: #05070a; }
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Montserrat', sans-serif; background: var(--bg); color: white; overflow: hidden; }
 
         /* Tło */
-        .bg-gradient { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: #05070a; }
-        .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.2; animation: move 15s infinite alternate; }
-        @keyframes move { from { transform: translate(0,0); } to { transform: translate(10vw, 10vh); } }
+        .bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: radial-gradient(circle at 50% 50%, #111827 0%, #05070a 100%); }
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.15; z-index: 1; }
 
-        /* Slajdy */
+        /* Kontener slajdów */
         .slide { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             display: flex; justify-content: center; align-items: center; 
-            padding: 20px; opacity: 0; visibility: hidden; transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 2;
+            padding: 20px; opacity: 0; visibility: hidden; transition: opacity 0.5s ease;
+            z-index: 5;
         }
         .slide.active { opacity: 1; visibility: visible; }
 
         /* Karta */
         .card { 
-            background: var(--glass); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255,255,255,0.1); padding: clamp(20px, 5vw, 50px); border-radius: 30px; 
-            max-width: 1000px; width: 100%; max-height: 85vh; overflow-y: auto;
-            display: flex; flex-direction: column; scrollbar-width: none;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            max-width: 900px; width: 100%; max-height: 85vh; overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5); position: relative; z-index: 10;
         }
-        .card::-webkit-scrollbar { display: none; }
 
-        h1 { font-size: clamp(2.2rem, 8vw, 4.5rem); font-weight: 900; margin: 0; line-height: 1.1; text-align: center; }
-        .gradient-text { background: linear-gradient(to right, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h1 { font-size: clamp(2rem, 8vw, 4rem); font-weight: 900; margin: 0; line-height: 1.1; text-align: center; }
+        .yellow { color: var(--accent); }
+        h2 { color: var(--primary); font-size: clamp(1rem, 3vw, 1.4rem); text-transform: uppercase; margin-bottom: 20px; text-align: center; }
+        p { font-size: clamp(0.95rem, 2vw, 1.1rem); line-height: 1.7; color: #e2e8f0; margin-bottom: 15px; }
         
-        h2 { color: var(--primary); font-size: clamp(1rem, 3vw, 1.4rem); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; text-align: center; font-weight: 700; }
-        p { font-size: clamp(0.95rem, 2vw, 1.1rem); line-height: 1.7; color: #e2e8f0; margin-bottom: 15px; text-align: justify; }
-        
-        .highlight { color: var(--accent); font-weight: 700; }
-
         .btn { 
-            background: var(--primary); color: white; border: none; padding: 18px 40px; border-radius: 50px; 
+            background: var(--primary); color: white; border: none; padding: 15px 40px; border-radius: 50px; 
             font-weight: 900; cursor: pointer; text-transform: uppercase; margin: 20px auto 0; 
-            display: block; width: fit-content; transition: 0.3s;
+            display: block; transition: 0.3s;
         }
-        .btn:hover { background: #ff4d4d; transform: scale(1.05); }
+        .btn:hover { background: var(--accent); color: black; }
 
-        /* Nawigacja */
-        .dots { position: fixed; bottom: 30px; left: 0; width: 100%; display: flex; justify-content: center; gap: 10px; z-index: 100; }
-        .dot { width: 40px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; transition: 0.4s; cursor: pointer; }
-        .dot.active { background: var(--accent); width: 70px; box-shadow: 0 0 15px var(--accent); }
+        /* Nawigacja boczna/dolna */
+        .nav { position: fixed; bottom: 30px; left: 0; width: 100%; display: flex; justify-content: center; gap: 10px; z-index: 100; }
+        .dot { width: 40px; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; cursor: pointer; transition: 0.3s; }
+        .dot.active { background: var(--accent); width: 60px; }
 
-        @media (max-width: 600px) { p { text-align: left; } .card { padding: 30px 20px; } }
+        .hint { position: fixed; bottom: 10px; width: 100%; text-align: center; font-size: 0.7rem; color: #555; z-index: 100; }
     </style>
 </head>
 <body>
 
-    <div class="bg-gradient">
-        <div class="orb" style="width: 400px; height: 400px; top: -5%; left: -5%; background: var(--primary);"></div>
-        <div class="orb" style="width: 300px; height: 300px; bottom: 5%; right: 5%; background: var(--accent);"></div>
+    <div class="bg">
+        <div class="orb" style="width: 400px; height: 400px; top: -50px; left: -50px; background: #ff1e1e;"></div>
     </div>
 
     <div class="slide active">
         <div class="card">
             <h2>Kandydat na Zastępcę Kierownika</h2>
-            <h1>ŁUKASZ <span class="gradient-text">KUŚ</span></h1>
-            <p style="text-align: center; margin-top: 15px;">Dostarczam wyniki, pilnuję standardów i dowodzę zespołem. <br> Bez zbędnego lania wody. Sprawdź dlaczego ja.</p>
-            <button class="btn" onclick="changeSlide(1)">Zaczynamy</button>
+            <h1>ŁUKASZ <span class="yellow">KUŚ</span></h1>
+            <p style="text-align: center; margin-top: 15px;">Nie lanie wody, tylko konkret. Informatyk, który kocha dynamikę handlu i pracę z ludźmi.</p>
+            <button class="btn" onclick="nextSlide()">Zobacz moje atuty</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>Wymagania z ogłoszenia? Mam je wszystkie.</h2>
-            <p>✅ <span class="highlight">Proaktywność:</span> Nie czekam aż ktoś mi powie, że trzeba dołożyć towaru. Widzę lukę – działam. Moja energia to silnik dla całego sklepu.</p>
-            <p>✅ <span class="highlight">Cele sprzedażowe:</span> Wiem, że liczy się wynik. Prawidłowa ekspozycja i oznaczenia cenowe to dla mnie świętość, bo to one sprzedają.</p>
-            <p>✅ <span class="highlight">3 Zmiany & Weekendy:</span> Studia online dają mi pełną wolność. Potrzebujecie mnie na nocnym rozładunku albo w niedzielę? Będę.</p>
+            <h2>Wymagania? Mam je odhaczone.</h2>
+            <p>✅ <strong>Samodzielność:</strong> Widzę co jest do zrobienia i to robię. Proaktywność mam w naturze.</p>
+            <p>✅ <strong>3 Zmiany:</strong> Studia online oznaczają, że nocki, weekendy i poranki są dla mnie bezproblemowe.</p>
+            <p>✅ <strong>Cele:</strong> Wiem, że sklep musi zarabiać. Ekspozycja i ceny to u mnie podstawa.</p>
+            <button class="btn" onclick="nextSlide()">Moje doświadczenie</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>Biedronka: Doświadczenie z pierwszej linii</h2>
-            <p>Ponad <span class="highlight">70 zmian przez Tikrowa (ocena 5.0)</span> oznacza, że nie musisz mnie uczyć podstaw. Znam kasę, znam wypiek, znam procedury.</p>
-            <p>Wchodzę do zespołu jako gotowy lider, który wie, jak dbać o porządek na sali i w obrębie sklepu. Realizacja zamówień i dbanie o dostępność towaru to dla mnie codzienna praktyka, a nie teoria.</p>
+            <h2>Biedronka: Praktyka 5.0</h2>
+            <p>Przez Tikrowa zaliczyłem <strong>70+ zmian</strong> w Biedronkach. Ocena 5.0 mówi sama za siebie.</p>
+            <p>Ogarniam kasy, wypiek i towar. Wchodzę do ekipy bez potrzeby długiego przyuczania. Wiem jak dbać o porządek i standardy sieci.</p>
+            <button class="btn" onclick="nextSlide()">Dowodzenie i IT</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>Umiejętność dowodzenia</h2>
-            <p>Zarządzanie tysiącami ludzi w świecie online oraz sekcjami ochrony w FORT nauczyło mnie jednego: <span class="highlight">spokoju pod presją</span>.</p>
-            <p>Umiem planować pracę zespołu tak, żeby każdy wiedział co robić. Moja wiedza IT (ex-informatyk UNICEF/Sąd) to dodatkowy atut – systemy kasowe i logistyczne ogarniam szybciej niż ktokolwiek inny.</p>
+            <h2>Lider z głową IT</h2>
+            <p>Prowadziłem serwery gier dla tysięcy ludzi i dowodziłem sekcjami ochrony w FORT. Umiem planować pracę zespołu pod presją.</p>
+            <p>Moje tło informatyczne (UNICEF/Sąd) sprawia, że kasy i systemy logistyczne ogarniam w sekundę. Żadna awaria mnie nie zestresuje.</p>
+            <button class="btn" onclick="nextSlide()">Kontakt</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>Konkretne Podsumowanie</h2>
-            <p style="text-align: center;">Szukasz kogoś sumiennego, kto brzydzi się bylejakością?</p>
+            <h2>Zatrudnij mnie</h2>
+            <p style="text-align: center;">Szukasz kogoś sumiennego do zespołu w Szczecinie? Czekam.</p>
             <div style="text-align: center; margin-top: 20px;">
                 <h3 style="margin:0; font-size: 2rem;">ŁUKASZ KUŚ</h3>
-                <p style="font-size: 0.9rem;">📍 Szczecin | Gotowy od zaraz</p>
-                <p style="font-size: 1.1rem; color:var(--accent);">lukasz.kus.kontakt@poczta.pl</p>
-                <button class="btn" onclick="location.href='mailto:lukasz.kus.kontakt@poczta.pl'">Zatrudnij mnie</button>
+                <p>E-mail: <strong>lukasz.kus.kontakt@poczta.pl</strong></p>
+                <button class="btn" onclick="location.href='mailto:lukasz.kus.kontakt@poczta.pl'">Wyślij wiadomość</button>
             </div>
         </div>
     </div>
 
-    <div class="dots" id="dots"></div>
+    <div class="nav" id="nav"></div>
+    <div class="hint">Użyj kółka myszy, strzałek lub klikaj w paski</div>
 
     <script>
-        let currentSlide = 0;
+        let current = 0;
         const slides = document.querySelectorAll('.slide');
-        const dotsContainer = document.getElementById('dots');
+        const nav = document.getElementById('nav');
 
+        // Generowanie nawigacji
         slides.forEach((_, i) => {
             const dot = document.createElement('div');
             dot.className = `dot ${i === 0 ? 'active' : ''}`;
-            dot.onclick = () => goToSlide(i);
-            dotsContainer.appendChild(dot);
+            dot.onclick = () => showSlide(i);
+            nav.appendChild(dot);
         });
 
-        function goToSlide(n) {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (n + slides.length) % slides.length;
-            slides[currentSlide].classList.add('active');
+        function showSlide(n) {
+            slides[current].classList.remove('active');
+            current = n;
+            if (current >= slides.length) current = 0;
+            if (current < 0) current = slides.length - 1;
+            slides[current].classList.add('active');
+            
             document.querySelectorAll('.dot').forEach((d, i) => {
-                d.className = `dot ${i === currentSlide ? 'active' : ''}`;
+                d.className = `dot ${i === current ? 'active' : ''}`;
             });
         }
 
-        function changeSlide(d) { goToSlide(currentSlide + d); }
+        function nextSlide() { showSlide(current + 1); }
 
-        // Naprawiona obsługa kółka myszy
-        let lastScroll = 0;
+        // Odporne przewijanie
+        let debounce = false;
         window.addEventListener('wheel', e => {
-            const now = Date.now();
-            if (now - lastScroll < 800) return; // Blokada zbyt szybkiego przewijania
-            if (Math.abs(e.deltaY) > 20) {
-                changeSlide(e.deltaY > 0 ? 1 : -1);
-                lastScroll = now;
+            if (debounce) return;
+            if (Math.abs(e.deltaY) > 40) {
+                debounce = true;
+                showSlide(current + (e.deltaY > 0 ? 1 : -1));
+                setTimeout(() => { debounce = false; }, 700);
             }
-        }, { passive: true });
-
-        // Obsługa strzałek
-        document.addEventListener('keydown', e => {
-            if (e.key === "ArrowRight" || e.key === "ArrowDown") changeSlide(1);
-            if (e.key === "ArrowLeft" || e.key === "ArrowUp") changeSlide(-1);
         });
 
-        // Obsługa dotyku
-        let startY = 0;
-        document.addEventListener('touchstart', e => startY = e.touches[0].clientY, { passive: true });
+        document.addEventListener('keydown', e => {
+            if (e.key === "ArrowRight" || e.key === "ArrowDown") showSlide(current + 1);
+            if (e.key === "ArrowLeft" || e.key === "ArrowUp") showSlide(current - 1);
+        });
+
+        // Swipe na telefon
+        let sY = 0;
+        document.addEventListener('touchstart', e => sY = e.touches[0].clientY);
         document.addEventListener('touchend', e => {
-            let endY = e.changedTouches[0].clientY;
-            if (Math.abs(startY - endY) > 50) changeSlide(startY > endY ? 1 : -1);
-        }, { passive: true });
+            let eY = e.changedTouches[0].clientY;
+            if (Math.abs(sY - eY) > 60) showSlide(current + (sY > eY ? 1 : -1));
+        });
     </script>
 </body>
 </html>
