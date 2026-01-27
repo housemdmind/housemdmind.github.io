@@ -2,119 +2,106 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Łukasz Kuś | Portfolio Kandydata</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Łukasz Kuś | Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #ff1e1e; --accent: #ffcc00; --bg: #05070a; --glass: rgba(255, 255, 255, 0.03); --border: rgba(255, 255, 255, 0.1); }
+        :root { --primary: #ff1e1e; --accent: #ffcc00; --bg: #05070a; --glass: rgba(255, 255, 255, 0.05); }
         
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Montserrat', sans-serif; background: var(--bg); color: white; overflow: hidden; }
 
-        /* Animowane tło - głębia */
-        .bg-gradient { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 50% 50%, #111827 0%, #05070a 100%); }
-        .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.2; animation: move 20s infinite alternate; }
-        @keyframes move { from { transform: translate(0,0); } to { transform: translate(15vw, 15vh); } }
+        .bg-gradient { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #05070a; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.15; animation: move 15s infinite alternate; }
+        @keyframes move { from { transform: translate(0,0); } to { transform: translate(10vw, 10vh); } }
 
-        /* Slajdy */
         .slide { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            padding: 20px; opacity: 0; visibility: hidden; transition: all 1s cubic-bezier(0.19, 1, 0.22, 1); transform: scale(1.1) translateY(30px);
+            display: flex; justify-content: center; align-items: center; 
+            padding: 15px; opacity: 0; visibility: hidden; transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
         }
-        .slide.active { opacity: 1; visibility: visible; transform: scale(1) translateY(0); }
+        .slide.active { opacity: 1; visibility: visible; }
 
-        /* Karta Premium */
         .card { 
-            background: var(--glass); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--border); padding: clamp(20px, 5vw, 60px); border-radius: 40px; 
-            max-width: 1100px; width: 100%; box-shadow: 0 50px 100px rgba(0,0,0,0.8);
-            position: relative; overflow-y: auto; max-height: 85vh;
+            background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1); padding: clamp(20px, 6vw, 50px); border-radius: 30px; 
+            max-width: 1000px; width: 100%; max-height: 85vh; overflow-y: auto;
+            display: flex; flex-direction: column; scrollbar-width: none;
         }
+        .card::-webkit-scrollbar { display: none; }
 
-        h1 { font-size: clamp(2rem, 8vw, 5rem); font-weight: 900; margin: 0; line-height: 0.9; letter-spacing: -2px; }
+        h1 { font-size: clamp(2.2rem, 10vw, 4.5rem); font-weight: 900; margin: 0; line-height: 1; text-align: center; }
         .gradient-text { background: linear-gradient(to right, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        h2 { color: var(--primary); font-size: clamp(1rem, 3vw, 1.8rem); text-transform: uppercase; letter-spacing: 5px; margin-bottom: 20px; font-weight: 700; }
-        p { font-size: clamp(0.9rem, 2vw, 1.1rem); line-height: 1.8; color: #a1a1aa; text-align: justify; }
+        h2 { color: var(--primary); font-size: clamp(0.9rem, 4vw, 1.5rem); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; text-align: center; }
+        p { font-size: clamp(0.9rem, 3.5vw, 1.1rem); line-height: 1.6; color: #d1d5db; margin-bottom: 15px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-top: 10px; }
+        .box { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); }
 
         .btn { 
-            background: var(--primary); color: white; border: none; padding: 18px 45px; border-radius: 100px; 
-            font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; margin-top: 30px;
-            box-shadow: 0 10px 30px rgba(255, 30, 30, 0.3); transition: 0.4s;
+            background: var(--primary); color: white; border: none; padding: 15px 30px; border-radius: 50px; 
+            font-weight: 900; cursor: pointer; text-transform: uppercase; margin: 20px auto 0; width: fit-content;
         }
-        .btn:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(255, 30, 30, 0.5); background: #ff3c3c; }
 
-        /* Pasek postępu */
-        .footer-nav { position: fixed; bottom: 30px; left: 0; width: 100%; display: flex; justify-content: center; gap: 10px; z-index: 100; }
-        .dot { width: 40px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; transition: 0.5s; cursor: pointer; }
-        .dot.active { background: var(--accent); box-shadow: 0 0 15px var(--accent); width: 80px; }
+        .dots { position: fixed; bottom: 20px; left: 0; width: 100%; display: flex; justify-content: center; gap: 8px; }
+        .dot { width: 30px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; transition: 0.4s; }
+        .dot.active { background: var(--accent); width: 50px; }
 
-        .tag { display: inline-block; background: rgba(255,255,255,0.05); padding: 8px 15px; border-radius: 10px; font-size: 0.8rem; margin: 5px; border: 1px solid var(--border); }
-        .highlight { color: var(--accent); font-weight: bold; }
+        @media (max-width: 480px) {
+            .card { padding: 25px 20px; border-radius: 20px; }
+            h1 { margin-bottom: 10px; }
+            p { text-align: left; }
+        }
     </style>
 </head>
 <body>
 
     <div class="bg-gradient">
-        <div class="orb" style="width: 500px; height: 500px; top: -10%; left: -5%; background: var(--primary);"></div>
-        <div class="orb" style="width: 400px; height: 400px; bottom: -5%; right: 0%; background: var(--accent);"></div>
+        <div class="orb" style="width: 300px; height: 300px; top: -5%; left: -5%; background: var(--primary);"></div>
+        <div class="orb" style="width: 200px; height: 200px; bottom: 5%; right: 5%; background: var(--accent);"></div>
     </div>
 
     <div class="slide active">
         <div class="card">
             <h2>Portfolio Kandydatury</h2>
             <h1>ŁUKASZ <span class="gradient-text">KUŚ</span></h1>
-            <p style="text-align: center; margin-top: 20px; font-size: 1.3rem;">Zastępca Kierownika, który ogarnia. Informatyk, który działa. Lider, który nie znośni nudy.</p>
-            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 30px; flex-wrap: wrap;">
-                <div class="tag">🏆 5.0 TIKROW</div>
-                <div class="tag">⚡ ADHD-DRIVEN</div>
-                <div class="tag">💻 EX-IT PRO</div>
-                <div class="tag">🌍 MULTILINGUAL</div>
-            </div>
-            <button class="btn" onclick="changeSlide(1)">Sprawdź konkrety</button>
+            <p style="text-align: center; margin-top: 15px;">Zastępca Kierownika, który ogarnia. Informatyk, który działa. Lider, który nie znosi nudy.</p>
+            <button class="btn" onclick="changeSlide(1)">Sprawdź konkret</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>O mnie bez owijania</h2>
-            <p>
-                Słuchajcie, sprawa jest prosta: <span class="highlight">nienawidzę nic nie robić</span>. Moja energia to mój największy atut – tam, gdzie inni szukają sposobu, żeby posiedzieć na zapleczu, ja szukam palety do rozłożenia albo kolejki do rozładowania. Mam 25 lat, głowę pełną pomysłów i ręce gotowe do roboty. Nie znoszę wulgaryzmów i cenię kulturę osobistą, ale w pracy jestem konkretny. Jeśli coś ma być zrobione, to będzie – i to na 100%.
-            </p>
-            <p>
-                Moje „niezdiagnozowane ADHD” to po prostu mój silnik. Dzięki niemu potrafię robić pięć rzeczy naraz i o żadnej nie zapomnieć. W Biedronce, gdzie co chwilę coś się zmienia, czuję się jak ryba w wodzie.
-            </p>
+            <h2>O mnie bez filtra</h2>
+            <p>Słuchajcie, sprawa jest prosta: <span style="color:var(--accent); font-weight:bold;">nienawidzę nic nie robić</span>. Moja energia to mój największy atut – tam, gdzie inni szukają sposobu, żeby posiedzieć na zapleczu, ja szukam palety do rozłożenia albo kolejki do rozładowania.</p>
+            <p>Moje „niezdiagnozowane ADHD” to po prostu mój silnik. Dzięki niemu potrafię robić pięć rzeczy naraz i o żadnej nie zapomnieć. W Biedronce, gdzie co chwilę coś się zmienia, czuję się jak ryba w wodzie.</p>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
             <h2>Biedronka to mój teren</h2>
-            <p>
-                Zrobiłem ponad <span class="highlight">70 zmian w Biedronkach</span> przez Tikrowa. Moja średnia ocen 5.0 nie wzięła się z nieba. Znam każdy proces: od kasy, przez wypiek pieczywa, aż po ciężkie rozładunki nocne.
-            </p>
-            <p>
-                Jako Zastępca Kierownika nie będę gościem, który „uczy się systemu” przez miesiąc. Ja ten system znam, lubię i wiem, jak go zoptymalizować. Nie boję się zakasać rękawów i stanąć na kasie obok zespołu, kiedy jest kocioł. Atmosfera w ekipie i zadowolenie klientów to dla mnie priorytety – wielokrotnie słyszałem „dziękuję” od kupujących, bo po prostu chciało mi się im pomóc.
-            </p>
+            <p>Zrobiłem ponad <span style="color:var(--accent); font-weight:bold;">70 zmian w Biedronkach</span> przez Tikrowa. Moja średnia ocen 5.0 nie wzięła się z kosmosu. Znam każdy proces: od kasy, przez wypiek, aż po rozładunki.</p>
+            <p>Jako Zastępca Kierownika nie będę gościem, który „uczy się systemu” przez miesiąc. Ja ten system znam i wiem, jak go zoptymalizować. Nie boję się zakasać rękawów i stanąć na kasie, kiedy jest kocioł.</p>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
             <h2>Doświadczenie w boju</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; text-align: left;">
-                <div>
-                    <h3 style="color: var(--accent);">Zarządzanie Online</h3>
-                    <p style="font-size: 0.9rem;">Prowadzę serwery gier dla tysięcy graczy. To tam nauczyłem się trzymać nerwy na wodzy, gasić konflikty i rozdzielać zadania. Ekipa online czy ekipa w sklepie – zasady są te same: szacunek i konkretny plan.</p>
+            <div class="grid">
+                <div class="box">
+                    <strong style="color:var(--accent);">Gry & Społeczność</strong><br>
+                    Zarządzanie tysiącami graczy online. Gaszenie pożarów i pilnowanie zasad.
                 </div>
-                <div>
-                    <h3 style="color: var(--accent);">IT & Administracja</h3>
-                    <p style="font-size: 0.9rem;">Praca w Sądzie Okręgowym i UNICEF-ie. Kasy, terminale, systemy logistyczne? Dla mnie to prosta matematyka. Jak sprzęt padnie, ja go podniosę szybciej niż support.</p>
+                <div class="box">
+                    <strong style="color:var(--accent);">IT & Administracja</strong><br>
+                    Sąd Okręgowy i UNICEF. Kasy i systemy to dla mnie prosta matematyka.
                 </div>
-                <div>
-                    <h3 style="color: var(--accent);">Ochrona & Dowodzenie</h3>
-                    <p style="font-size: 0.9rem;">W firmie FORT jako dowódca sekcji na eventach. Odpowiedzialność za ludzi i bezpieczeństwo. Wiem, jak utrzymać autorytet bez krzyku.</p>
+                <div class="box">
+                    <strong style="color:var(--accent);">Ochrona FORT</strong><br>
+                    Dowodzenie sekcją na eventach. Odpowiedzialność i zimna krew.
                 </div>
             </div>
         </div>
@@ -122,42 +109,25 @@
 
     <div class="slide">
         <div class="card">
-            <h2>Edukacja i Czas</h2>
-            <p>
-                Właśnie startuję z <span class="highlight">Zarządzaniem (Online)</span>. Wybrałem te studia, bo chcę wiedzieć jeszcze więcej o tym, jak efektywnie prowadzić biznes. Dzięki temu, że studiuję przez neta, moja dyspozycyjność dla sklepu jest niemal totalna.
-            </p>
-            <p>
-                Nie koliduje to z grafikami, nie muszę co dwa tygodnie uciekać na zjazdy. Egzaminy? Kliknę je wieczorem. Dla Was oznacza to pracownika, który chce się rozwijać, ale jest na miejscu 24/7, kiedy trzeba ogarnąć niedzielę handlową albo nocną inwentaryzację.
-            </p>
-        </div>
-    </div>
-
-    <div class="slide">
-        <div class="card" style="border: 2px solid var(--accent);">
-            <h2>TL;DR - Konkrety w 15 sekund</h2>
-            <ul style="list-style: none; padding: 0; font-size: 1.2rem;">
-                <li style="margin: 15px 0;">⚡ <span class="highlight">Pracoholik:</span> Jak nie pracuję, to się nudzę. Zawsze znajdę sobie zajęcie.</li>
-                <li style="margin: 15px 0;">🏆 <span class="highlight">Pewniak:</span> Ocena 5.0 na Tikrow w Biedronkach. Zero wpadek.</li>
-                <li>🛠️ <span class="highlight">Mózg techniczny:</span> Informatyk studiujący zarządzanie. Ogarniam kasy i ludzi.</li>
-                <li style="margin: 15px 0;">🗣️ <span class="highlight">Komunikatywny:</span> Spokojny, kulturalny, dogadam się z każdym po polsku i angielsku.</li>
-            </ul>
+            <h2>Edukacja & Czas</h2>
+            <p>Właśnie startuję z <span style="color:var(--accent); font-weight:bold;">Zarządzaniem (Online)</span>. Dzięki temu moja dyspozycyjność dla sklepu jest niemal totalna. Nie muszę co dwa tygodnie uciekać na zjazdy.</p>
+            <p>Dla Was oznacza to pracownika, który chce się rozwijać, ale jest na miejscu 24/7, kiedy trzeba ogarnąć niedzielę handlową albo nocną inwentaryzację.</p>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>Zróbmy to!</h2>
-            <p style="text-align: center;">Szukasz Zastępcy, który nie boi się roboty i ogarnia więcej niż tylko skanowanie towaru? Czekam na kontakt.</p>
-            <div style="text-align: center; margin-top: 40px;">
-                <h3 style="font-size: 2.5rem; margin: 0;">ŁUKASZ KUŚ</h3>
-                <p>📍 SZCZECIN / CAŁA POLSKA (ONLINE)</p>
-                <p>📧 <span class="highlight">lukasz.kus.kontakt@poczta.pl</span></p>
-                <button class="btn" onclick="location.href='mailto:TWÓJ@EMAIL.PL'">Wyślij e-mail</button>
+            <h2>Zbudujmy to razem</h2>
+            <p style="text-align: center;">Czekam na konkretne wyzwanie w Szczecinie.</p>
+            <div style="text-align: center; margin-top: 20px;">
+                <h3 style="margin:0; font-size: 1.8rem;">ŁUKASZ KUŚ</h3>
+                <p style="font-size: 0.8rem;">lukasz.kus.kontakt@poczta.pl</p>
+                <button class="btn" onclick="location.href='mailto:lukasz.kus.kontakt@poczta.pl'">Wyślij e-mail</button>
             </div>
         </div>
     </div>
 
-    <div class="footer-nav" id="dots"></div>
+    <div class="dots" id="dots"></div>
 
     <script>
         let currentSlide = 0;
@@ -167,11 +137,10 @@
         slides.forEach((_, i) => {
             const dot = document.createElement('div');
             dot.className = `dot ${i === 0 ? 'active' : ''}`;
-            dot.onclick = () => goToSlide(i);
             dotsContainer.appendChild(dot);
         });
 
-        function goToSlide(n) {
+        function changeSlide(n) {
             slides[currentSlide].classList.remove('active');
             currentSlide = (n + slides.length) % slides.length;
             slides[currentSlide].classList.add('active');
@@ -180,14 +149,8 @@
             });
         }
 
-        function changeSlide(d) { goToSlide(currentSlide + d); }
-
         window.addEventListener('wheel', e => { if(Math.abs(e.deltaY) > 30) changeSlide(e.deltaY > 0 ? 1 : -1); });
-        document.addEventListener('keydown', e => {
-            if (e.key === "ArrowRight" || e.key === "ArrowDown") changeSlide(1);
-            if (e.key === "ArrowLeft" || e.key === "ArrowUp") changeSlide(-1);
-        });
-
+        
         let startY = 0;
         document.addEventListener('touchstart', e => startY = e.touches[0].clientY);
         document.addEventListener('touchend', e => {
