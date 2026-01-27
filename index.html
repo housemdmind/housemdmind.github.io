@@ -3,177 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Łukasz Kuś | Kompletne Portfolio Zawodowe</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Łukasz Kuś | Konkretnie i na temat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #e30613; --accent: #ffcc00; --bg: #0b0f1a; --glass: rgba(255, 255, 255, 0.05); }
-        * { box-sizing: border-box; scroll-behavior: smooth; }
+        * { box-sizing: border-box; }
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Montserrat', sans-serif; background: var(--bg); color: white; overflow: hidden; }
-
-        .bg-animate { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
-        .circle { position: absolute; background: var(--primary); filter: blur(120px); border-radius: 50%; opacity: 0.15; animation: float 20s infinite alternate; }
-
-        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(100px, 100px) scale(1.2); } }
-
-        .slide { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            padding: 2rem; opacity: 0; visibility: hidden; transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
-        }
+        .bg-animate { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .circle { position: absolute; background: var(--primary); filter: blur(100px); border-radius: 50%; opacity: 0.12; animation: float 20s infinite alternate; }
+        @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(100px, 100px); } }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1.5rem; opacity: 0; visibility: hidden; transition: 0.6s ease-in-out; }
         .slide.active { opacity: 1; visibility: visible; }
-
-        .glass-card { 
-            background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.1); padding: clamp(1.5rem, 5vw, 4rem); border-radius: 35px; 
-            max-width: 1100px; width: 100%; box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-            overflow-y: auto; max-height: 85vh; scrollbar-width: thin;
-        }
-
-        h1 { font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 800; margin: 0; background: linear-gradient(45deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; }
-        h2 { color: var(--accent); font-size: clamp(1.5rem, 4vw, 2.5rem); border-bottom: 2px solid var(--primary); display: inline-block; margin-bottom: 1.5rem; }
-        h3 { color: #fff; margin-top: 2rem; font-size: 1.3rem; }
-        
-        p, li { font-size: clamp(0.9rem, 2.5vw, 1.05rem); line-height: 1.8; color: #d1d5db; text-align: justify; }
-        .highlight { color: var(--accent); font-weight: 600; }
-
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
-        .skill-box { background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 20px; border-left: 4px solid var(--primary); }
-
-        .btn-main { margin-top: 2rem; padding: 18px 45px; border-radius: 50px; border: none; background: var(--primary); color: white; font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; display: block; margin-left: auto; margin-right: auto; }
-        .btn-main:hover { background: var(--accent); color: var(--bg); transform: scale(1.05); }
-
-        .nav-hint { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 100; font-size: 0.7rem; letter-spacing: 3px; color: rgba(255,255,255,0.3); text-transform: uppercase; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
-
-        @media (max-width: 768px) { .slide { padding: 1rem; } .glass-card { padding: 1.5rem; } }
+        .glass-card { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); padding: 2.5rem; border-radius: 30px; max-width: 900px; width: 100%; box-shadow: 0 20px 50px rgba(0,0,0,0.5); overflow-y: auto; max-height: 90vh; }
+        h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900; margin: 0; color: var(--accent); text-align: center; }
+        h2 { color: var(--primary); font-size: 1.8rem; margin-bottom: 15px; text-transform: uppercase; }
+        p, li { font-size: 1.1rem; line-height: 1.6; color: #e2e8f0; margin-bottom: 15px; }
+        .slide-num { position: fixed; top: 20px; right: 20px; font-weight: 900; color: var(--accent); font-size: 1.2rem; }
+        .btn-main { margin-top: 20px; padding: 15px 40px; border-radius: 50px; border: none; background: var(--primary); color: white; font-weight: bold; cursor: pointer; display: block; margin-left: auto; margin-right: auto; }
+        .btn-main:hover { transform: scale(1.05); background: #ff0000; }
+        .hl { color: var(--accent); font-weight: bold; }
     </style>
 </head>
 <body>
 
     <div class="bg-animate">
-        <div class="circle" style="width: 500px; height: 500px; top: -10%; left: -10%;"></div>
-        <div class="circle" style="width: 400px; height: 400px; bottom: -5%; right: -5%; background: var(--accent);"></div>
+        <div class="circle" style="width: 400px; height: 400px; top: -5%; left: -5%;"></div>
+        <div class="circle" style="width: 300px; height: 300px; bottom: 5%; right: 5%; background: var(--accent);"></div>
     </div>
+
+    <div class="slide-num" id="slide-num">1 / 8</div>
 
     <div class="slide active">
         <div class="glass-card">
-            <h1>ŁUKASZ KUŚ</h1>
-            <p style="text-align: center; font-size: 1.3rem;">Kandydat na Zastępcę Kierownika | Strateg Operacyjny | Lider Społeczności</p>
-            <p>
-                W świecie, gdzie przeciętność jest standardem, ja stawiam na <span class="highlight">maksymalne zaangażowanie</span>. Urodzony w 2001 roku, reprezentuję pokolenie, które łączy instynktowną obsługę technologii z etosem twardej, fizycznej pracy. Moja historia to nie jest zwykłe CV – to zapis ciągłego ruchu, od zarządzania tysiącami użytkowników w przestrzeni cyfrowej, po fizyczną pracę operacyjną w największych sieciach handlowych w Polsce. Jeśli szukają Państwo kogoś, kto „popilnuje sklepu”, to nie ja. Jeśli szukają Państwo lidera, który <span class="highlight">zoptymalizuje każdy proces</span> – zapraszam dalej.
-            </p>
-            <button class="btn-main" onclick="changeSlide(1)">Poznaj pełną historię</button>
+            <h1>SIEMA, TU ŁUKASZ!</h1>
+            <p style="text-align: center; font-size: 1.3rem;">Szukasz kogoś, kto ogarnie sklep, a nie tylko „odbije kartę”? Dobrze trafiłeś.</p>
+            <p>Mam 25 lat i nie potrafię usiedzieć w miejscu. Moje życie to ciągły ruch – od Informatyki, przez zarządzanie ekipami w grach, aż po „latające” zmiany w Biedronce. Zrobiłem tę stronę, żebyś nie musiał czytać nudnego PDF-a. Przewiń dalej, zobacz co mam do zaoferowania.</p>
+            <button class="btn-main" onclick="changeSlide(1)">Lecimy z tematem</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="glass-card">
-            <h2>Filozofia Operacyjna</h2>
-            <p>
-                Moje podejście do pracy definiuje brak tolerancji dla bezczynności. Chociaż formalnie nie zdiagnozowano u mnie ADHD, moja naturalna predyspozycja do pozostawania w ciągłym procesie twórczym i roboczym sprawia, że jestem <span class="highlight">pracownikiem wysokowydajnym</span>. W środowisku Biedronki, gdzie dynamika zmian jest ogromna, ta cecha staje się moim największym atutem. 
-            </p>
-            <h3>Dlaczego Biedronka?</h3>
-            <p>
-                Analizując strukturę pracy w tej sieci, dostrzegam unikalną synergię między atmosferą zespołu a wymaganiami klientów. Moje doświadczenie z aplikacji Tikrow (70+ zleceń, średnia 5.0) dało mi unikalną perspektywę: znam błędy, których należy unikać i standardy, które należy wyśrubować. Moim celem jako Zastępcy Kierownika jest stworzenie środowiska, w którym <span class="highlight">zespół czuje wsparcie lidera</span>, a klient czuje się obsłużony na poziomie premium w dyskontowej cenie.
-            </p>
+            <h2>01. Nie znoszę nudy</h2>
+            <p>Mówiąc wprost: <span class="hl">mam niespożytą energię</span>. Oficjalnie papieru na ADHD nie mam, ale serio – jak nie mam co robić, to mnie nosi. W pracy to mój największy atut. Zamiast stać i czekać na koniec zmiany, ja zawsze znajdę sobie robotę. Paleta do rozłożenia? Kolejka do rozładowania? Terminowość do sprawdzenia? Robię to, bo lubię, jak się dzieje.</p>
         </div>
     </div>
 
     <div class="slide">
         <div class="glass-card">
-            <h2>Fundamenty Kompetencyjne</h2>
-            <div class="grid-3">
-                <div class="skill-box">
-                    <h3 style="margin-top:0">Zarządzanie Ludźmi</h3>
-                    <p>Prowadzenie serwerów gier dla tysięcy graczy nauczyło mnie moderacji konfliktów w czasie rzeczywistym. W firmie FORT jako dowódca sekcji na eventach, odpowiadałem za bezpieczeństwo i koordynację podległych mi osób w sytuacjach kryzysowych.</p>
-                </div>
-                <div class="skill-box">
-                    <h3 style="margin-top:0">Technologia i IT</h3>
-                    <p>Praca w Sądzie Okręgowym i UNICEF-ie na stanowiskach informatycznych wypracowała u mnie analityczny spokój. Rozumiem systemy ERP, kasy fiskalne i logistykę magazynową nie jako „czarną magię”, ale jako zestaw danych do optymalizacji.</p>
-                </div>
-                <div class="skill-box">
-                    <h3 style="margin-top:0">Wszechstronność</h3>
-                    <p>Technikum hodowli koni, kursy pilarza, inseminatora czy cyberbezpieczeństwa. Co je łączy? <span class="highlight">Umiejętność błyskawicznej nauki</span>. Nie boję się ubrudzić rąk przy rozładunku palet, by za chwilę z pełną kulturą obsłużyć klienta obcojęzycznego.</p>
-                </div>
-            </div>
+            <h2>02. Biedronkę znam od środka</h2>
+            <p>Nie przychodzę z ulicy. Przez <span class="hl">Tikrowa zrobiłem ponad 70 zmian</span> w różnych Biedronkach. Moja ocena to <span class="hl">5.0</span> – nikt na mnie nie narzekał, wręcz przeciwnie. Wiem, jak działa kasa, jak dbać o towar i jak rozmawiać z klientami, żeby wychodzili zadowoleni. Jako Zastępca Kierownika wejdę w buty lidera od pierwszego dnia, bo nie musisz mnie uczyć, gdzie leżą bułki, a gdzie wpisuje się straty.</p>
         </div>
     </div>
 
     <div class="slide">
         <div class="glass-card">
-            <h2>Edukacja i Logistyka Osobista</h2>
-            <p>
-                Obecnie rozpoczynam studia na kierunku <span class="highlight">Zarządzanie (Zaoczne/Online)</span>. Jest to wybór w pełni świadomy – chcę poprzeć moją praktykę solidną teorią akademicką. Fakt, że studia odbywają się online, jest kluczowy dla Państwa jako pracodawcy:
-            </p>
-            <ul>
-                <li><strong>Pełna elastyczność grafikowa:</strong> Mogę pracować na zmiany poronne, popołudniowe oraz nocne (rozładunki).</li>
-                <li><strong>Praktyki w czasie rzeczywistym:</strong> Każdy dzień w Biedronce będzie dla mnie laboratorium zarządzania, co przekłada się na moją podwójną motywację do osiągania wyników.</li>
-                <li><strong>Bariery językowe:</strong> Mój angielski pozwala na swobodną obsługę biznesową, a niemiecki – mimo że słabszy – wystarcza do profesjonalnego i uprzejmego obsłużenia klientów zza granicy.</li>
-            </ul>
+            <h2>03. Umiem dowodzić ekipą</h2>
+            <p>Zarządzanie mam przećwiczone w boju. Prowadzę serwery gier, gdzie miesięcznie przewijają się <span class="hl">tysiące graczy</span>. Tam nauczyłem się, jak gasić pożary (te słowne) i pilnować porządku. W firmie FORT jako dowódca sekcji na eventach pilnowałem bezpieczeństwa i rozdzielałem zadania ludziom. Wiem, jak sprawić, żeby zespół robił swoje i czuł, że ma wsparcie w szefie.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="glass-card">
+            <h2>04. Informatyk w sklepie? Tak!</h2>
+            <p>Studiowałem informatykę, pracowałem w Sądzie i UNICEF-ie jako IT. Co to daje w Biedronce? <span class="hl">Błyskawicznie ogarniam systemy</span>. Kasy, terminale, komputery na zapleczu – dla mnie to pestka. Jak coś się zawiesi, nie będę stał bezradnie, tylko spróbuję to naprawić. Do tego dochodzi analityczne myślenie – w logistyce i grafikach to mega ważne.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="glass-card">
+            <h2>05. Studia online = brak problemów</h2>
+            <p>Zaczynam Zarządzanie zaocznie przez neta. Dlaczego to dla Was dobrze? Bo <span class="hl">nie mam sztywnych godzin zajęć</span>. Mogę być w pracy rano, wieczorem, w nocy czy w niedziele handlowe. Egzaminy mam online, więc nie muszę co dwa tygodnie brać wolnego na zjazdy. Jestem dyspozycyjny 24/7.</p>
         </div>
     </div>
 
     <div class="slide">
         <div class="glass-card" style="border: 2px solid var(--accent);">
-            <h2>Dla leniwych (TL;DR) - czyli konkret w pigułce</h2>
-            <p>Jeśli nie masz czasu czytać mojej analizy, oto co musisz wiedzieć o Łukaszu Kusiu:</p>
-            <div class="grid-3">
-                <div>
-                    <span class="highlight">✅ JAKOŚĆ:</span> 5.0/5.0 na Tikrow po 70 zmianach. Nie trzeba mnie uczyć pracy w Biedronce – ja już ją znam.
-                </div>
-                <div>
-                    <span class="highlight">✅ KULTURA:</span> Spokój, brak wulgaryzmów, szacunek do klienta. Moja praca w jubilerstwie nauczyła mnie najwyższej klasy obsługi.
-                </div>
-                <div>
-                    <span class="highlight">✅ POTENCJAŁ:</span> Informatyk studiujący zarządzanie. Ogarnę grafik, kasy i systemy szybciej niż myślisz.
-                </div>
-            </div>
-            <p style="text-align:center; margin-top:2rem; font-style:italic;">"Nie szukam pracy, by przeczekać rok. Szukam miejsca, gdzie moje 'ADHD' i ambicja zbudują Państwa sukces sprzedażowy."</p>
+            <h2>06. W skrócie (Dla leniwych)</h2>
+            <ul>
+                <li>✅ <span class="hl">Pewniak:</span> 70+ zmian w Biedronce, ocena 5.0.</li>
+                <li>✅ <span class="hl">Robociarz:</span> Nienawidzę stać bezczynnie.</li>
+                <li>✅ <span class="hl">Mózg:</span> Informatyk, który ogarnia kasy i systemy w mig.</li>
+                <li>✅ <span class="hl">Dogadany:</span> Angielski na luzie, po niemiecku też pomogę turystom.</li>
+                <li>✅ <span class="hl">Kulturalny:</span> Zero przekleństw, pełna kultura do klienta i ekipy.</li>
+            </ul>
         </div>
     </div>
 
     <div class="slide">
         <div class="glass-card">
-            <h2>Skontaktujmy się</h2>
-            <p style="text-align:center;">Jestem dostępny na rozmowę kwalifikacyjną w Szczecinie w dowolnym terminie.</p>
-            <div style="text-align:center; margin: 3rem 0;">
-                <h3 style="font-size: 2.5rem; color: var(--accent);">ŁUKASZ KUŚ</h3>
-                <p>Data urodzenia: 31.01.2001</p>
-                <p>📍 Szczecin / Zachodniopomorskie</p>
-                <p>📧 <strong>TWÓJ-EMAIL@DOMENA.PL</strong></p>
+            <h2>Pogadajmy!</h2>
+            <p style="text-align: center;">Chcesz mnie w swojej ekipie? Daj znać, na rozmowę w Szczecinie wpadnę w każdej chwili.</p>
+            <div style="text-align: center; margin-top: 2rem;">
+                <h3>Łukasz Kuś</h3>
+                <p>📍 Szczecin</p>
+                <p>📧 <strong>lukasz.kus.kontakt@poczta.pl</strong></p>
+                <button class="btn-main" onclick="location.href='mailto:TWÓJ-EMAIL@DOMENA.PL'">WYŚLIJ MAILA</button>
             </div>
-            <button class="btn-main" onclick="location.href='mailto:TWÓJ-EMAIL@DOMENA.PL'">WYŚLIJ ZAPROSZENIE NA ROZMOWĘ</button>
         </div>
     </div>
-
-    <div class="nav-hint">PRZEWIŃ W DÓŁ LUB UŻYJ STRZAŁEK</div>
 
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
-        let isAnimating = false;
+        const numDisplay = document.getElementById('slide-num');
 
-        function goToSlide(n) {
-            if (isAnimating) return;
-            isAnimating = true;
+        function updateSlide(n) {
             slides[currentSlide].classList.remove('active');
             currentSlide = (n + slides.length) % slides.length;
             slides[currentSlide].classList.add('active');
-            setTimeout(() => { isAnimating = false; }, 800);
+            numDisplay.innerText = `${currentSlide + 1} / ${slides.length}`;
         }
 
-        window.addEventListener('wheel', e => { if(Math.abs(e.deltaY) > 30) goToSlide(currentSlide + (e.deltaY > 0 ? 1 : -1)); });
+        function changeSlide(d) { updateSlide(currentSlide + d); }
+
+        window.addEventListener('wheel', e => { if(Math.abs(e.deltaY) > 30) changeSlide(e.deltaY > 0 ? 1 : -1); });
         document.addEventListener('keydown', e => {
-            if (e.key === "ArrowRight" || e.key === "ArrowDown") goToSlide(currentSlide + 1);
-            if (e.key === "ArrowLeft" || e.key === "ArrowUp") goToSlide(currentSlide - 1);
+            if (e.key === "ArrowRight" || e.key === "ArrowDown") changeSlide(1);
+            if (e.key === "ArrowLeft" || e.key === "ArrowUp") changeSlide(-1);
         });
 
-        // Obsługa dotyku
         let startY = 0;
-        document.addEventListener('touchstart', e => { startY = e.touches[0].clientY; });
+        document.addEventListener('touchstart', e => startY = e.touches[0].clientY);
         document.addEventListener('touchend', e => {
             let endY = e.changedTouches[0].clientY;
-            if (Math.abs(startY - endY) > 50) goToSlide(currentSlide + (startY > endY ? 1 : -1));
+            if (Math.abs(startY - endY) > 50) changeSlide(startY > endY ? 1 : -1);
         });
     </script>
 </body>
