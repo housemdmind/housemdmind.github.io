@@ -3,64 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moje CV | Imię i Nazwisko</title>
+    <title>CV | Zastępca Kierownika Sklepu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         :root {
-            --primary: #2563eb;
-            --dark: #1e293b;
-            --light: #f8fafc;
+            --primary: #e30613; /* Kolor zbliżony do brandu Biedronki */
+            --dark: #2d2d2d;
+            --light: #f4f4f4;
+            --accent: #ffcc00;
         }
-        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; margin: 0; background: var(--light); color: var(--dark); }
-        header { background: var(--primary); color: white; padding: 3rem 1rem; text-align: center; }
-        .container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
-        section { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.5rem; }
-        h2 { border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem; color: var(--primary); }
-        .skill-tag { display: inline-block; background: #e2e8f0; padding: 0.3rem 0.8rem; border-radius: 20px; margin: 0.2rem; font-size: 0.9rem; }
-        footer { text-align: center; padding: 2rem; color: #64748b; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            background: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), #a3040e);
+            color: white;
+            padding: 5rem 1rem;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .container { max-width: 900px; margin: -50px auto 2rem; padding: 0 1rem; position: relative; z-index: 10; }
+
+        section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        section:hover { transform: translateY(-5px); }
+
+        h2 { color: var(--primary); border-left: 5px solid var(--accent); padding-left: 15px; margin-top: 0; }
+
+        .skill-tag {
+            display: inline-block;
+            background: var(--dark);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            margin: 0.3rem;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover { background: var(--accent); color: var(--dark); transform: scale(1.1); }
+
+        .job { margin-bottom: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 1rem; }
+        .job:last-child { border-bottom: none; }
+
+        .contact-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: box-shadow 0.3s;
+        }
+
+        .contact-btn:hover { box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4); }
+
+        footer { text-align: center; padding: 3rem; color: #888; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Jan Kowalski</h1>
-    <p>Specjalista ds. [Twoja Branża] | Rozwiązuję problemy, nie tworzę nowych.</p>
+<header data-aos="fade-down">
+    <h1 style="font-size: 3rem; margin: 0;">Twoje Imię i Nazwisko</h1>
+    <p style="font-size: 1.2rem; opacity: 0.9;">Kandydat na Zastępcę Kierownika Sklepu</p>
 </header>
 
 <div class="container">
-    <section>
-        <h2>O mnie</h2>
-        <p>Tutaj wpisz krótkie, konkretne "elevator pitch". Czym się zajmujesz i co sprawia, że jesteś świetny w tym, co robisz?</p>
+    <section data-aos="fade-up">
+        <h2>Profil Zawodowy</h2>
+        <p>Zorientowany na wyniki lider z doświadczeniem w handlu. Skutecznie zarządzam procesami operacyjnymi, dbając o najwyższe standardy obsługi klienta i efektywność zespołu. Szukam wyzwań w dynamicznym środowisku sieci Biedronka.</p>
     </section>
 
-    <section>
+    <section data-aos="fade-up" data-aos-delay="100">
+        <h2>Kluczowe Kompetencje</h2>
+        <div class="skill-tag">Zarządzanie Zespołem</div>
+        <div class="skill-tag">Standardy HACCP / BHP</div>
+        <div class="skill-tag">Rozliczanie Utargów</div>
+        <div class="skill-tag">Planowanie Grafików</div>
+        <div class="skill-tag">Obsługa Klienta</div>
+        <div class="skill-tag">Zarządzanie Towarem</div>
+    </section>
+
+    <section data-aos="fade-up" data-aos-delay="200">
         <h2>Doświadczenie</h2>
-        <div>
-            <strong>Firma X</strong> | Stanowisko | 2022 - obecnie
+        <div class="job">
+            <strong>Nazwa Firmy / Sklepu</strong> | Stanowisko | 2021 – Obecnie
             <ul>
-                <li>Osiągnięcie A (np. zwiększenie sprzedaży o 20%)</li>
-                <li>Zadanie B (zarządzanie zespołem)</li>
+                <li>Nadzór nad pracą zespołu (10+ osób) i motywowanie do realizacji planów.</li>
+                <li>Zapewnienie ciągłości sprzedaży poprzez optymalne zatowarowanie.</li>
+                <li>Rozwiązywanie trudnych sytuacji z klientami zgodnie z polityką firmy.</li>
+            </ul>
+        </div>
+        <div class="job">
+            <strong>Poprzednia Firma</strong> | Sprzedawca-Kasjer | 2018 – 2021
+            <ul>
+                <li>Szybka i profesjonalna obsługa klienta.</li>
+                <li>Dbanie o ekspozycję towaru zgodnie ze standardami.</li>
             </ul>
         </div>
     </section>
 
-    <section>
-        <h2>Umiejętności</h2>
-        <span class="skill-tag">Zarządzanie projektami</span>
-        <span class="skill-tag">Analiza danych</span>
-        <span class="skill-tag">Komunikacja</span>
-        <span class="skill-tag">Obsługa klienta</span>
-    </section>
-
-    <section>
-        <h2>Kontakt</h2>
-        <p>Email: twoj@email.com</p>
-        <p>LinkedIn: linkedin.com/in/twoj-profil</p>
+    <section data-aos="fade-up" data-aos-delay="300" style="text-align: center;">
+        <h2>Zapraszam do kontaktu</h2>
+        <p>Jestem gotowy na nowe wyzwania!</p>
+        <p>Telefon: <strong>+48 123 456 789</strong></p>
+        <a href="mailto:twoj-email@poczta.pl" class="contact-btn">Wyślij e-mail</a>
     </section>
 </div>
 
 <footer>
-    &copy; 2026 Strona stworzona wspólnie z Gemini.
+    &copy; 2026 housemdmind CV. Wszystkie prawa zastrzeżone.
 </footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000, // Czas trwania animacji
+        once: true // Animacja tylko raz przy przewijaniu
+    });
+</script>
 
 </body>
 </html>
