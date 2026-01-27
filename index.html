@@ -19,88 +19,116 @@
         .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 15px; opacity: 0; visibility: hidden; transition: opacity 0.6s ease; z-index: 5; }
         .slide.active { opacity: 1; visibility: visible; }
 
-        .card { background: var(--glass); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.1); padding: clamp(20px, 5vw, 50px); border-radius: 30px; max-width: 1000px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; z-index: 10; box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
+        .card { background: var(--glass); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.1); padding: clamp(20px, 5vw, 50px); border-radius: 30px; max-width: 1050px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; z-index: 10; box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
         
-        h1 { font-size: clamp(2rem, 8vw, 4rem); font-weight: 900; margin: 0; line-height: 1.1; text-align: center; }
+        h1 { font-size: clamp(2.2rem, 8vw, 4rem); font-weight: 900; margin: 0; line-height: 1.1; text-align: center; }
         .accent { color: var(--accent); }
-        h2 { color: var(--primary); font-size: clamp(1rem, 3vw, 1.4rem); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; text-align: center; font-weight: 700; }
+        h2 { color: var(--primary); font-size: clamp(1rem, 3vw, 1.4rem); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; text-align: center; font-weight: 700; border-left: 5px solid var(--accent); padding-left: 15px; }
         p, li { font-size: clamp(0.95rem, 2vw, 1.1rem); line-height: 1.7; color: #e2e8f0; margin-bottom: 15px; text-align: justify; }
         
-        .btn { background: var(--primary); color: white; border: none; padding: 18px 40px; border-radius: 50px; font-weight: 900; cursor: pointer; text-transform: uppercase; margin: 20px auto 0; display: block; width: fit-content; transition: 0.3s; }
-        .btn:hover { background: #ff4d4d; transform: scale(1.05); }
+        .btn { background: var(--primary); color: white; border: none; padding: 18px 45px; border-radius: 100px; font-weight: 900; cursor: pointer; text-transform: uppercase; margin: 25px auto 0; display: block; width: fit-content; transition: 0.3s; letter-spacing: 2px; }
+        .btn:hover { background: var(--accent); color: black; transform: scale(1.05); }
         .btn-static { background: #333; cursor: default; }
-        .btn-static:hover { transform: none; background: #333; }
 
+        .slide-counter { position: fixed; top: 20px; right: 20px; font-weight: 900; color: var(--accent); z-index: 1000; font-size: 1.2rem; }
         .dots { position: fixed; bottom: 30px; left: 0; width: 100%; display: flex; justify-content: center; gap: 10px; z-index: 100; }
-        .dot { width: 40px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; transition: 0.4s; cursor: pointer; }
-        .dot.active { background: var(--accent); width: 70px; }
-        @media (max-width: 600px) { p { text-align: left; } .card { padding: 30px 20px; } .dot { width: 20px; } .dot.active { width: 40px; } }
+        .dot { width: 35px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; transition: 0.4s; cursor: pointer; }
+        .dot.active { background: var(--accent); width: 60px; }
     </style>
 </head>
 <body>
 
     <div id="particles-js"></div>
     <div class="bg-orbs">
-        <div class="orb" style="width: 400px; height: 400px; top: -5%; left: -5%; background: var(--primary);"></div>
-        <div class="orb" style="width: 300px; height: 300px; bottom: 5%; right: 5%; background: var(--accent);"></div>
+        <div class="orb" style="width: 500px; height: 500px; top: -5%; left: -5%; background: var(--primary);"></div>
+        <div class="orb" style="width: 400px; height: 400px; bottom: 5%; right: 5%; background: var(--accent);"></div>
     </div>
+    <div class="slide-counter" id="sc">1 / 10</div>
 
     <div class="slide active">
         <div class="card">
-            <h2>Kandydat na Zastępcę Kierownika</h2>
             <h1>ŁUKASZ <span class="accent">KUŚ</span></h1>
-            <p style="text-align: center; margin-top: 15px;">Lubieszyn | 70+ zmian w Biedronce | Ocena 5.0</p>
-            <p>Siema! Szukasz kogoś, kto nie boi się roboty i ogarnia procesy przygranicznego sklepu? Zostań chwilę i sprawdź, co mogę wnieść do Twojej ekipy.</p>
-            <button class="btn" onclick="changeSlide(1)">Poznaj mnie</button>
+            <p style="text-align: center; font-weight: bold; font-size: 1.3rem; margin-top: 15px;">Kandydat na Zastępcę Kierownika – Biedronka Lubieszyn</p>
+            <p>Moja kandydatura to połączenie doświadczenia operacyjnego, opanowania w kontakcie z międzynarodowym klientem oraz pełnej gotowości do pracy w najwyższym tempie. Lubieszyn to specyficzny sklep, a ja jestem na niego gotowy.</p>
+            <button class="btn" onclick="next()">Dalej</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>01. Lubieszyn: Specyfika i Spryt</h2>
-            <p>Praca przy granicy to wyzwanie – ogromny ruch i klienci zza granicy. Choć mój angielski jest świetny, potrafię też sprytnie dogadać się po niemiecku. Wiem, jak rozładować napięcie i profesjonalnie obsłużyć każdego, kto wpadnie na zakupy.</p>
-            <button class="btn" onclick="changeSlide(1)">Moje doświadczenie</button>
+            <h2>01. Lubieszyn: Spryt i komunikacja</h2>
+            <p>Praca przy granicy to wyzwanie. Choć mój angielski jest świetny, potrafię też sprytnie dogadać się po niemiecku. Wiem, jak rozładować napięcie i profesjonalnie obsłużyć każdego klienta zza granicy.</p>
+            <button class="btn" onclick="next()">Dalej</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>02. Biedronka bez tajemnic</h2>
-            <p>Zaliczyłem ponad 70 zmian w Biedronkach (Tikrow, ocena 5.0). Kasa, wypiek, ekspozycja i nocki – nie musisz mnie uczyć podstaw. Jako Zastępca Kierownika od pierwszego dnia biorę odpowiedzialność za standardy na sali sprzedaży.</p>
-            <button class="btn" onclick="changeSlide(1)">Odpowiedzialność</button>
+            <h2>02. Doświadczenie Biedronka (Tikrow)</h2>
+            <p>Zaliczyłem ponad 70 zmian w sieci Biedronka z oceną 5.0. Kasa, wypiek, ekspozycja towaru i nocki – znam standardy firmy i nie muszę się uczyć podstaw od zera.</p>
+            <button class="btn" onclick="next()">Dalej</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
             <h2>03. Klucze, Alarmy, Kasa</h2>
-            <p>Otwierałem i zamykałem sklepy (Żabka, Chata Polska), więc systemy alarmowe, sejf i klucze to dla mnie codzienna odpowiedzialność. Potrafię zachować zimną krew i dopilnować bezpieczeństwa placówki po godzinach pracy.</p>
-            <button class="btn" onclick="changeSlide(1)">Oaza Spokoju</button>
+            <p>Otwierałem i zamykałem sklepy (Żabka, Chata Polska), więc odpowiedzialność za mienie, sejf i systemy alarmowe to dla mnie codzienność. Jestem sumienny i rzetelny w rozliczaniu utargów.</p>
+            <button class="btn" onclick="next()">Dalej</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>04. Klient trudny? Spokój przede wszystkim</h2>
-            <p>W relacjach z trudnym klientem jestem oazą spokoju. Brzydzę się brakiem kultury i wulgaryzmami. Zawsze szukam rozwiązania zgodnego z procedurami, nie dając się wciągnąć w zbędne kłótnie.</p>
-            <button class="btn" onclick="changeSlide(1)">Studia i Czas</button>
+            <h2>04. Klient trudny? "Oaza Spokoju"</h2>
+            <p>W relacjach z trudnym klientem jestem oazą spokoju. Brzydzę się brakiem kultury i wulgaryzmami. Zawsze szukam rozwiązania zgodnego z procedurami, dbając o dobry wizerunek sklepu.</p>
+            <button class="btn" onclick="next()">Dalej</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>05. Pełna dyspozycyjność</h2>
-            <p>Studiuję Zarządzanie Online, więc zapomnij o problemach z grafikiem. Nie mam zjazdów, nie mam blokad – nocki, weekendy i poranki na Lubieszynie są do Twojej dyspozycji 24/7.</p>
-            <button class="btn" onclick="changeSlide(1)">Podsumowanie</button>
+            <h2>05. Inwentaryzacja i Porządek</h2>
+            <p>Rozumiem wagę stanów magazynowych. Porządek "od zaplecza po rampę" to dla mnie standard. Potrafię perfekcyjnie przygotować salę sprzedaży do spisu i nadzorować proces.</p>
+            <button class="btn" onclick="next()">Dalej</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>Warto nawiązać współpracę</h2>
-            <p style="text-align: center;">Gotowy do działania w Szczecinie / Lubieszynie od zaraz.</p>
-            <div style="text-align: center; margin-top: 20px;">
-                <h3 style="margin:0; font-size: 1.8rem;">ŁUKASZ KUŚ</h3>
+            <h2>06. Koordynacja i Liderstwo</h2>
+            <p>Doświadczenie w dowodzeniu sekcjami ochrony oraz zarządzaniu dużymi grupami online nauczyło mnie sprawiedliwego podziału zadań. Wiem, jak motywować zespół do realizacji celów.</p>
+            <button class="btn" onclick="next()">Dalej</button>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="card">
+            <h2>07. Studia Online = Pełna Dostępność</h2>
+            <p>Studiuję Zarządzanie Online, więc zapomnij o problemach z grafikiem. Nie mam zjazdów, nie mam blokad – jestem do Twojej dyspozycji na nocki, weekendy i poranki 24/7.</p>
+            <button class="btn" onclick="next()">Dalej</button>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="card" style="border: 2px solid var(--accent);">
+            <h2>Wartości w pigułce:</h2>
+            <ul>
+                <li>🚀 <strong>Energia:</strong> Nienawidzę bezczynności.</li>
+                <li>🏆 <strong>Pewniak:</strong> 70+ zmian w Biedronce (ocena 5.0).</li>
+                <li>💻 <strong>Mózg:</strong> Informatyk studiujący zarządzanie.</li>
+                <li> lions <strong>Lider:</strong> Doświadczony w sytuacjach kryzysowych.</li>
+            </ul>
+            <button class="btn" onclick="next()">Kontakt</button>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="card">
+            <h2>Zapraszam do kontaktu</h2>
+            <p style="text-align: center;">Szczecin | Gotowy do działania od zaraz.</p>
+            <div style="text-align: center; margin-top: 30px;">
+                <h3 style="margin:0; font-size: 2.2rem;">ŁUKASZ KUŚ</h3>
                 <p>📞 667 268 314 | 📧 thkbenice@gmail.com</p>
                 <button class="btn btn-static">ZATRUDNIJ MNIE</button>
             </div>
@@ -114,6 +142,8 @@
         let current = 0;
         const slides = document.querySelectorAll('.slide');
         const dotsContainer = document.getElementById('dots');
+        const sc = document.getElementById('sc');
+        let isLocked = false;
 
         slides.forEach((_, i) => {
             const dot = document.createElement('div');
@@ -123,40 +153,26 @@
         });
 
         function goToSlide(n) {
+            if (isLocked) return;
+            isLocked = true;
             slides[current].classList.remove('active');
             current = n;
             slides[current].classList.add('active');
-            document.querySelectorAll('.dot').forEach((d, i) => {
-                d.className = `dot ${i === current ? 'active' : ''}`;
-            });
+            sc.innerText = `${current + 1} / ${slides.length}`;
+            document.querySelectorAll('.dot').forEach((d, i) => { d.className = `dot ${i === current ? 'active' : ''}`; });
+            setTimeout(() => isLocked = false, 700);
         }
 
-        function changeSlide(d) {
-            let next = (current + d + slides.length) % slides.length;
-            goToSlide(next);
-        }
+        function next() { if(current < slides.length - 1) goToSlide(current + 1); else goToSlide(0); }
+        function prev() { if(current > 0) goToSlide(current - 1); else goToSlide(slides.length - 1); }
 
-        window.addEventListener('wheel', e => { if(Math.abs(e.deltaY) > 40) changeSlide(e.deltaY > 0 ? 1 : -1); }, {passive: true});
-        document.addEventListener('keydown', e => {
-            if (e.key === "ArrowRight" || e.key === "ArrowDown") changeSlide(1);
-            if (e.key === "ArrowLeft" || e.key === "ArrowUp") changeSlide(-1);
-        });
-
+        window.addEventListener('wheel', e => { if(Math.abs(e.deltaY) > 40) { if(e.deltaY > 0) next(); else prev(); } }, {passive: true});
+        document.addEventListener('keydown', e => { if (e.key === "ArrowRight" || e.key === "ArrowDown") next(); if (e.key === "ArrowLeft" || e.key === "ArrowUp") prev(); });
         let sY = 0;
         document.addEventListener('touchstart', e => sY = e.touches[0].clientY, {passive: true});
-        document.addEventListener('touchend', e => {
-            let eY = e.changedTouches[0].clientY;
-            if (Math.abs(sY - eY) > 60) changeSlide(sY > eY ? 1 : -1);
-        }, {passive: true});
+        document.addEventListener('touchend', e => { let eY = e.changedTouches[0].clientY; if (Math.abs(sY - eY) > 60) { if(sY > eY) next(); else prev(); } }, {passive: true});
 
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#ffffff" },
-                "opacity": { "value": 0.2, "random": true },
-                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "out_mode": "out" }
-            }
-        });
+        particlesJS("particles-js", { "particles": { "number": { "value": 60 }, "opacity": { "value": 0.2 }, "move": { "enable": true, "speed": 1.5 } } });
     </script>
 </body>
 </html>
