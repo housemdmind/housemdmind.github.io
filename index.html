@@ -2,163 +2,161 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Łukasz Kuś | Kandydat na Z-cę Kierownika (Lubieszyn)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Łukasz Kuś | Portfolio Lubieszyn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #ff1e1e; --accent: #ffcc00; --bg: #05070a; }
+        :root { --primary: #ff1e1e; --accent: #ffcc00; --bg: #05070a; --glass: rgba(255, 255, 255, 0.07); }
         * { scrollbar-width: none; -ms-overflow-style: none; box-sizing: border-box; }
         *::-webkit-scrollbar { display: none; }
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Montserrat', sans-serif; background: var(--bg); color: white; overflow: hidden; }
 
         #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
         .bg-orbs { position: fixed; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
-        .orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15; animation: drift 25s infinite alternate ease-in-out; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.15; animation: drift 25s infinite alternate ease-in-out; }
         @keyframes drift { 0% { transform: translate(-5%, -5%) scale(1); } 100% { transform: translate(10%, 10%) scale(1.3); } }
 
-        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 20px; opacity: 0; visibility: hidden; transition: opacity 0.7s ease, transform 0.7s ease; z-index: 5; transform: scale(0.95); }
-        .slide.active { opacity: 1; visibility: visible; transform: scale(1); }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 15px; opacity: 0; visibility: hidden; transition: opacity 0.6s ease; z-index: 5; }
+        .slide.active { opacity: 1; visibility: visible; }
 
-        .card { background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid rgba(255,255,255,0.1); padding: clamp(25px, 5vw, 60px); border-radius: 40px; max-width: 1100px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; z-index: 10; box-shadow: 0 40px 100px rgba(0,0,0,0.8); }
+        .card { background: var(--glass); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.1); padding: clamp(20px, 5vw, 50px); border-radius: 30px; max-width: 1000px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; z-index: 10; box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
         
-        h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900; margin: 0; text-align: center; color: white; }
+        h1 { font-size: clamp(2rem, 8vw, 4rem); font-weight: 900; margin: 0; line-height: 1.1; text-align: center; }
         .accent { color: var(--accent); }
-        h2 { color: var(--primary); font-size: clamp(1.2rem, 3vw, 1.8rem); margin-bottom: 25px; text-transform: uppercase; border-left: 5px solid var(--accent); padding-left: 15px; }
-        p, li { font-size: 1.1rem; line-height: 1.7; color: #e2e8f0; margin-bottom: 15px; text-align: justify; }
+        h2 { color: var(--primary); font-size: clamp(1rem, 3vw, 1.4rem); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; text-align: center; font-weight: 700; }
+        p, li { font-size: clamp(0.95rem, 2vw, 1.1rem); line-height: 1.7; color: #e2e8f0; margin-bottom: 15px; text-align: justify; }
         
-        .btn { background: var(--primary); color: white; border: none; padding: 18px 45px; border-radius: 100px; font-weight: 900; cursor: pointer; text-transform: uppercase; display: block; margin: 30px auto 0; transition: 0.4s; }
-        .btn:hover { background: var(--accent); color: black; transform: translateY(-3px); }
-        .progress-bar { position: fixed; top: 0; left: 0; height: 5px; background: linear-gradient(to right, var(--primary), var(--accent)); z-index: 1000; transition: width 0.4s; width: 0%; }
-        .slide-counter { position: fixed; top: 20px; right: 20px; font-weight: 900; color: var(--accent); z-index: 1000; font-size: 1.2rem; }
+        .btn { background: var(--primary); color: white; border: none; padding: 18px 40px; border-radius: 50px; font-weight: 900; cursor: pointer; text-transform: uppercase; margin: 20px auto 0; display: block; width: fit-content; transition: 0.3s; }
+        .btn:hover { background: #ff4d4d; transform: scale(1.05); }
+        .btn-static { background: #333; cursor: default; }
+        .btn-static:hover { transform: none; background: #333; }
+
+        .dots { position: fixed; bottom: 30px; left: 0; width: 100%; display: flex; justify-content: center; gap: 10px; z-index: 100; }
+        .dot { width: 40px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; transition: 0.4s; cursor: pointer; }
+        .dot.active { background: var(--accent); width: 70px; }
+        @media (max-width: 600px) { p { text-align: left; } .card { padding: 30px 20px; } .dot { width: 20px; } .dot.active { width: 40px; } }
     </style>
 </head>
 <body>
 
     <div id="particles-js"></div>
     <div class="bg-orbs">
-        <div class="orb" style="width: 600px; height: 600px; top: -10%; left: -10%; background: var(--primary);"></div>
-        <div class="orb" style="width: 500px; height: 500px; bottom: -5%; right: -5%; background: var(--accent);"></div>
+        <div class="orb" style="width: 400px; height: 400px; top: -5%; left: -5%; background: var(--primary);"></div>
+        <div class="orb" style="width: 300px; height: 300px; bottom: 5%; right: 5%; background: var(--accent);"></div>
     </div>
-    <div class="progress-bar" id="pb"></div>
-    <div class="slide-counter" id="sc">1 / 10</div>
 
     <div class="slide active">
         <div class="card">
+            <h2>Kandydat na Zastępcę Kierownika</h2>
             <h1>ŁUKASZ <span class="accent">KUŚ</span></h1>
-            <h3 style="text-align: center; text-transform: uppercase; letter-spacing: 2px;">Kandydat na Zastępcę Kierownika – Biedronka Lubieszyn</h3>
-            <p style="margin-top: 30px;">Znam specyfikę placówki na Lubieszynie i rozumiem wyzwania, jakie stoją przed przygranicznym sklepem. Moja kandydatura to połączenie <strong>doświadczenia operacyjnego, opanowania w kontakcie z międzynarodowym klientem oraz pełnej gotowości do pracy w najwyższym tempie.</strong></p>
-            <button class="btn" onclick="next()">Zaczynamy</button>
+            <p style="text-align: center; margin-top: 15px;">Lubieszyn | 70+ zmian w Biedronce | Ocena 5.0</p>
+            <p>Siema! Szukasz kogoś, kto nie boi się roboty i ogarnia procesy przygranicznego sklepu? Zostań chwilę i sprawdź, co mogę wnieść do Twojej ekipy.</p>
+            <button class="btn" onclick="changeSlide(1)">Poznaj mnie</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>01. Lubieszyn: Spryt i komunikacja</h2>
-            <p>Praca w placówce przygranicznej wymaga elastyczności. Choć mój angielski jest na wysokim poziomie, potrafię sprawnie i kulturalnie dogadać się z klientem niemieckojęzycznym. Dzięki doświadczeniu w handlu (Jubiler, Żabka) wiem, jak przełamywać bariery językowe, by zapewnić profesjonalną obsługę każdemu klientowi.</p>
-            <p>Rozumiem, że Lubieszyn to "pierwsza linia" – ogromne obroty i konieczność błyskawicznego reagowania na sali sprzedaży. Jestem gotowy, by wnieść tam swój spokój i energię.</p>
+            <h2>01. Lubieszyn: Specyfika i Spryt</h2>
+            <p>Praca przy granicy to wyzwanie – ogromny ruch i klienci zza granicy. Choć mój angielski jest świetny, potrafię też sprytnie dogadać się po niemiecku. Wiem, jak rozładować napięcie i profesjonalnie obsłużyć każdego, kto wpadnie na zakupy.</p>
+            <button class="btn" onclick="changeSlide(1)">Moje doświadczenie</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>02. Doświadczenie w strukturach sieci</h2>
-            <p>Dzięki <strong>70+ zmianom</strong> zrealizowanym w sieci Biedronka (Tikrow, ocena 5.0), znam procesy, które trzymają ten sklep w ryzach. Nie muszę się uczyć, jak obsługiwać kasę w godzinach szczytu czy jak dbać o ekspozycję towaru przy dużym przepływie klientów.</p>
-            <p>Wchodzę do zespołu jako osoba, która od razu może przejąć obowiązki Zastępcy, dbając o świeżość, oznaczenia cenowe i standardy firmy.</p>
+            <h2>02. Biedronka bez tajemnic</h2>
+            <p>Zaliczyłem ponad 70 zmian w Biedronkach (Tikrow, ocena 5.0). Kasa, wypiek, ekspozycja i nocki – nie musisz mnie uczyć podstaw. Jako Zastępca Kierownika od pierwszego dnia biorę odpowiedzialność za standardy na sali sprzedaży.</p>
+            <button class="btn" onclick="changeSlide(1)">Odpowiedzialność</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>03. Odpowiedzialność za mienie i obiekt</h2>
-            <p>Otwieranie i zamykanie sklepu, odpowiedzialność za klucze, alarmy i sejf – mam to przećwiczone w praktyce (Żabka, Chata Polska). Rola Zastępcy na Lubieszynie to duża odpowiedzialność operacyjna, na którą jestem w pełni przygotowany.</p>
-            <p>Moja precyzja analityczna (ex-IT UNICEF/Sąd) pomaga mi w bezbłędnym rozliczaniu raportów i obsłudze systemów logistycznych, co minimalizuje ryzyko strat i przestojów technicznych.</p>
+            <h2>03. Klucze, Alarmy, Kasa</h2>
+            <p>Otwierałem i zamykałem sklepy (Żabka, Chata Polska), więc systemy alarmowe, sejf i klucze to dla mnie codzienna odpowiedzialność. Potrafię zachować zimną krew i dopilnować bezpieczeństwa placówki po godzinach pracy.</p>
+            <button class="btn" onclick="changeSlide(1)">Oaza Spokoju</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>04. Klient trudny? "Oaza Spokoju"</h2>
-            <p>W dynamicznym sklepie przygranicznym emocje klientów bywają duże. Moja zasada jest prosta: jestem oazą spokoju. Brzydzę się wulgaryzmami i brakiem kultury. Nawet w najtrudniejszej sytuacji zachowuję profesjonalizm, kierując się procedurami i dbając o wizerunek firmy.</p>
-            <p>Wiem, jak rozładować napięcie i sprawić, by zespół mógł pracować spokojnie, a klient poczuł się obsłużony z szacunkiem.</p>
+            <h2>04. Klient trudny? Spokój przede wszystkim</h2>
+            <p>W relacjach z trudnym klientem jestem oazą spokoju. Brzydzę się brakiem kultury i wulgaryzmami. Zawsze szukam rozwiązania zgodnego z procedurami, nie dając się wciągnąć w zbędne kłótnie.</p>
+            <button class="btn" onclick="changeSlide(1)">Studia i Czas</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>05. Przygotowanie do sukcesu (Inwentaryzacja)</h2>
-            <p>Rozumiem wagę stanów magazynowych. Choć inwentaryzacje w sieci robią firmy zewnętrzne, jako Zastępca kładę nacisk na <strong>perfekcyjne przygotowanie sali i magazynu</strong>. Porządek "od zaplecza po rampę" to dla mnie standard.</p>
-            <p>Mój brak tolerancji dla nudy sprawia, że stale kontroluję terminowość i jakość ekspozycji, co bezpośrednio wpływa na wynik finansowy placówki.</p>
+            <h2>05. Pełna dyspozycyjność</h2>
+            <p>Studiuję Zarządzanie Online, więc zapomnij o problemach z grafikiem. Nie mam zjazdów, nie mam blokad – nocki, weekendy i poranki na Lubieszynie są do Twojej dyspozycji 24/7.</p>
+            <button class="btn" onclick="changeSlide(1)">Podsumowanie</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>06. Koordynacja pracy zespołu</h2>
-            <p>Doświadczenie w dowodzeniu sekcjami ochrony oraz zarządzaniu dużymi grupami online nauczyło mnie sprawiedliwego podziału zadań. Na Lubieszynie, gdzie tempo pracy jest wysokie, kluczowe jest, by każdy wiedział, co robić.</p>
-            <p>Stawiam na współpracę. Jako Zastępca jestem wsparciem dla ekipy na kasie i sali, motywując ich wspólnym działaniem do realizacji celów sprzedażowych.</p>
-        </div>
-    </div>
-
-    <div class="slide">
-        <div class="card">
-            <h2>07. Edukacja i Czas pracy</h2>
-            <p>Studia <strong>Zarządzania (Online)</strong> pozwalają mi na naukę nowoczesnych metod kierowania placówką bez żadnych ograniczeń czasowych. Nie mam zjazdów, nie mam blokad w grafiku – jestem dostępny na każdą zmianę, nockę i weekend.</p>
-            <p>Szukam stabilizacji na Lubieszynie i chcę związać się z tą konkretną placówką na długo. Moja ambicja i brak nałogów to gwarancja rzetelności.</p>
-        </div>
-    </div>
-
-    <div class="slide">
-        <div class="card" style="border: 2px solid var(--accent);">
-            <h2>Dlaczego warto mi zaufać?</h2>
-            <ul>
-                <li>✅ <strong>Brak barier:</strong> Spryt komunikacyjny w obsłudze klientów DE/EN.</li>
-                <li>✅ <strong>Pewniak:</strong> Znam Biedronkę od podszewki (ocena 5.0 w Tikrow).</li>
-                <li>✅ <strong>Odpowiedzialny:</strong> Otwierałem/zamykałem sklepy, pracowałem z sejfem.</li>
-                <li>✅ <strong>Dostępny:</strong> Studia online = gotowość na 3 zmiany i weekendy.</li>
-                <li>✅ <strong>Lider:</strong> Opanowanie i kultura w każdej sytuacji kryzysowej.</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="slide">
-        <div class="card">
-            <h2>Zapraszam do kontaktu</h2>
-            <p style="text-align: center;">Chętnie zaprezentuję swoje umiejętności podczas rozmowy na Lubieszynie.</p>
-            <div style="text-align: center; margin-top: 30px;">
-                <h3 style="font-size: 2.5rem; margin: 0;">ŁUKASZ KUŚ</h3>
-                <p>📍 Szczecin | 📞 667 268 314</p>
-                <p>E-mail: <span class="accent">thkbenice@gmail.com</span></p>
-                <button class="btn" onclick="location.href='mailto:thkbenice@gmail.com'">Napisz do mnie</button>
+            <h2>Warto nawiązać współpracę</h2>
+            <p style="text-align: center;">Gotowy do działania w Szczecinie / Lubieszynie od zaraz.</p>
+            <div style="text-align: center; margin-top: 20px;">
+                <h3 style="margin:0; font-size: 1.8rem;">ŁUKASZ KUŚ</h3>
+                <p>📞 667 268 314 | 📧 thkbenice@gmail.com</p>
+                <button class="btn btn-static">ZATRUDNIJ MNIE</button>
             </div>
         </div>
     </div>
+
+    <div class="dots" id="dots"></div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         let current = 0;
         const slides = document.querySelectorAll('.slide');
-        const pb = document.getElementById('pb');
-        const sc = document.getElementById('sc');
-        let isLocked = false;
+        const dotsContainer = document.getElementById('dots');
 
-        function update(index) {
-            if (index < 0 || index >= slides.length || isLocked) return;
-            isLocked = true;
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.className = `dot ${i === 0 ? 'active' : ''}`;
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        });
+
+        function goToSlide(n) {
             slides[current].classList.remove('active');
-            current = index;
+            current = n;
             slides[current].classList.add('active');
-            pb.style.width = ((current + 1) / slides.length) * 100 + "%";
-            sc.innerText = `${current + 1} / ${slides.length}`;
-            setTimeout(() => { isLocked = false; }, 800);
+            document.querySelectorAll('.dot').forEach((d, i) => {
+                d.className = `dot ${i === current ? 'active' : ''}`;
+            });
         }
 
-        function next() { update(current + 1); }
-        function prev() { update(current - 1); }
+        function changeSlide(d) {
+            let next = (current + d + slides.length) % slides.length;
+            goToSlide(next);
+        }
 
-        window.addEventListener('wheel', e => { if (Math.abs(e.deltaY) > 30) { if (e.deltaY > 0) next(); else prev(); } }, { passive: true });
-        document.addEventListener('keydown', e => { if (e.key === "ArrowRight" || e.key === "ArrowDown") next(); if (e.key === "ArrowLeft" || e.key === "ArrowUp") prev(); });
+        window.addEventListener('wheel', e => { if(Math.abs(e.deltaY) > 40) changeSlide(e.deltaY > 0 ? 1 : -1); }, {passive: true});
+        document.addEventListener('keydown', e => {
+            if (e.key === "ArrowRight" || e.key === "ArrowDown") changeSlide(1);
+            if (e.key === "ArrowLeft" || e.key === "ArrowUp") changeSlide(-1);
+        });
 
-        particlesJS("particles-js", { "particles": { "number": { "value": 60 }, "opacity": { "value": 0.2 }, "size": { "value": 2 }, "line_linked": { "enable": true, "distance": 150, "opacity": 0.1 }, "move": { "enable": true, "speed": 1.2 } } });
+        let sY = 0;
+        document.addEventListener('touchstart', e => sY = e.touches[0].clientY, {passive: true});
+        document.addEventListener('touchend', e => {
+            let eY = e.changedTouches[0].clientY;
+            if (Math.abs(sY - eY) > 60) changeSlide(sY > eY ? 1 : -1);
+        }, {passive: true});
+
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#ffffff" },
+                "opacity": { "value": 0.2, "random": true },
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "out_mode": "out" }
+            }
+        });
     </script>
 </body>
 </html>
