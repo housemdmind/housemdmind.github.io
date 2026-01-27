@@ -3,56 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Łukasz Kuś | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>Łukasz Kuś | Kandydat na Z-cę Kierownika</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #ff1e1e; --accent: #ffcc00; --bg: #05070a; --glass: rgba(255, 255, 255, 0.05); }
-        
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Montserrat', sans-serif; background: var(--bg); color: white; overflow: hidden; }
-
         .bg-gradient { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #05070a; }
         .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.15; animation: move 15s infinite alternate; }
         @keyframes move { from { transform: translate(0,0); } to { transform: translate(10vw, 10vh); } }
-
-        .slide { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            display: flex; justify-content: center; align-items: center; 
-            padding: 15px; opacity: 0; visibility: hidden; transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
-        }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 15px; opacity: 0; visibility: hidden; transition: 0.7s cubic-bezier(0.2, 1, 0.3, 1); }
         .slide.active { opacity: 1; visibility: visible; }
-
-        .card { 
-            background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.1); padding: clamp(20px, 6vw, 50px); border-radius: 30px; 
-            max-width: 1000px; width: 100%; max-height: 85vh; overflow-y: auto;
-            display: flex; flex-direction: column; scrollbar-width: none;
-        }
+        .card { background: var(--glass); backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.1); padding: clamp(20px, 6vw, 50px); border-radius: 30px; max-width: 1000px; width: 100%; max-height: 85vh; overflow-y: auto; scrollbar-width: none; }
         .card::-webkit-scrollbar { display: none; }
-
-        h1 { font-size: clamp(2.2rem, 10vw, 4.5rem); font-weight: 900; margin: 0; line-height: 1; text-align: center; }
+        h1 { font-size: clamp(2rem, 10vw, 4rem); font-weight: 900; margin: 0; line-height: 1; text-align: center; }
         .gradient-text { background: linear-gradient(to right, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        h2 { color: var(--primary); font-size: clamp(0.9rem, 4vw, 1.5rem); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; text-align: center; }
-        p { font-size: clamp(0.9rem, 3.5vw, 1.1rem); line-height: 1.6; color: #d1d5db; margin-bottom: 15px; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-top: 10px; }
-        .box { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); }
-
-        .btn { 
-            background: var(--primary); color: white; border: none; padding: 15px 30px; border-radius: 50px; 
-            font-weight: 900; cursor: pointer; text-transform: uppercase; margin: 20px auto 0; width: fit-content;
-        }
-
+        h2 { color: var(--primary); font-size: clamp(0.9rem, 4vw, 1.4rem); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; text-align: center; }
+        p { font-size: clamp(0.9rem, 3.5vw, 1.05rem); line-height: 1.6; color: #d1d5db; margin-bottom: 15px; }
+        .highlight { color: var(--accent); font-weight: bold; }
+        .btn { background: var(--primary); color: white; border: none; padding: 15px 30px; border-radius: 50px; font-weight: 900; cursor: pointer; text-transform: uppercase; margin: 20px auto 0; display: block; width: fit-content; }
         .dots { position: fixed; bottom: 20px; left: 0; width: 100%; display: flex; justify-content: center; gap: 8px; }
         .dot { width: 30px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; transition: 0.4s; }
         .dot.active { background: var(--accent); width: 50px; }
-
-        @media (max-width: 480px) {
-            .card { padding: 25px 20px; border-radius: 20px; }
-            h1 { margin-bottom: 10px; }
-            p { text-align: left; }
-        }
     </style>
 </head>
 <body>
@@ -64,65 +36,57 @@
 
     <div class="slide active">
         <div class="card">
-            <h2>Portfolio Kandydatury</h2>
+            <h2>Kandydat na Zastępcę Kierownika</h2>
             <h1>ŁUKASZ <span class="gradient-text">KUŚ</span></h1>
-            <p style="text-align: center; margin-top: 15px;">Zastępca Kierownika, który ogarnia. Informatyk, który działa. Lider, który nie znosi nudy.</p>
-            <button class="btn" onclick="changeSlide(1)">Sprawdź konkret</button>
+            <p style="text-align: center; margin-top: 15px;">Gotowy na planowanie, organizowanie i branie odpowiedzialności za Twój sklep. 24/7. Bez wymówek.</p>
+            <button class="btn" onclick="changeSlide(1)">Sprawdź dopasowanie</button>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>O mnie bez filtra</h2>
-            <p>Słuchajcie, sprawa jest prosta: <span style="color:var(--accent); font-weight:bold;">nienawidzę nic nie robić</span>. Moja energia to mój największy atut – tam, gdzie inni szukają sposobu, żeby posiedzieć na zapleczu, ja szukam palety do rozłożenia albo kolejki do rozładowania.</p>
-            <p>Moje „niezdiagnozowane ADHD” to po prostu mój silnik. Dzięki niemu potrafię robić pięć rzeczy naraz i o żadnej nie zapomnieć. W Biedronce, gdzie co chwilę coś się zmienia, czuję się jak ryba w wodzie.</p>
+            <h2>Wymagacie? Ja to mam.</h2>
+            <p>✅ <span class="highlight">Samodzielność i proaktywność:</span> Nie czekam na polecenia. Widzę brak towaru – uzupełniam. Widzę kolejkę – otwieram kasę. Moja energia sprawia, że zawsze wyprzedzam problemy.</p>
+            <p>✅ <span class="highlight">Cele sprzedażowe:</span> Rozumiem, że sklep musi zarabiać. Dbam o ekspozycję i dostępność towaru, bo wiem, że klient kupuje oczami.</p>
+            <p>✅ <span class="highlight">Komunikatywność:</span> Kultura osobista to u mnie podstawa. Rozmawiam z ludźmi tak, żeby chcieli wracać do naszej Biedronki.</p>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>Biedronka to mój teren</h2>
-            <p>Zrobiłem ponad <span style="color:var(--accent); font-weight:bold;">70 zmian w Biedronkach</span> przez Tikrowa. Moja średnia ocen 5.0 nie wzięła się z kosmosu. Znam każdy proces: od kasy, przez wypiek, aż po rozładunki.</p>
-            <p>Jako Zastępca Kierownika nie będę gościem, który „uczy się systemu” przez miesiąc. Ja ten system znam i wiem, jak go zoptymalizować. Nie boję się zakasać rękawów i stanąć na kasie, kiedy jest kocioł.</p>
+            <h2>Operacyjnie? Znam to na wylot.</h2>
+            <p>Dzięki 70+ zmianom w Biedronce (Tikrow, ocena 5.0) ogarniam:</p>
+            <p>• <span class="highlight">Ekspozycję i ceny:</span> Prawidłowe oznaczenia cenowe i estetyka półek to dla mnie priorytet.<br>
+               • <span class="highlight">Obsługę kasy:</span> Szybko, sprawnie i zawsze z uśmiechem.<br>
+               • <span class="highlight">Zamówienia i towar:</span> Wiem, jak pilnować dostępności produktów, żeby półki nigdy nie świeciły pustkami.</p>
+            <p>Dbanie o porządek na sali i zapleczu mam we krwi – czysty sklep to podstawa standardów.</p>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>Doświadczenie w boju</h2>
-            <div class="grid">
-                <div class="box">
-                    <strong style="color:var(--accent);">Gry & Społeczność</strong><br>
-                    Zarządzanie tysiącami graczy online. Gaszenie pożarów i pilnowanie zasad.
-                </div>
-                <div class="box">
-                    <strong style="color:var(--accent);">IT & Administracja</strong><br>
-                    Sąd Okręgowy i UNICEF. Kasy i systemy to dla mnie prosta matematyka.
-                </div>
-                <div class="box">
-                    <strong style="color:var(--accent);">Ochrona FORT</strong><br>
-                    Dowodzenie sekcją na eventach. Odpowiedzialność i zimna krew.
-                </div>
-            </div>
+            <h2>Dyspozycyjność 3-zmianowa</h2>
+            <p>Wasze wymagania to praca fizyczna, weekendy i 3 zmiany? <span class="highlight">Dla mnie to idealny układ.</span></p>
+            <p>Ponieważ moje studia Zarządzania odbywają się w pełni online, nie mam żadnych ograniczeń grafikowych. Poranna zmiana? Popołudniowa? Nocka na rozładunku? Jestem do dyspozycji w każdym z tych wariantów, włączając w to wszystkie weekendy handlowe.</p>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>Edukacja & Czas</h2>
-            <p>Właśnie startuję z <span style="color:var(--accent); font-weight:bold;">Zarządzaniem (Online)</span>. Dzięki temu moja dyspozycyjność dla sklepu jest niemal totalna. Nie muszę co dwa tygodnie uciekać na zjazdy.</p>
-            <p>Dla Was oznacza to pracownika, który chce się rozwijać, ale jest na miejscu 24/7, kiedy trzeba ogarnąć niedzielę handlową albo nocną inwentaryzację.</p>
+            <h2>Lider, jakiego szukacie</h2>
+            <p>Zarządzanie serwerami (tysiące graczy) i dowodzenie sekcjami ochrony w FORT nauczyło mnie najważniejszego: <span class="highlight">koordynowania pracy zespołu pod presją.</span></p>
+            <p>Umiem zaplanować zadania tak, żeby każdy wiedział, co robić, a sklep funkcjonował jak szwajcarski zegarek. Nie boję się odpowiedzialności za prawidłowe funkcjonowanie całego obiektu.</p>
         </div>
     </div>
 
     <div class="slide">
         <div class="card">
-            <h2>Zbudujmy to razem</h2>
-            <p style="text-align: center;">Czekam na konkretne wyzwanie w Szczecinie.</p>
+            <h2>Zapraszam do współpracy</h2>
+            <p style="text-align: center;">Szczecin | Gotowy do startu od zaraz.</p>
             <div style="text-align: center; margin-top: 20px;">
                 <h3 style="margin:0; font-size: 1.8rem;">ŁUKASZ KUŚ</h3>
-                <p style="font-size: 0.8rem;">lukasz.kus.kontakt@poczta.pl</p>
-                <button class="btn" onclick="location.href='mailto:lukasz.kus.kontakt@poczta.pl'">Wyślij e-mail</button>
+                <p style="font-size: 0.9rem;">lukasz.kus.kontakt@poczta.pl</p>
+                <button class="btn" onclick="location.href='mailto:lukasz.kus.kontakt@poczta.pl'">WYŚLIJ ZAPROSZENIE</button>
             </div>
         </div>
     </div>
@@ -133,24 +97,18 @@
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const dotsContainer = document.getElementById('dots');
-
         slides.forEach((_, i) => {
             const dot = document.createElement('div');
             dot.className = `dot ${i === 0 ? 'active' : ''}`;
             dotsContainer.appendChild(dot);
         });
-
         function changeSlide(n) {
             slides[currentSlide].classList.remove('active');
             currentSlide = (n + slides.length) % slides.length;
             slides[currentSlide].classList.add('active');
-            document.querySelectorAll('.dot').forEach((d, i) => {
-                d.className = `dot ${i === currentSlide ? 'active' : ''}`;
-            });
+            document.querySelectorAll('.dot').forEach((d, i) => { d.className = `dot ${i === currentSlide ? 'active' : ''}`; });
         }
-
         window.addEventListener('wheel', e => { if(Math.abs(e.deltaY) > 30) changeSlide(e.deltaY > 0 ? 1 : -1); });
-        
         let startY = 0;
         document.addEventListener('touchstart', e => startY = e.touches[0].clientY);
         document.addEventListener('touchend', e => {
