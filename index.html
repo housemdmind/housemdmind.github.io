@@ -3,117 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Łukasz Kuś | CV & List Motywacyjny</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>Łukasz Kuś | Interaktywne CV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #e30613; --dark: #1e293b; --light: #f8fafc; --accent: #ffcc00; }
-        body { font-family: 'Inter', sans-serif; line-height: 1.6; margin: 0; background: var(--light); color: var(--dark); overflow-x: hidden; }
+        :root { --primary: #e30613; --dark: #121826; --accent: #ffcc00; --text: #ffffff; }
         
-        header { 
-            background: linear-gradient(135deg, var(--primary), #a3040e); 
-            color: white; padding: 6rem 1rem; text-align: center; 
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); 
+        * { box-sizing: border-box; }
+        body, html { margin: 0; padding: 0; height: 100%; font-family: 'Inter', sans-serif; background: var(--dark); color: var(--text); overflow: hidden; }
+
+        /* Pasek postępu jak w Instagram Stories / PowerPoint */
+        .progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 5px; display: flex; z-index: 100; }
+        .progress-bar { flex: 1; height: 100%; background: rgba(255,255,255,0.2); margin: 0 2px; }
+        .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.3s; }
+
+        .slide { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            padding: 2rem; text-align: center; opacity: 0; visibility: hidden;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform: translateY(20px);
         }
 
-        .container { max-width: 850px; margin: -60px auto 2rem; padding: 0 1rem; position: relative; z-index: 10; }
-        
-        section { 
-            background: white; padding: 3rem; border-radius: 20px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.07); margin-bottom: 2.5rem; 
-        }
+        .slide.active { opacity: 1; visibility: visible; transform: translateY(0); }
 
-        h2 { color: var(--primary); font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-top: 0; display: flex; align-items: center; gap: 10px; }
-        
-        .letter-content { font-style: italic; color: #475569; border-left: 3px solid var(--accent); padding-left: 20px; }
-        
-        .tag { display: inline-block; background: var(--dark); color: white; padding: 0.5rem 1rem; border-radius: 10px; margin: 0.3rem; font-size: 0.85rem; }
-        
-        .lazy-section { 
-            background: var(--dark); color: white; border: 4px dashed var(--accent);
-        }
-        .lazy-section h2 { color: var(--accent); border: none; }
-        .lazy-item { margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
-        .lazy-item span { color: var(--accent); font-weight: bold; }
+        h2 { color: var(--accent); font-size: 2.5rem; text-transform: uppercase; margin-bottom: 1rem; }
+        p { max-width: 700px; font-size: 1.2rem; line-height: 1.6; color: #cbd5e1; }
 
-        .rating-badge { 
-            background: var(--accent); color: var(--dark); padding: 8px 20px; 
-            border-radius: 50px; font-weight: 900; display: inline-block; margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+        .btn-nav {
+            position: fixed; bottom: 40px; right: 40px; z-index: 100;
+            background: var(--primary); color: white; border: none; padding: 15px 30px;
+            border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 1.1rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition: 0.3s;
         }
+        .btn-nav:hover { transform: scale(1.1); background: #ff0000; }
+        .btn-prev { right: auto; left: 40px; background: #334155; }
 
-        .contact-btn { 
-            display: inline-block; background: var(--primary); color: white; 
-            padding: 1.2rem 2.5rem; text-decoration: none; border-radius: 12px; 
-            font-weight: bold; transition: 0.4s; border: none; cursor: pointer;
+        .badge { background: var(--accent); color: var(--dark); padding: 5px 15px; border-radius: 20px; font-weight: 900; margin-bottom: 10px; display: inline-block; }
+        
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; text-align: left; }
+        .lazy-box { border: 2px dashed var(--accent); padding: 20px; border-radius: 15px; background: rgba(255,255,0,0.05); }
+
+        @media (max-width: 600px) {
+            h2 { font-size: 1.8rem; }
+            .grid { grid-template-columns: 1fr; }
+            .btn-nav { padding: 10px 20px; bottom: 20px; font-size: 0.9rem; }
         }
-        .contact-btn:hover { background: #b90510; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(227, 6, 19, 0.2); }
-
-        footer { text-align: center; padding: 4rem; color: #94a3b8; }
     </style>
 </head>
 <body>
 
-<header data-aos="zoom-in">
-    <div class="rating-badge">OCENA TIKROW: 5.0 / 5.0 (70+ zleceń) ★</div>
-    <h1 style="margin:0; font-size: 3.5rem;">Łukasz Kuś</h1>
-    <p style="font-size: 1.4rem; font-weight: 300;">Więcej niż Zastępca Kierownika – Człowiek od zadań specjalnych</p>
-</header>
+    <div class="progress-container" id="progress-container"></div>
 
-<div class="container">
-    
-    <section data-aos="fade-up">
-        <h2>✉️ Dlaczego właśnie ja?</h2>
-        <div class="letter-content">
-            <p>Szanowni Państwo,</p>
-            <p>Nie lubię nudy. Jeśli nic się nie dzieje, sam szukam sobie pracy – dlatego moje doświadczenie rozciąga się od informatyki w UNICEF-ie, przez zarządzanie tysiącami graczy online, aż po 70+ pozytywnie ocenionych zleceń w Biedronkach przez aplikację Tikrow.</p>
-            <p>Szukam pracy jako Zastępca Kierownika, bo <strong>zarządzanie mam we krwi</strong> (od samorządów szkolnych po dowodzenie ochroną na eventach), a Biedronkę znam od strony operacyjnej lepiej niż niejeden stały pracownik. Moje studia z Zarządzania (online) pozwalają mi być u Państwa o każdej porze, a moja natura "pracoholika" sprawia, że każda powierzona mi paleta, grafik czy problem klienta zostaną rozwiązane na 100%.</p>
+    <div class="slide active" style="background: linear-gradient(rgba(18,24,38,0.8), rgba(18,24,38,0.8)), url('https://images.unsplash.com/photo-1534452286302-2f50d8b5e20d?auto=format&fit=crop&w=1920&q=80') center/cover;">
+        <div class="badge">PROFIL KANDYDATA 2026</div>
+        <h1 style="font-size: 4rem; margin: 0;">Łukasz Kuś</h1>
+        <p>Informatyk z pasją do zarządzania, który nie znosi bezczynności. <br> Poznaj moją historię w 30 sekund.</p>
+    </div>
+
+    <div class="slide">
+        <h2>✉️ List Motywacyjny</h2>
+        <p style="font-style: italic;">"Znam Biedronkę od podszewki dzięki 70+ zleceniom na Tikrow. Nie szukam 'jakiejś' pracy – szukam miejsca, gdzie moja energia i umiejętność dowodzenia zostaną w pełni wykorzystane."</p>
+        <div class="badge">Studia Zarządzania (Online) = Pełna dyspozycyjność</div>
+    </div>
+
+    <div class="slide">
+        <h2>🛠️ Doświadczenie</h2>
+        <div class="grid">
+            <div>
+                <strong style="color: var(--accent);">Zarządzanie:</strong>
+                <ul>
+                    <li>Tysiące graczy na serwerach online</li>
+                    <li>Dowodzenie ochroną w firmie FORT</li>
+                    <li>Samorządy szkolne</li>
+                </ul>
+            </div>
+            <div>
+                <strong style="color: var(--accent);">Handel & IT:</strong>
+                <ul>
+                    <li>Biedronka, Żabka, Chata Polska</li>
+                    <li>Informatyk w UNICEF i Sądzie</li>
+                    <li>Sprzedaż biżuterii</li>
+                </ul>
+            </div>
         </div>
-    </section>
+    </div>
 
-    <section data-aos="fade-up">
-        <h2>🛠️ Co wnoszę do zespołu?</h2>
-        <div class="tag">Zarządzanie ludźmi (online & offline)</div>
-        <div class="tag">Biegła obsługa systemów sprzedaży</div>
-        <div class="tag">Komunikacja (Angielski + spryt językowy)</div>
-        <div class="tag">Odporność na stres</div>
-        <div class="tag">Szybkie rozwiązywanie konfliktów</div>
-        <div class="tag">Standardy Biedronki (znajomość z praktyki)</div>
-    </section>
+    <div class="slide">
+        <h2>😴 Dla leniwych (TL;DR)</h2>
+        <div class="lazy-box">
+            <p style="margin: 5px 0;">🚀 <strong>5.0/5.0</strong> na Tikrow – jestem pewniakiem.</p>
+            <p style="margin: 5px 0;">💪 <strong>Pracoholik</strong> (w pozytywnym sensie) – zawsze znajdę sobie zajęcie.</p>
+            <p style="margin: 5px 0;">🗣️ <strong>Komunikacja:</strong> Angielski + spryt w dogadywaniu się.</p>
+            <p style="margin: 5px 0;">🎓 <strong>Profil:</strong> Zarządzanie + IT + Kursy (od pilarza po cyberbezpieczeństwo).</p>
+        </div>
+    </div>
 
-    <section data-aos="fade-up">
-        <h2>🎓 Wykształcenie i Kursy</h2>
-        <p><strong>Obecnie:</strong> Zarządzanie (Studia online – pełna dyspozycyjność)</p>
-        <p><strong>Wcześniej:</strong> Informatyka, Technikum Hodowli Koni</p>
-        <p><strong>Kursy:</strong> Pierwsza pomoc, Pilarz, Cyberbezpieczeństwo, Inseminator.</p>
-    </section>
+    <div class="slide">
+        <h2>📱 Zróbmy coś razem!</h2>
+        <p>Szukasz zastępcy, który ogarnie zespół, towar i systemy IT?</p>
+        <h3 style="font-size: 2rem; margin: 10px 0;">Łukasz Kuś</h3>
+        <p>Szczecin / Online</p>
+        <a href="mailto:TWÓJ@EMAIL.PL" style="text-decoration: none; background: var(--accent); color: var(--dark); padding: 15px 40px; border-radius: 50px; font-weight: bold; font-size: 1.2rem;">WYŚLIJ E-MAIL</a>
+    </div>
 
-    <section class="lazy-section" data-aos="flip-up">
-        <h2>😴 Sekcja dla leniwych (TL;DR)</h2>
-        <p>Nie masz czasu czytać całości? Oto konkret w 15 sekund:</p>
-        <div class="lazy-item"><span>🚀</span> Pracuję za dwóch, bo nie znoszę bezczynności.</div>
-        <div class="lazy-item"><span>🏆</span> Na Tikrow mam czyste 5.0 po 70 zleceniach w handlu.</div>
-        <div class="lazy-item"><span>🤝</span> Dogadam się z każdym – od zdenerwowanego klienta po niemieckiego turystę.</div>
-        <div class="lazy-item"><span>📅</span> Jestem dostępny 24/7 (studia mam w internecie).</div>
-        <div class="lazy-item"><span>💻</span> Ogarniam komputery lepiej niż przeciętny kierownik (ex-informatyk).</div>
-        <div class="lazy-item"><span>🦁</span> Prowadziłem projekty dla tysięcy ludzi – 10-osobowy zespół to dla mnie czysta przyjemność.</div>
-    </section>
+    <button class="btn-nav btn-prev" onclick="changeSlide(-1)">Wstecz</button>
+    <button class="btn-nav" onclick="changeSlide(1)">Dalej</button>
 
-    <section data-aos="fade-up" style="text-align: center;">
-        <h2>📱 Porozmawiajmy!</h2>
-        <p>Łukasz Kuś | Ur. 31.01.2001</p>
-        <p>Gotowy do startu od zaraz.</p>
-        <a href="mailto:TWOJ@EMAIL.PL" class="contact-btn">Zatrudnij mnie (wyślij e-mail)</a>
-    </section>
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progressContainer = document.getElementById('progress-container');
 
-</div>
+        // Tworzenie pasków postępu
+        slides.forEach(() => {
+            const bar = document.createElement('div');
+            bar.className = 'progress-bar';
+            const fill = document.createElement('div');
+            fill.className = 'progress-fill';
+            bar.appendChild(fill);
+            progressContainer.appendChild(bar);
+        });
 
-<footer>
-    Wygenerowano z energią przez housemdmind & Gemini.
-</footer>
+        const fills = document.querySelectorAll('.progress-fill');
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init({ duration: 800, once: true });</script>
+        function updateProgress() {
+            fills.forEach((fill, index) => {
+                if (index < currentSlide) fill.style.width = '100%';
+                else if (index === currentSlide) fill.style.width = '100%';
+                else fill.style.width = '0%';
+            });
+        }
 
+        function changeSlide(direction) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide += direction;
+
+            if (currentSlide >= slides.length) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = slides.length - 1;
+
+            slides[currentSlide].classList.add('active');
+            updateProgress();
+        }
+
+        // Obsługa klawiatury (strzałki)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "ArrowRight") changeSlide(1);
+            if (e.key === "ArrowLeft") changeSlide(-1);
+        });
+
+        updateProgress();
+    </script>
 </body>
 </html>
