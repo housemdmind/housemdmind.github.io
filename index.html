@@ -34,8 +34,8 @@
         .dash-row { display: flex; flex-direction: column; gap: 8px; }
         .dash-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); display: flex; justify-content: space-between; }
         .dash-bar-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
-        .dash-bar-fill { height: 100%; background: var(--primary); border-radius: 10px; animation: fillBar 2s ease-out forwards; }
-        @keyframes fillBar { from { width: 0; } }
+        .dash-bar-fill { height: 100%; background: var(--primary); border-radius: 10px; width: 0; transition: width 2s ease-out; }
+        .slide.active .dash-bar-fill { width: var(--fill-width); }
 
         .contact-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
         .contact-item { background: rgba(255,255,255,0.05); padding: 15px 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: white; transition: 0.3s; display: flex; align-items: center; gap: 10px; font-weight: 700; }
@@ -43,6 +43,8 @@
 
         .footer-note { text-align: center; margin-top: 30px; font-size: 0.7rem; opacity: 0.3; letter-spacing: 3px; text-transform: uppercase; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
         .slide-counter { position: fixed; top: 25px; right: 25px; font-weight: 900; color: var(--accent); z-index: 1000; font-size: 1.2rem; }
+        
+        .nav-hints { position: fixed; bottom: 20px; width: 100%; text-align: center; font-size: 0.7rem; color: rgba(255,255,255,0.3); letter-spacing: 2px; pointer-events: none; }
     </style>
 </head>
 <body>
@@ -153,7 +155,7 @@
         </div>
     </div>
 
-<div class="slide">
+    <div class="slide">
         <div class="card">
             <span class="latin-motto">Audentes fortuna iuvat (Odważnym szczęście sprzyja)</span>
             <h2>DNA Lidera i kontakt</h2>
@@ -161,20 +163,20 @@
             
             <div class="dashboard">
                 <div class="dash-row">
-                    <div class="dash-label"><span>Instynkt proaktywny (Działanie bez czekania na polecenie)</span><span>100%</span></div>
-                    <div class="dash-bar-bg"><div class="dash-bar-fill" style="width: 100%;"></div></div>
+                    <div class="dash-label"><span>Instynkt proaktywny (Działanie bez czekania)</span><span>100%</span></div>
+                    <div class="dash-bar-bg"><div class="dash-bar-fill" style="--fill-width: 100%;"></div></div>
                 </div>
                 <div class="dash-row">
-                    <div class="dash-label"><span>Opanowanie (Chłodna głowa w sytuacjach kryzysowych)</span><span>98%</span></div>
-                    <div class="dash-bar-bg"><div class="dash-bar-fill" style="width: 100%;"></div></div>
+                    <div class="dash-label"><span>Opanowanie (Chłodna głowa w kryzysie)</span><span>98%</span></div>
+                    <div class="dash-bar-bg"><div class="dash-bar-fill" style="--fill-width: 98%;"></div></div>
                 </div>
                 <div class="dash-row">
-                    <div class="dash-label"><span>Lojalność i Etyka (Szacunek do mienia i ludzi)</span><span>100%</span></div>
-                    <div class="dash-bar-bg"><div class="dash-bar-fill" style="width: 100%;"></div></div>
+                    <div class="dash-label"><span>Lojalność i Etyka (Szacunek do mienia)</span><span>100%</span></div>
+                    <div class="dash-bar-bg"><div class="dash-bar-fill" style="--fill-width: 100%;"></div></div>
                 </div>
                 <div class="dash-row">
                     <div class="dash-label"><span>Kultura osobista i Dyplomacja</span><span>100%</span></div>
-                    <div class="dash-bar-bg"><div class="dash-bar-fill" style="width: 100%;"></div></div>
+                    <div class="dash-bar-bg"><div class="dash-bar-fill" style="--fill-width: 100%;"></div></div>
                 </div>
             </div>
 
@@ -187,6 +189,8 @@
             <button class="btn btn-static" style="background:#222; cursor:default; border: 1px solid var(--accent);">DO ZOBACZENIA NA LUBIESZYNIE</button>
         </div>
     </div>
+
+    <div class="nav-hints">Użyj przycisków lub strzałek klawiatury</div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
@@ -214,11 +218,21 @@
         function next() { if(current < slides.length - 1) update(current + 1); else update(0); }
         function prev() { if(current > 0) update(current - 1); else update(slides.length - 1); }
 
-        window.addEventListener('wheel', e => { if(Math.abs(e.deltaY) > 40) { if(e.deltaY > 0) next(); else prev(); } }, {passive: true});
-        document.addEventListener('keydown', e => { if (e.key === "ArrowRight" || e.key === "ArrowDown") next(); if (e.key === "ArrowLeft" || e.key === "ArrowUp") prev(); });
+        // WYŁĄCZONE KÓŁKO MYSZY (SCROLL), WŁĄCZONE STRZAŁKI
+        document.addEventListener('keydown', e => { 
+            if (e.key === "ArrowRight" || e.key === "ArrowDown") next(); 
+            if (e.key === "ArrowLeft" || e.key === "ArrowUp") prev(); 
+        });
+
+        // OBSŁUGA GESTÓW (SWIPE) NA TELEFONIE
         let sY = 0;
         document.addEventListener('touchstart', e => sY = e.touches[0].clientY, {passive: true});
-        document.addEventListener('touchend', e => { let eY = e.changedTouches[0].clientY; if (Math.abs(sY - eY) > 60) { if(sY > eY) next(); else prev(); } }, {passive: true});
+        document.addEventListener('touchend', e => { 
+            let eY = e.changedTouches[0].clientY; 
+            if (Math.abs(sY - eY) > 80) { // Czułość gestu
+                if(sY > eY) next(); else prev(); 
+            }
+        }, {passive: true});
 
         particlesJS("particles-js", { "particles": { "number": { "value": 60 }, "opacity": { "value": 0.2 }, "move": { "enable": true, "speed": 1.5 } } });
     </script>
